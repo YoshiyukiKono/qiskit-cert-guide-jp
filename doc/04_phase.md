@@ -1,4 +1,4 @@
-では第4章として、**位相ゲート（S / T / 位相の意味そのもの）**を資格試験対策レベルで体系的に解説します。
+
 この章は：
 
 * Zゲートとの関係
@@ -40,15 +40,15 @@
 
 状態：
 
-[
+$$
 |\psi\rangle=\frac{1}{\sqrt{2}}(|0\rangle+|1\rangle)
-]
+$$
 
 と：
 
-[
+$$
 |\psi\rangle=\frac{1}{\sqrt{2}}(|0\rangle-|1\rangle)
-]
+$$
 
 は測定結果が同じ：
 
@@ -75,7 +75,10 @@
 
 量子状態：
 
+$$
 |\psi\rangle=a|0\rangle+b|1\rangle
+$$
+
 
 ここで：
 
@@ -85,9 +88,9 @@ a, b は複素数
 
 例：
 
-[
+$$
 |0\rangle+i|1\rangle
-]
+$$
 
 確率：
 
@@ -131,9 +134,14 @@ a, b は複素数
 
 Sゲートの作用：
 
+$$
 S|0\rangle=|0\rangle
+$$
 
+$$
 S|1\rangle=i|1\rangle
+$$
+
 
 つまり：
 
@@ -147,13 +155,13 @@ S|1\rangle=i|1\rangle
 
 行列：
 
-[
+$$
 S=
 \begin{pmatrix}
 1 & 0 \
 0 & i
 \end{pmatrix}
-]
+$$
 
 資格試験では：
 
@@ -199,19 +207,21 @@ print(state)
 
 逆操作：
 
-[
+$$
 S^\dagger
-]
+$$
 
 作用：
 
-[
+$$
 S^\dagger|1\rangle=-i|1\rangle
-]
+$$
 
 関係：
 
+$$
 SS^{\dagger}=I
+$$
 
 ---
 
@@ -221,7 +231,9 @@ Tゲートはさらに小さい位相回転です。
 
 作用：
 
+$$
 T|1\rangle=e^{i\pi/4}|1\rangle
+$$
 
 つまり：
 
@@ -233,13 +245,13 @@ T|1\rangle=e^{i\pi/4}|1\rangle
 
 # 9. Tゲートの行列表現
 
-[
+$$
 T=
 \begin{pmatrix}
 1 & 0 \
 0 & e^{i\pi/4}
 \end{pmatrix}
-]
+$$
 
 特徴：
 
@@ -253,21 +265,21 @@ Sより弱い回転
 
 逆操作：
 
-[
+$$
 T^\dagger
-]
+$$
 
 作用：
 
-[
+$$
 e^{-i\pi/4}
-]
+$$
 
 関係：
 
-[
+$$
 TT^\dagger=I
-]
+$$
 
 ---
 
@@ -299,15 +311,15 @@ T → S → Z
 
 状態A：
 
-[
+$$
 (|0\rangle+|1\rangle)/\sqrt{2}
-]
+$$
 
 状態B：
 
-[
+$$
 (|0\rangle+i|1\rangle)/\sqrt{2}
-]
+$$
 
 測定結果：
 
