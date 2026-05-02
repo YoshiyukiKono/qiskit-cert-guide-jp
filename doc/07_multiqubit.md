@@ -1,4 +1,4 @@
-では第7章として、**多量子ビット（multi-qubit）系**を資格試験対策レベルで体系的に解説します。
+**多量子ビット（multi-qubit）系**を資格試験対策レベルで体系的に解説します。
 ここは合格ラインを超えるための**最重要分岐点**です。
 
 理由：
@@ -18,9 +18,9 @@
 
 単一量子ビット：
 
-[
+$$
 |\psi\rangle=a|0\rangle+b|1\rangle
-]
+$$
 
 でした。
 
@@ -59,7 +59,9 @@
 
 基底状態は4つあります：
 
+$$
 |00\rangle, |01\rangle, |10\rangle, |11\rangle
+$$
 
 これは：
 
@@ -75,13 +77,17 @@
 
 2量子ビット状態は：
 
+$$
 |a\rangle \otimes |b\rangle
+$$
 
 で表されます。
 
 例：
 
+$$
 |0\rangle \otimes |1\rangle = |01\rangle
+$$
 
 つまり：
 
@@ -97,17 +103,17 @@
 
 単一量子ビット：
 
-[
+$$
 |0\rangle=
 \begin{pmatrix}
 1\
 0
 \end{pmatrix}
-]
+$$
 
 2量子ビット：
 
-[
+$$
 |00\rangle=
 \begin{pmatrix}
 1\
@@ -115,7 +121,7 @@
 0\
 0
 \end{pmatrix}
-]
+$$
 
 同様に：
 
@@ -132,7 +138,9 @@
 
 一般状態：
 
+$$
 |\psi\rangle = a|00\rangle + b|01\rangle + c|10\rangle + d|11\rangle
+$$
 
 正規化条件：
 
@@ -245,7 +253,9 @@ qc.h(0)
 
 状態：
 
+$$
 \frac{1}{\sqrt{2}}(|00\rangle + |10\rangle)
+$$
 
 つまり：
 
@@ -269,7 +279,9 @@ qc.h([0,1])
 
 状態：
 
+$$
 \frac{1}{2}(|00\rangle + |01\rangle + |10\rangle + |11\rangle)
+$$
 
 つまり：
 
@@ -285,19 +297,21 @@ qc.h([0,1])
 
 例：
 
-[
+$$
 (|0\rangle + |1\rangle)/\sqrt{2}
-]
+$$
 
 と
 
-[
+$$
 |0\rangle
-]
+$$
 
 のtensor product：
 
+$$
 \frac{1}{\sqrt{2}}(|00\rangle + |10\rangle)
+$$
 
 ---
 
@@ -305,7 +319,9 @@ qc.h([0,1])
 
 次の状態：
 
+$$
 \frac{1}{\sqrt{2}}(|00\rangle + |10\rangle)
+$$
 
 は：
 
@@ -327,7 +343,9 @@ qc.h([0,1])
 
 例：
 
+$$
 \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle)
+$$
 
 これは：
 
@@ -375,7 +393,9 @@ qc.h([0,1])
 
 意味：
 
+$$
 \frac{1}{\sqrt{2}}(|00\rangle + |11\rangle)
+$$
 
 順序：
 
@@ -396,9 +416,9 @@ qc.h([0,1])
 
 次の状態の確率：
 
-[
+$$
 (|00\rangle + |11\rangle)/\sqrt{2}
-]
+$$
 
 答え：
 
@@ -413,9 +433,9 @@ qc.h([0,1])
 
 次は分離可能か？
 
-[
+$$
 (|00\rangle + |10\rangle)/\sqrt{2}
-]
+$$
 
 答え：
 
@@ -429,9 +449,9 @@ YES
 
 次は分離可能か？
 
-[
+$$
 (|00\rangle + |11\rangle)/\sqrt{2}
-]
+$$
 
 答え：
 
