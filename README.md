@@ -1,10 +1,3 @@
-# qiskit-cert-guide-jp
-Qiskit Certification Guide for Developers
-以下は、先ほど提案したディレクトリ構成に対応した **GitHub公開用 README.md（そのまま貼り付け可能）** です。
-各章タイトルは **実際の `.md` ファイルへのリンク前提** で構成しています。
-
----
-
 # Qiskit Certification Guide for Developers
 
 **IBM Certified Associate Developer – Quantum Computation using Qiskit**
