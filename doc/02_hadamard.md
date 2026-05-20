@@ -1,4 +1,4 @@
-ではシリーズ第2章として、**資格試験で最も重要な単一ゲート**である Hadamard を徹底的に扱います。
+シリーズ第2章として、**資格試験で最も重要な単一ゲート**である Hadamard を徹底的に扱います。
 この章を理解すると：
 
 * 重ね合わせの生成
@@ -41,11 +41,15 @@ Hadamardは：
 
 変換：
 
+$$
 H\lvert0\rangle=\frac{1}{\sqrt{2}}(\lvert0\rangle+\lvert1\rangle)
+$$
 
 そして：
 
+$$
 H\lvert1\rangle=\frac{1}{\sqrt{2}}(\lvert0\rangle-\lvert1\rangle)
+$$
 
 ここで重要なのは：
 
@@ -243,7 +247,9 @@ Z基底 ↔ X基底
 
 Hadamardは次の行列：
 
+$$
 H=\frac{1}{\sqrt{2}}\begin{pmatrix}1&1\1&-1\end{pmatrix}
+$$
 
 試験では：
 
