@@ -1,119 +1,147 @@
 # Topic Test 05 — Sampler Primitive
 
-全10問。各問1つ選択してください。
+全10問。local V2 reference implementationとIBM Quantum Compute `SamplerV2` を区別して扱います。
 
 ## Questions
 
 ### Q1
-Sampler primitive の役割として最も適切なのはどれか。
+Sampler V2の中心的な役割はどれか。
 
-A. 回路の古典出力をサンプリングする  
-B. Hamiltonian の固有値を厳密対角化する  
-C. transpiler pass を生成する  
-D. OpenQASMを構文解析する
+A. observableの期待値だけを返す  
+B. circuitのclassical output registerからbitstring samplesを得る  
+C. Hamiltonianを厳密対角化する  
+D. transpiler passを生成する
 
 ### Q2
-Qiskit SDK のローカル V2 Sampler 実装として代表的なのはどれか。
+Qiskit SDKのローカルV2 reference Samplerはどれか。
 
-A. `StatevectorSampler`  
-B. `StatevectorEstimator`  
-C. `SparsePauliOp`  
-D. `CouplingMap`
+A. `BackendEstimatorV2`  
+B. `EstimatorV2`  
+C. `StatevectorSampler`  
+D. `QiskitRuntimeService`
 
 ### Q3
-Sampler を使う回路に classical output register / measurement が重要なのはなぜか。
+IBM Quantum Compute Serviceで使うSampler implementationはどれか。
 
-A. Sampler は古典出力レジスタからサンプルを返すから  
-B. 測定がないと transpile が禁止されるから  
-C. 測定がないと量子ビットが作れないから  
-D. classical bit が observable になるから
+A. `qiskit_ibm_runtime.SamplerV2`  
+B. `qiskit.primitives.StatevectorEstimator`  
+C. `qiskit.quantum_info.Sampler`  
+D. `QuantumCircuit.sampler()`
 
 ### Q4
-V2 primitive でいう PUB の説明として最も適切なのはどれか。
+Sampler PUBの一般的なtuple構造として最も適切なのはどれか。
 
-A. 1つの実行単位をまとめた Primitive Unified Bloc  
-B. Python Universal Backend  
-C. Physical Utility Bit  
-D. Public User Bus
+A. `(circuit, observable, precision)`  
+B. `(counts, shots)`  
+C. `(backend, circuit, observable)`  
+D. `(circuit, optional parameter_values, optional shots)`
 
 ### Q5
-Sampler で shots を増やす主目的はどれか。
+`StatevectorSampler` とmid-circuit measurementについて正しいものはどれか。
 
-A. サンプリング統計のばらつきを減らす  
-B. 回路を自動的に短くする  
-C. observableを追加する  
-D. qubit数を増やす
+A. local `StatevectorSampler` は一般のmid-circuit measurementをサポートしない。Runtime側のdynamic-circuit supportとは分けて考える  
+B. Sampler V2という名前なら全implementationが同じdynamic-circuit機能を持つ  
+C. `StatevectorSampler`ではterminal measurementも禁止  
+D. measurementがあると自動的に`StatevectorEstimator`へ切り替わる
 
 ### Q6
-parameterized circuit を Sampler V2 に渡す利点として適切なのはどれか。
+IBM Quantum Compute `SamplerV2` のshotsを既定値として設定するoptionとして最も直接的なのはどれか。
 
-A. 同じ回路構造に複数の parameter values を与えて評価できる  
-B. Parameterを使うと測定が不要になる  
-C. Parameterはhardware calibrationだけに使う  
-D. Parameterを使うとshotsが必ず1になる
+A. `resilience_level`  
+B. `default_shots`  
+C. `default_precision`  
+D. `optimization_level`
 
 ### Q7
-`StatevectorSampler` について正しい説明はどれか。
+Sampler optionsのdynamical decouplingを有効化する現在の形に最も近いものはどれか。
 
-A. 純粋状態の statevector simulation を使う参照実装である  
-B. 必ず実IBM QPUを使う  
-C. Estimator専用のobservableを返す  
-D. OpenQASM 2しか受け付けない
+A. `sampler.options.resilience_level = 2`  
+B. `sampler.options.shots.dynamic = True`  
+C. `sampler.options.dynamical_decoupling.enable = True`  
+D. `sampler.dynamic_circuit = "DD"`
 
 ### Q8
-mid-circuit measurement を含む回路と `StatevectorSampler` の関係について正しいものはどれか。
+dynamical decouplingの目的として最も適切なのはどれか。
 
-A. pure statevector ベースのため制約があり、一般的なmid-circuit measurementとは非互換  
-B. あらゆるdynamic circuitを完全サポートする  
-C. mid-circuit measurementが必須  
-D. 測定があると自動的にEstimatorへ切り替わる
+A. idle periodにpulse sequenceを挿入し、decoherence等の影響を抑える方向で使う  
+B. shotsを必ず1に減らす  
+C. classical registerをobservableへ変換する  
+D. OpenQASM parserを高速化する
 
 ### Q9
-Sampler の結果を expectation value と混同してはいけない理由はどれか。
+2026-09時点のIBM Quantum documentationで、dynamic circuitsとdynamical decouplingのfeature compatibilityについて正しいものはどれか。
 
-A. Sampler は主に測定された古典サンプルを返し、Estimator はobservableの期待値を扱うから  
-B. 両者は完全に同じAPI名だから  
-C. Samplerは量子回路を受け付けないから  
-D. Estimatorはclassical registerだけを受け付けるから
+A. 常に併用必須  
+B. dynamic circuitsではDDが自動でONになる  
+C. feature compatibilityはSamplerと無関係  
+D. 現行documentationでは互いにincompatibleとして記載されている
 
 ### Q10
-1000 shots の理想的な `|+>` 測定で counts が 487/513 になった。最も適切な解釈はどれか。
+Sampler resultで `pub_result.data.meas` のようなfieldを得た場合、その典型的な意味はどれか。
 
-A. 50/50分布と整合する有限shotの統計変動  
-B. Hゲートは壊れている  
-C. `|+>` は48.7%だけ存在する混合状態  
-D. global phaseが変化した証拠
+A. Estimatorのexpectation-value array  
+B. `meas`というclassical output registerに対応する`BitArray`等のresult data  
+C. backendのcoupling map  
+D. circuitのglobal phase
 
 ---
 
 # Answers & Explanations
 
-### A1 — A
-Sampler は回路の classical outputs をサンプリングする primitive。Estimator の expectation value と役割を区別する。
+### A1 — B
+- A: expectation valuesはEstimatorの中心目的。
+- B: 正解。Samplerは測定されたclassical outputsをsampleする。
+- C/D: primitiveの役割ではない。
 
-### A2 — A
-Qiskit v2.x の参照 V2 implementation として `qiskit.primitives.StatevectorSampler` がある。
+### A2 — C
+- A: Estimator implementation。
+- B: IBM Runtime Estimator側の名称。
+- C: 正解。`qiskit.primitives.StatevectorSampler`はlocal reference V2 implementation。
+- D: IBM Quantum service access class。
 
 ### A3 — A
-Sampler は測定から得る classical data を扱う。回路設計時に、どの classical register に何を測るかが結果解釈に直結する。
+- A: 正解。IBM Quantum Compute用V2 Sampler。
+- B: local Estimator。
+- C/D: 現行APIではない。
 
-### A4 — A
-PUB は Primitive Unified Bloc。Sampler では circuit と optional parameter values / shots などを1実行単位としてまとめる。
+### A4 — D
+- A: Estimator PUBに近い。
+- B/C: Sampler V2 PUBの構造ではない。
+- D: 正解。Sampler PUBはsingle circuitとoptional parameter values/shots。
 
 ### A5 — A
-shots を増やすと経験頻度の統計誤差は通常小さくなるが、回路そのものが変わるわけではない。
+- A: 正解。implementation-specific constraintを明示している。
+- B: V2 interfaceと実装能力を混同している。
+- C: terminal measurementはSamplerのclassical outputに必要。
+- D: primitiveが自動切替されることはない。
 
-### A6 — A
-同じ ansatz/circuit を複数パラメータで評価するとき、parameterized circuit と V2 PUB の組み合わせが有効。
+### A6 — B
+- A: Estimatorのnoise mitigation設定。
+- B: 正解。SamplerOptionsの`default_shots`。
+- C: Estimator側のprecision概念。
+- D: transpiler設定で、Sampler execution shotsではない。
 
-### A7 — A
-`StatevectorSampler` は `Statevector` を使うローカル参照実装。IBM QPUを必須としない。
+### A7 — C
+- A: SamplerにEstimator resilience levelを設定する問題ではない。
+- B/D: 現行option pathではない。
+- C: 正解。
 
 ### A8 — A
-pure-state statevector でサンプルを生成する設計上、mid-circuit measurements には制約がある。実装ごとの差を意識する。
+- A: 正解。idle qubitへのsequenceでnoise suppressionを狙う。
+- B/C/D: DDの目的ではない。
 
-### A9 — A
-Sampler=sampled classical outcomes、Estimator=expectation values と整理すると試験問題を切り分けやすい。
+### A9 — D
+- A/B/C: current feature tableと一致しない。
+- D: 正解。これはversion-sensitiveなので試験直前にcurrent docsを再確認する。
 
-### A10 — A
-理論確率が0.5でも有限標本では正確に500/500になる必要はない。487/513は十分自然な揺らぎ。
+### A10 — B
+- A: `evs`はEstimator result側。
+- B: 正解。V2 Sampler resultはclassical register名に対応するdataを持ち、BitArrayからbitstrings/countsを取得できる。
+- C/D: result classical dataの意味ではない。
+
+## Official references
+
+- Primitives: https://quantum.cloud.ibm.com/docs/en/guides/primitives
+- Sampler quickstart: https://quantum.cloud.ibm.com/docs/en/guides/get-started-with-sampler
+- Sampler options: https://quantum.cloud.ibm.com/docs/en/guides/sampler-options
+- Local SDK primitives: https://quantum.cloud.ibm.com/docs/en/guides/simulate-with-qiskit-sdk-primitives
