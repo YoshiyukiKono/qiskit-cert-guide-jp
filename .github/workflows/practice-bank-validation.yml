@@ -1,0 +1,60 @@
+name: Practice bank validation
+on:
+  push:
+    branches: [add-v2x-practice-bank, main]
+    paths: ['practice-bank/**', '.github/workflows/practice-bank-validation.yml']
+  pull_request:
+    paths: ['practice-bank/**', '.github/workflows/practice-bank-validation.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  validation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install pinned SDK and Runtime client
+        run: python -m pip install -r practice-bank/validation/requirements.txt
+      - name: Structural validation
+        if: ${{ !cancelled() }}
+        run: python practice-bank/validation/run_check.py structure -- python practice-bank/validation/validate_bank.py
+      - name: Validator regression tests
+        if: ${{ !cancelled() }}
+        run: python practice-bank/validation/run_check.py regression -- python practice-bank/validation/test_validate_bank.py
+      - name: Qiskit local smoke checks
+        if: ${{ !cancelled() }}
+        run: python practice-bank/validation/run_check.py sdk -- python practice-bank/validation/smoke_checks.py
+      - uses: actions/upload-artifact@v4
+        if: ${{ always() }}
+        with:
+          name: practice-bank-${{ github.run_id }}-${{ github.run_attempt }}
+          path: validation-output/
+          if-no-files-found: warn
+  public-exam-record:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    # External availability is not a code-test gate. Inspect the separate outcome.
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Retrieve public IBM exam record
+        run: python practice-bank/validation/run_check.py official-record -- python practice-bank/validation/collect_exam_evidence.py
+      - uses: actions/upload-artifact@v4
+        if: ${{ always() }}
+        with:
+          name: public-exam-record-${{ github.run_id }}-${{ github.run_attempt }}
+          path: validation-output/
+          if-no-files-found: warn
