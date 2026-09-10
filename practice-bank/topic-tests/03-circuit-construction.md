@@ -1,119 +1,156 @@
 # Topic Test 03 — Circuit Construction
 
-全10問。各問1つ選択してください。
+全10問。basic / parameterized / dynamic circuitsとtranspilationを横断します。
 
 ## Questions
 
 ### Q1
-2量子ビット・2古典ビットの回路を最も簡潔に作るコードはどれか。
+2量子ビット・2古典ビットの回路を作る最も直接的なコードはどれか。
 
-A. `QuantumCircuit(2, 2)`  
-B. `QuantumCircuit(4)`  
+A. `QuantumCircuit(4)`  
+B. `QuantumCircuit(2, 2)`  
 C. `QuantumCircuit("2,2")`  
-D. `QuantumCircuit.measure(2,2)`
+D. `QuantumCircuit(2).measure_all(2)`
 
 ### Q2
-量子ビット0を古典ビット1へ測定する正しい呼び出しはどれか。
+q0の測定結果をc1へ格納する呼び出しはどれか。
 
-A. `qc.measure(0, 1)`  
-B. `qc.measure(1, 0)`  
-C. `qc.measure_all(0, 1)`  
+A. `qc.measure(1, 0)`  
+B. `qc.measure_all(0, 1)`  
+C. `qc.measure(0, 1)`  
 D. `qc.read(0, 1)`
 
 ### Q3
-パラメータ化された回転角を作る代表的なクラスはどれか。
+`new_qc = qc.compose(other)` について正しい説明はどれか。
 
-A. `Parameter`  
-B. `Sampler`  
-C. `Target`  
-D. `Counts`
+A. defaultでは合成した新しい回路を返し、`qc`自体をin-place変更しない  
+B. defaultで`qc`を必ずin-place変更し、戻り値はない  
+C. `compose`はmeasurement resultだけを結合する  
+D. `compose`はQiskit v2.xでは削除されている
 
 ### Q4
-回路 `other` の操作を既存回路 `qc` に結合する用途として適切なのはどれか。
+parameterized rotationを作る代表的な組み合わせはどれか。
 
-A. `qc.compose(other)`  
-B. `qc.sample(other)`  
-C. `qc.compile(other)`  
-D. `qc.counts(other)`
+A. `theta = Target("theta"); qc.ry(theta, 0)`  
+B. `theta = Parameter("theta"); qc.ry(theta, 0)`  
+C. `theta = SamplerV2("theta"); qc.ry(theta, 0)`  
+D. `theta = ClassicalRegister("theta"); qc.ry(theta, 0)`
 
 ### Q5
-ある回路の逆ユニタリを構成したい。最も直接的なのはどれか。
+parameterized circuitを事前に数値へ束縛する代表的なAPIはどれか。
 
-A. `qc.inverse()`  
-B. `qc.reverse_bits()`  
-C. `qc.measure_all()`  
-D. `qc.decompose()`
+A. `draw_parameters`  
+B. `measure_parameters`  
+C. `bind_runtime`  
+D. `assign_parameters`
 
 ### Q6
-単一量子ビットゲート X を制御付きゲートに変換する考え方として正しいものはどれか。
+X gateからcontrolled-X相当のgateを構成する考え方として適切なのはどれか。
 
-A. X の `control()` を利用できる  
-B. X を classical register に変換する  
-C. X に測定を追加する  
-D. X の global phase を削除する
+A. gateの`control()`を使う  
+B. gateの`measure()`を使う  
+C. classical registerへcastする  
+D. `reverse_bits()`を使う
 
 ### Q7
-`barrier()` の主な意味として適切なのはどれか。
+次のコードの中心的な意味はどれか。
 
-A. 量子状態を測定する  
-B. 回路上の論理的な区切りを示し、特定の最適化をまたがせないために使える  
-C. 量子ビットを追加する  
-D. ノイズを除去する
+```python
+qc.h(q0)
+qc.measure(q0, c0)
+with qc.if_test((c0, 1)):
+    qc.x(q1)
+```
+
+A. q1を常にXするstatic circuit  
+B. q0を測定した後、q0の量子状態そのものをif文で直接比較する  
+C. q0の測定結果が1のときだけq1へXを適用するclassical feedforward  
+D. q0とq1をSWAPする
 
 ### Q8
-`qc.append(gate, [0, 1])` の第2引数が表すものはどれか。
+Qiskit SDKのdynamic-circuit/control-flow supportについて正しいものはどれか。
 
-A. gate を適用する量子ビットの対応  
-B. shot数  
-C. transpiler optimization level  
-D. measurement counts
+A. SDKは`if_test`しか表現できない  
+B. SDKは`if_test`, `switch`, `for_loop`, `while_loop`等を表現できるが、実QPUで利用可能な機能はbackend/service側のsupportも確認する  
+C. dynamic circuitではmid-circuit measurementを使えない  
+D. dynamic circuitはSampler/Estimatorと無関係なので実行できない
 
 ### Q9
-`QuantumRegister(3, "q")` が表すものはどれか。
+backend向けの標準的なstaged transpilation pipelineを作る代表的な方法はどれか。
 
-A. 3量子ビットの名前付き量子レジスタ  
-B. 3古典ビットのレジスタ  
-C. 3shotの実行設定  
-D. 3つのbackend
+A. `Statevector.from_instruction(backend)`  
+B. `qc.draw(backend)`  
+C. `SamplerV2(optimization_level=3)`  
+D. `generate_preset_pass_manager(optimization_level=..., backend=backend)`
 
 ### Q10
-parameterized circuit に数値を代入する用途として適切なのはどれか。
+IBM QPUへRuntime primitiveで送る回路について最も適切なのはどれか。
 
-A. `assign_parameters(...)`  
-B. `draw(...)`  
-C. `measure_all(...)`  
-D. `reverse_bits(...)`
+A. backendのISAへtranspileした回路を用意する  
+B. abstract circuitならbackendに関係なく必ずそのまま受理される  
+C. coupling mapを無視するためtranspilationを禁止する  
+D. circuitをOpenQASM 2へ変換しなければならない
 
 ---
 
 # Answers & Explanations
 
-### A1 — A
-`QuantumCircuit(2, 2)` は2量子ビットと2古典ビットを持つ回路を作る標準的な簡略形。
+### A1 — B
+- A: `QuantumCircuit(4)`は4 quantum bits、classical bitsなし。
+- B: 正解。2 qubits + 2 clbits。
+- C: constructorの有効な指定ではない。
+- D: `measure_all`の呼び方・意味が異なる。
 
-### A2 — A
-`measure(qubit, cbit)` の順。`qc.measure(0,1)` は q0 の結果を c1 に格納する。
+### A2 — C
+`measure(qubit, clbit)`の順。
+- A: q1→c0になる。
+- B: `measure_all()`は個別mapping指定用ではない。
+- C: 正解。
+- D: `read`という対応APIではない。
 
 ### A3 — A
-`qiskit.circuit.Parameter` は未束縛の記号パラメータを回路に持たせるために使う。Sampler/Estimator へ値の配列を渡す学習にもつながる。
+- A: 正解。default `inplace=False`では新しい回路を返す。
+- B: in-place更新したい場合は`inplace=True`。
+- C: circuit operations全般を合成する。
+- D: 現行APIで利用できる。
 
-### A4 — A
-`compose` は回路同士を合成するためのAPI。引数や `inplace` の扱いは最新版APIを確認すること。
+### A4 — B
+- A/C/D: symbolic circuit parameterを作るクラスではない。
+- B: 正解。`qiskit.circuit.Parameter`をgate parameterへ使える。
 
-### A5 — A
-`inverse()` は各可逆操作を逆順・逆操作へ変換して逆回路を構成する。測定など非ユニタリ操作を含む場合には単純な逆ユニタリとして扱えない。
+### A5 — D
+- A/B/C: 該当する標準APIではない。
+- D: 正解。`assign_parameters`で数値や別Parameterへ置換できる。V2 Primitiveへ未束縛回路とparameter valuesを渡す方法も別途ある。
 
 ### A6 — A
-Gate/Instruction の制御版を構成できるAPIがあり、X の制御版はCXに対応する考え方になる。
+- A: 正解。Gate/Instructionのcontrolled versionを構成できる。
+- B/C/D: controlled gate生成の方法ではない。
 
-### A7 — B
-barrier は物理的な量子操作として情報を変換するためのものではなく、回路構造・コンパイル上の境界として使われる。
+### A7 — C
+- A: Xは条件付き。
+- B: 条件はmeasurementで得たclassical bit `c0`。
+- C: 正解。mid-circuit measurement + classical feedforwardの例。
+- D: SWAPではない。
 
-### A8 — A
-`append` では instruction/gate と、それをどの qargs/cargs に割り当てるかを指定する。
+### A8 — B
+- A: SDKには複数のcontrol-flow constructがある。
+- B: 正解。SDK representationとhardware execution supportは区別する。
+- C: mid-circuit measurementはdynamic circuitsの中心的要素。
+- D: IBM Quantum Computeでdynamic-circuit execution supportがあるがfeature compatibilityを確認する。
 
-### A9 — A
-`QuantumRegister(3,"q")` は3つの quantum bits を束ねる名前付きレジスタ。
+### A9 — D
+- A/B/C: transpilation pass manager生成ではない。
+- D: 正解。preset staged pass managerを作り`run(circuit)`するのが推奨workflow。
 
 ### A10 — A
-`assign_parameters` は Parameter を数値や別Parameterへ束縛する。V2 Primitives では回路自体を事前束縛せず PUB としてparameter valuesを渡す場面もある。
+- A: 正解。IBM Quantum primitives workflowではtarget backendのISA/layoutへ合わせる。
+- B: local reference primitiveとRuntime/QPU workflowを混同している。
+- C: connectivityとinstruction supportを満たすためtranspilationが必要。
+- D: OpenQASM 2への変換は要件ではない。
+
+## Official references
+
+- Construct circuits: https://quantum.cloud.ibm.com/docs/en/guides/construct-circuits
+- Dynamic circuits: https://quantum.cloud.ibm.com/docs/en/guides/classical-feedforward-and-control-flow
+- Transpile with pass managers: https://quantum.cloud.ibm.com/docs/en/guides/transpile-with-pass-managers
+- IBM Quantum ISA boundary: https://quantum.cloud.ibm.com/docs/en/guides/simulate-with-qiskit-sdk-primitives
