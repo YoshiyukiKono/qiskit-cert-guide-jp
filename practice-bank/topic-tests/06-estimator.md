@@ -53,7 +53,7 @@ C. 0, 1だけ
 D. 任意の0以上の整数
 
 ### Q7
-`resilience_level=0` の意味として最も適切なのはどれか。
+個別のresilience optionsで上書きしない場合、`resilience_level=0` のpresetとして最も適切なのはどれか。
 
 A. ZNEだけを有効にする  
 B. TREXだけを必ず有効にする  
@@ -61,7 +61,7 @@ C. shotsを0にする
 D. Estimatorが提供するresilience mitigationを適用しない
 
 ### Q8
-2026-09時点の `resilience_level=2` について最も適切な説明はどれか。
+個別のresilience optionsで上書きしない場合、2026-09時点の `resilience_level=2` のpresetについて最も適切なのはどれか。
 
 A. level 1の測定error mitigationに加え、ZNE等を用いたより強いmitigationを有効にする設定である  
 B. Qiskit transpilerのoptimization level 2と同一である  
@@ -80,9 +80,9 @@ D. circuit depthの上限を指定する
 Estimator V2のPUB resultで `data.evs` が典型的に表すものはどれか。
 
 A. error vectors  
-B. expectation values  
+B. event bitstrings  
 C. execution versions  
-D. event bitstrings
+D. expectation values
 
 ---
 
@@ -112,21 +112,24 @@ D. event bitstrings
 
 ### A5 — C
 `|+>`はZ basisでは0/1が等確率で、Z固有値+1/-1の平均は0。
-- A/B: X observableなら`|+>`は+1固有状態だが、ここはZ。
+- A: `|+>`に対するXの期待値なら+1だが、ここはZ。
+- B: `|1>`に対するZの期待値は-1だが、ここは`|+>`。
 - C: 正解。
-- D: 期待値ではない。
+- D: `P(0)=1/2`と、固有値を重み付けした期待値を混同している。
 
 ### A6 — B
 - A/C/D: current Runtime optionsと一致しない。
 - B: 正解。2026-09時点では0, 1, 2。
 
 ### A7 — D
-- A/B: 特定mitigationを有効にするlevelではない。
+- A/B: 上書きのないlevel 0 presetはこれらのmitigationを有効にしない。
 - C: shot count設定ではない。
 - D: 正解。resilience mitigationを適用しないbaseline。
 
+個別optionsはpresetを上書きできる。例えばlevel 0と`resilience.zne_mitigation=True`を組み合わせるとZNEを有効にできるため、数値levelだけから最終設定を断定しない。
+
 ### A8 — A
-- A: 正解。current docsではlevel 2はlevel 1より強いresilience設定で、ZNE等を含む。詳細はversion-sensitive。
+- A: 正解。上書きのないlevel 2 presetはlevel 1の測定mitigationにZNEやgate twirlingを加える。精度の改善量を保証する値ではない。
 - B: transpiler optimization levelとは別概念。
 - C/D: execution countやobservable数の指定ではない。
 
@@ -134,9 +137,9 @@ D. event bitstrings
 - A/B/D: precisionの意味ではない。
 - C: 正解。Estimatorが返すexpectation-value estimateのtarget precision。実装・optionsによって必要resourceとの関係は変わり得るのでcurrent docsを確認する。
 
-### A10 — B
-- A/C/D: `evs`の意味ではない。
-- B: 正解。expectation valuesを保持する。
+### A10 — D
+- A/B/C: `evs`の意味ではない。
+- D: 正解。expectation valuesを保持する。
 
 ## Official references
 
@@ -144,3 +147,4 @@ D. event bitstrings
 - Estimator options: https://quantum.cloud.ibm.com/docs/en/guides/estimator-options
 - Estimator inputs/outputs: https://quantum.cloud.ibm.com/docs/en/guides/estimator-input-output
 - Local SDK primitives: https://quantum.cloud.ibm.com/docs/en/guides/simulate-with-qiskit-sdk-primitives
+- Presets and explicit overrides: https://quantum.cloud.ibm.com/docs/en/guides/estimator-noise-management

@@ -28,12 +28,13 @@ OPENQASM 3.0;
 include "stdgates.inc";
 bit c;
 qubit q;
+reset q;
 h q;
 c = measure q;
 ```
 
 A. `c`を量子状態へ変換してからHを作用させる  
-B. qを`|+>`へし、測定結果をclassical bit cへ格納する  
+B. qをゼロ初期化してからHで`|+>`を準備し、その後の測定結果をclassical bit cへ格納する  
 C. qを測定せずstatevectorをcへ代入する  
 D. H gateの定義をcへ保存する
 
@@ -102,15 +103,18 @@ D. REST APIを使う場合Sampler/Estimatorというprimitive conceptはなく�
 - B: 正解。`qubit[n]`はquantum bits、`bit[n]`はclassical bits。
 
 ### A2 — C
-- A/D: Python等の一般-purpose language typeをそのまま採用したものではない。
+- A: `complex`自体はOpenQASM 3に存在する。ただし`string`や`object`をこのような標準型として列挙し、これら「だけ」とする説明は誤り。
 - B: `qubit`はquantum typeでclassical typeではない。
 - C: 正解。OpenQASM 3には`bit`, `int`, `uint`, `float`, `angle`等のclassical typesがある。
+- D: Pythonのcontainer typeをそのままOpenQASMの型として使うことはできない。
 
 ### A3 — B
 - A: `c`はclassical bitでquantum stateへ変換しない。
-- B: 正解。`stdgates.inc`でHを使えるようにし、qへH、measurement resultをcへ代入する。
+- B: 正解。`reset q`で`|0>`を準備し、`stdgates.inc`のHで測定直前の状態を`|+>`にする。その後、測定結果をcへ代入する。
 - C: measurementを実行している。
 - D: gate definitionをclassical bitへ保存するコードではない。
+
+OpenQASM 3.0仕様ではqubitの初期状態は未定義であり、`qubit q;`だけではゼロ初期化を保証しない。この例の`reset`はその前提を明示するための操作である。測定後も`|+>`のままと述べているわけではない。
 
 ### A4 — A
 - A: 正解。OpenQASM 3はclassical control/dynamic-circuit semanticsを表現できる。
@@ -156,4 +160,5 @@ D. REST APIを使う場合Sampler/Estimatorというprimitive conceptはなく�
 - OpenQASM 3 + Qiskit: https://quantum.cloud.ibm.com/docs/en/guides/interoperate-qiskit-qasm3
 - QASM feature table: https://quantum.cloud.ibm.com/docs/en/guides/qasm-feature-table
 - REST execution modes: https://quantum.cloud.ibm.com/docs/en/guides/execution-modes-rest-api
-- OpenQASM types: https://openqasm.com/versions/3.0/language/types.html
+- OpenQASM types and initial state: https://openqasm.com/versions/3.0/language/types.html
+- OpenQASM reset: https://openqasm.com/versions/3.0/language/insts.html

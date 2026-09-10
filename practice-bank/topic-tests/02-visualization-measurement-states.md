@@ -23,17 +23,17 @@ D. `plot_histogram(counts)`
 ### Q3
 Qiskitのcounts文字列`"10"`について、通常もっとも右側の文字が対応するclassical bitはどれか。
 
-A. bit 0  
+A. physical qubit 0に必ず固定される  
 B. bit 1  
-C. physical qubit 0に必ず固定される  
+C. bit 0  
 D. register mappingに関係なく常にbit 1になる
 
 ### Q4
 Bell状態 `(|00>+|11>)/sqrt(2)` のcomputational-basis測定分布として正しいものはどれか。
 
-A. 01と10が約50%ずつ  
+A. 00と11が約50%ずつ  
 B. 4通りが25%ずつ  
-C. 00と11が約50%ずつ  
+C. 01と10が約50%ずつ  
 D. 常に00
 
 ### Q5
@@ -106,16 +106,16 @@ D. measurementは非ユニタリであり、post-measurement stateは結果に�
 - C: `draw`はcircuit visualization。
 - D: 正解。bitstring frequency/countsの比較に使う。
 
-### A3 — A
+### A3 — C
 Qiskitの通常のbitstring表示ではbit 0が右端。
-- A: 正解。
-- B/D: 左右が逆。
-- C: classical bitとphysical qubitを同一視している。measurement mappingを確認する必要がある。
-
-### A4 — C
-Bell状態の非零振幅は00と11のみで各`1/sqrt(2)`。
-- A/B/D: statevectorの非零成分と一致しない。
 - C: 正解。
+- B/D: 左右が逆。
+- A: classical bitとphysical qubitを同一視している。measurement mappingを確認する必要がある。
+
+### A4 — A
+Bell状態の非零振幅は00と11のみで各`1/sqrt(2)`。
+- B/C/D: statevectorの非零成分と一致しない。
+- A: 正解。
 
 ### A5 — B
 - A: circuit-only関数ではない。

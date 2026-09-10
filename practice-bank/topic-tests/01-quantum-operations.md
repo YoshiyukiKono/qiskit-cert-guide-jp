@@ -108,6 +108,7 @@ D. ZとXの固有値だけを保存したclassical array
 
 ### A4 — A
 Hadamard conjugationでXとZが交換され、`HZH=X`。
+- A: 正解。HでZを共役変換するとXになる。
 - B/D: 対応する恒等式ではない。
 - C: Hで挟むことでZのままではない。
 
@@ -120,6 +121,7 @@ Hadamard conjugationでXとZが交換され、`HZH=X`。
 
 ### A6 — C
 `|+>=(|0>+|1>)/sqrt(2)`で、Zは`|1>`成分だけ符号反転するため`|->`。
+- C: 正解。状態ベクトルは`(|0>-|1>)/sqrt(2)`になる。
 - A/D: 重ね合わせがbasis stateへ直接collapseする操作ではない。
 - B: Zの作用ではない。
 

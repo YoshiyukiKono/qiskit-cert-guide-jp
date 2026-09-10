@@ -32,9 +32,9 @@ D. `compose`はQiskit v2.xでは削除されている
 parameterized rotationを作る代表的な組み合わせはどれか。
 
 A. `theta = Target("theta"); qc.ry(theta, 0)`  
-B. `theta = Parameter("theta"); qc.ry(theta, 0)`  
+B. `theta = ClassicalRegister("theta"); qc.ry(theta, 0)`  
 C. `theta = SamplerV2("theta"); qc.ry(theta, 0)`  
-D. `theta = ClassicalRegister("theta"); qc.ry(theta, 0)`
+D. `theta = Parameter("theta"); qc.ry(theta, 0)`
 
 ### Q5
 parameterized circuitを事前に数値へ束縛する代表的なAPIはどれか。
@@ -114,16 +114,16 @@ D. circuitをOpenQASM 2へ変換しなければならない
 - C: circuit operations全般を合成する。
 - D: 現行APIで利用できる。
 
-### A4 — B
-- A/C/D: symbolic circuit parameterを作るクラスではない。
-- B: 正解。`qiskit.circuit.Parameter`をgate parameterへ使える。
+### A4 — D
+- A/B/C: symbolic circuit parameterを作るクラスではない。
+- D: 正解。`qiskit.circuit.Parameter`をgate parameterへ使える。
 
 ### A5 — D
 - A/B/C: 該当する標準APIではない。
 - D: 正解。`assign_parameters`で数値や別Parameterへ置換できる。V2 Primitiveへ未束縛回路とparameter valuesを渡す方法も別途ある。
 
 ### A6 — A
-- A: 正解。Gate/Instructionのcontrolled versionを構成できる。
+- A: 正解。`Gate.control()`でcontrolled versionを構成する。例えば`XGate().control()`でcontrolled-Xを得る。基底`Instruction`には`control()`はなく、測定などを含む任意のInstructionを同様に制御化できるわけではない。
 - B/C/D: controlled gate生成の方法ではない。
 
 ### A7 — C
@@ -154,3 +154,5 @@ D. circuitをOpenQASM 2へ変換しなければならない
 - Dynamic circuits: https://quantum.cloud.ibm.com/docs/en/guides/classical-feedforward-and-control-flow
 - Transpile with pass managers: https://quantum.cloud.ibm.com/docs/en/guides/transpile-with-pass-managers
 - IBM Quantum ISA boundary: https://quantum.cloud.ibm.com/docs/en/guides/simulate-with-qiskit-sdk-primitives
+- Gate control: https://quantum.cloud.ibm.com/docs/en/api/qiskit/qiskit.circuit.Gate
+- Instruction API: https://quantum.cloud.ibm.com/docs/en/api/qiskit/qiskit.circuit.Instruction

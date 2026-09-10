@@ -2,7 +2,7 @@
 
 対応問題: `../../mock-exams/mock-01.md`
 
-この解説は、正答だけでなく各distractorがなぜ不適切かを確認するためのものです。API依存事項は2026-09-10時点のIBM Quantum Documentationを基準にしています。
+この解説は、正答だけでなく各distractorがなぜ不適切かを確認するためのものです。API依存事項は2026-09-10時点のIBM Quantum Documentationを基準にしています。2026-09-11の訂正・再検証範囲は`../../validation/revision-report-2026-09-11.md`を参照してください。
 
 ## Answer Key
 
@@ -39,7 +39,7 @@ Hadamard conjugationでXとZは交換されるため`HZH=X`。
 - A: `-|+>`は両成分を反転するglobal phaseでありZの作用ではない。
 - B: Zはprojective measurementではない。
 - C: 正解。
-- D: 余分なglobal phaseが付いており、厳密なstatevector等式ではない。
+- D: Cと同じphysical stateを表すが、余分なglobal phaseが付いており、設問の要求する厳密なstatevector等式ではない。
 
 ### Q4 — B
 `S†=diag(1,-i)`で、`i(-i)=1`。したがって`|+>`。
@@ -56,7 +56,7 @@ global phaseはstatevector全体への共通因子で、同じray/physical state
 - D: 正解。
 
 ### Q6 — B
-CXはcontrol=1のときtargetを反転するので`10 -> 11`。
+CXはcontrol=1のときtargetを反転するので`10 -> 11`（ここではcontrol, targetの順で記載）。
 - A: targetを反転していない。
 - B: 正解。
 - C/D: control/targetのbit patternと一致しない。
@@ -177,7 +177,7 @@ Bell stateの非零amplitudeは00と11だけで各`1/sqrt(2)`。
 - B/C/D: current standard APIではない。
 
 ### Q25 — D
-Gate/Instructionの`control()`でcontrolled versionを構成できる。
+`Gate.control()`でcontrolled versionを構成できる。例えば`XGate().control()`でcontrolled-Xを得る。基底`Instruction`にはこのmethodはなく、測定等を含む任意のInstructionへ一般化しない。
 - A/B/C: controlled-Xを生成する方法ではない。
 - D: 正解。
 
@@ -261,12 +261,16 @@ Estimator PUBはcircuit + observablesを核に、parameter valuesとprecisionを
 - B: Sampler PUBの形。
 - C/D: Estimator PUBではない。
 
+位置引数の順序は変わらない。未parameter化回路でprecisionだけを指定する例は`(qc, observable, None, 0.01)`であり、`None`の位置を省いて値を前へ詰めない。
+
 ### Q39 — A
 Estimator V2はobservable arraysとparameter arraysにNumPy-style broadcastingを使う。
 - A: 正解。
 - B: exact同長listだけに限定されない。
 - C: Estimator V2の重要な機能。
 - D: broadcast shapeに応じてarray resultを返し得る。
+
+parameter values配列の最後の軸は回路parameterの軸で、broadcastingのshapeから除かれる。例えばparameterが1個ならvalues shape `(3,1)`のbinding shapeは`(3,)`。observables shape `(2,1)`と組み合わせると結果shapeは`(2,3)`になる。
 
 ### Q40 — B
 Runtime V2 `run()`はsubmitted job objectを返し、`job.result()`でPrimitiveResultを得る。
@@ -304,6 +308,8 @@ Sampler PUBはcircuitとoptional parameter values/shots。
 - A: Estimator PUBに近い。
 - B: 正解。
 - C/D: valid Sampler PUB structureではない。
+
+parameter valuesを省略してPUBのshotsを指定する例は`(qc, None, 128)`。`(qc, 128)`では2番目の要素がshotsになるわけではない。
 
 ### Q46 — D
 `SamplerV2.run(pubs, shots=128)`のrun-level shotsは、PUB-specific shotsがないPUBについてcurrent runの`default_shots`をoverrideする。
@@ -367,10 +373,12 @@ Estimator PUBはcircuitとobservable(s)を核にする。
 - D: 正解。
 
 ### Q56 — A
-`resilience_level=0`はEstimatorのresilience mitigationを適用しないbaseline。
+個別optionsによる上書きがない場合、`resilience_level=0`はEstimatorのresilience mitigationを適用しないbaseline。
 - A: 正解。
-- B/C: higher resilience settings等と混同している。
+- B/C: 上書きのないlevel 0 presetでは有効にしない。
 - D: shotsの値ではない。
+
+個別optionsはpresetを上書きできる。level 0でも`resilience.zne_mitigation=True`を設定すればZNEを有効にできるため、levelだけで最終設定を断定しない。
 
 ### Q57 — A
 `data.evs`はestimated expectation values。
@@ -396,7 +404,7 @@ Estimator PUBはcircuitとobservable(s)を核にする。
 
 ### Q61 — C
 Sampler resultの`BitArray.get_counts()`でoutcome countsを得られる。
-- A: expectation-value APIではない。
+- A: `BitArray.expectation_values(observables)`は実在し、対角observableの期待値を求めるAPIである。ただしcounts辞書を返すAPIではなく、この選択肢の呼び出しには必須の`observables`引数もない。
 - B: sampled dataからexact probabilitiesを返すmethodではない。
 - C: 正解。
 - D: observableを返すものではない。
@@ -427,7 +435,7 @@ OpenQASM 3では`qubit[2] q;`と`bit[2] c;`。
 
 ### Q66 — A
 version declarationと`stdgates.inc`を読み、qへHを作用させ、measurement resultをcへ格納する。
-- A: 正解。
+- A: 正解。ここでは初期状態やH後の特定の状態ベクトルを断定していない。
 - B: cはclassical bitでqubitへ変換しない。
 - C: measurementを明示的に実行している。
 - D: gate definitionをcへ保存するコードではない。
@@ -472,3 +480,6 @@ language/specification、Qiskit parse/representation、IBM QPU executable suppor
 - Runtime service API: https://quantum.cloud.ibm.com/docs/en/api/qiskit-ibm-runtime/qiskit-runtime-service
 - OpenQASM 3 interop: https://quantum.cloud.ibm.com/docs/en/guides/interoperate-qiskit-qasm3
 - REST execution modes: https://quantum.cloud.ibm.com/docs/en/guides/execution-modes-rest-api
+- Gate control: https://quantum.cloud.ibm.com/docs/en/api/qiskit/qiskit.circuit.Gate
+- BitArray methods: https://quantum.cloud.ibm.com/docs/en/api/qiskit/qiskit.primitives.BitArray
+- Resilience presets and overrides: https://quantum.cloud.ibm.com/docs/en/guides/estimator-noise-management
