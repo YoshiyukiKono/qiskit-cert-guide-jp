@@ -21,7 +21,7 @@ base main: `88c9a83a12383541bb5ca53484afdaa3b15874bb`。
 | F07 | 内部mapping訂正に加え、今回取得した公式試験レコードの8領域・21項目・weightと照合。Q15/Q16はstate visualization、Q60はmonitoring。理論backgroundとclass識別を分離。T/append/inverse等の未出題を明記。Study Guide PDFの参考資料等は未確認 |
 | F08 | 確認・改修。重複key、空/余分なchoice、空解説、domain誤割当を検出するparserと否定テスト。assert依存を廃止。科学的正しさや分類の意味までは検査しないと明記 |
 | F09 | 確認・訂正。Topic 02 Q3/Q4のA/Cを交換し、BDACの全列周期を解消。頻度と解説を整合。乱数性の証明とはしない |
-| F10 | 全面的な出題品質改訂は依頼範囲外として保留。公開Task 4.2/8.4の薄い箇所に限りTopic 04 Q9をshape読解、Topic 08 Q10をREST結果取得へ差し替え。計148問・各キー位置を維持 |
+| F10 | 全面的な出題品質改訂は依頼範囲外として保留。公開Task 4.2/8.4の薄い箇所に限りTopic 04 Q9をshape読解、Topic 08 Q10をREST結果取得へ差し替え。計148問・差し替え2問のキー位置を維持 |
 | F11 | 確認・訂正。OpenQASM complexは実在することをTopic 08 A2へ明示 |
 | F12 | 表現を訂正。全行列比較の方針は元から妥当。数値許容誤差内でglobal phaseを区別する比較と明記し、記号的厳密計算とは呼ばない |
 
@@ -35,7 +35,7 @@ base main: `88c9a83a12383541bb5ca53484afdaa3b15874bb`。
 
 Study Guideへの署名付き参照もレコードにあったが、PDF本文の閲覧には成功していない。したがってPDFの参考文献・細目・sample testとの比較は未完了。この制約はREADMEとmapにも明記する。以後のcollectorは関連する公開試験fieldのみ保存し、連絡先・署名付きURLを除く。
 
-## Executed verification so far
+## Verification history
 
 | 対象 | 環境/commit | 観測結果 |
 |---|---|---|
@@ -49,7 +49,24 @@ Study Guideへの署名付き参照もレコードにあったが、PDF本文の
 
 SDK smokeの1件errorは教材の誤りではなく、今回追加したtest側がmid-circuit拒否を`ValueError`と想定したことが原因。公式2.5.2実装を読んで`QiskitError`と確認し、型とメッセージを検査するよう修正した。検査を削除・skipしたり、任意の例外を成功とする変更ではない。
 
-**この例外型修正・追加の2問差し替えを含むheadのCI結果は、そのheadのActions runで確認する。本ファイルに未実行の結果を合格として固定しない。**
+## Verified corrected code head
+
+上記の例外型修正と2問の差し替えを含むcommit **`2e2e041971321481e499ff9898e6a24b27edb3ea`**を、GitHub Actionsの[push run 34511308637](https://github.com/YoshiyukiKono/qiskit-cert-guide-jp/actions/runs/34511308637)で実行した。validation job `102985835560`の実ログと各stepの終了状態を取得して確認した。
+
+| 検証 | 実際の結果 |
+|---|---|
+| 全教材の構造validator | 成功、exit code 0。Topic80問・Mock68問 |
+| Validator回帰test | 26件成功、失敗・error・skipなし、exit code 0 |
+| SDK/client smoke | 15件成功、失敗・error・skipなし、exit code 0 |
+| 公開試験レコード取得 | 別job `102985835488`で成功。コード検査の成功とは分離 |
+
+実環境はUbuntu 24.04.5、CPython 3.12.14、Qiskit 2.5.2、qiskit-ibm-runtime 0.49.0、qiskit-qasm3-import 0.6.0、NumPy 2.5.3。主要3packageはrequirementsで固定し、推移的依存は導入ログに記録した。全依存をlockした構成ではない。
+
+構造検査の実集計はTopic **A20/B21/C21/D18**、Mock **A17/B17/C17/D17**、Mockの教材側primary domain割当は **11/8/12/10/8/8/7/4**。
+
+実行証拠は[artifact practice-bank-34511308637-1](https://github.com/YoshiyukiKono/qiskit-cert-guide-jp/actions/runs/34511308637/artifacts/10165892943)にも保存されている。3つのJSONにcheckout SHA、Python/package version、command、終了コード、実出力を含む。artifact IDは`10165892943`、ZIP SHA256は`090724574a12e7c2f95f95c2ce9e6406bf8ca288a7aa761aa991c1e5bb3a94e7`。
+
+本結果の追記は報告書のみの変更であり、検証済みの教材・検証コード・workflowを変更していない。以降のcommitに対するCI結果はそのSHAのActions runで確認する。異なるSHAの実行結果を取り違えて合格とはしない。
 
 ## Remaining boundaries
 
