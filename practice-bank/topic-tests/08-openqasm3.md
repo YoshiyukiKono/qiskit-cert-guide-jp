@@ -1,126 +1,159 @@
 # Topic Test 08 — OpenQASM 3
 
-全10問。各問1つ選択してください。
+全10問。syntaxだけでなくclassical types、control flow、Qiskit interoperability、IBM Quantum Compute REST executionまで扱います。
 
 ## Questions
 
 ### Q1
-OpenQASM 3 プログラムの先頭宣言として正しいものはどれか。
+OpenQASM 3で3量子ビットと3古典ビットを宣言する組み合わせとして正しいものはどれか。
 
-A. `OPENQASM 3.0;`  
-B. `QASM VERSION 3;`  
-C. `OPENQASM = 3.0`  
-D. `import qasm3`
+A. `qbit[3] q; cbit[3] c;`  
+B. `qubit[3] q; bit[3] c;`  
+C. `quantum[3] q; classical[3] c;`  
+D. `qubits q(3); bits c(3);`
 
 ### Q2
-OpenQASM 3 で2量子ビットを宣言する代表的な構文はどれか。
+OpenQASM 3のclassical typeとして実際に存在する組み合わせはどれか。
 
-A. `qubit[2] q;`  
-B. `qbit q = 2;`  
-C. `quantum[2] q;`  
-D. `qubits q(2);`
+A. `string`, `object`, `complex`だけ  
+B. `qubit`だけがclassical typeでもある  
+C. `bit`, `int`, `uint`, `float`, `angle`など  
+D. Pythonの`list`, `dict`, `tuple`をそのまま使う
 
 ### Q3
-2古典ビットを宣言する代表的な構文はどれか。
-
-A. `bit[2] c;`  
-B. `classical[2] c;`  
-C. `cbit c(2);`  
-D. `measure[2] c;`
-
-### Q4
-`qiskit.qasm3.dumps(qc)` の役割はどれか。
-
-A. `QuantumCircuit` を OpenQASM 3 の文字列へexportする  
-B. OpenQASM 3文字列を必ず実機で実行する  
-C. countsをJSONへ変換する  
-D. circuitをPNGにする
-
-### Q5
-`qiskit.qasm3.dump(qc, stream)` と `dumps(qc)` の主な違いはどれか。
-
-A. `dump` はstreamへ書き、`dumps` は文字列を返す  
-B. `dump` はQASM2、`dumps` はQASM3  
-C. `dump` はEstimator専用  
-D. 違いはない
-
-### Q6
-OpenQASM 3 を Qiskit に import する `loads()` / `load()` について正しいものはどれか。
-
-A. 現在は追加の `qiskit_qasm3_import` package が必要な場合がある  
-B. QiskitではOpenQASM 3 importは原理的に禁止  
-C. `loads()` はPNGしか読めない  
-D. `load()` はSamplerの別名
-
-### Q7
-次のOpenQASM 3の意味はどれか。
+次の完全なOpenQASM 3 programの意味として最も適切なのはどれか。
 
 ```qasm
+OPENQASM 3.0;
+include "stdgates.inc";
 bit c;
 qubit q;
 h q;
 c = measure q;
 ```
 
-A. Hで重ね合わせを作り、qを測定して結果をcへ格納する  
-B. cを量子ビットへ変換する  
-C. Hを測定する  
-D. qを削除する
+A. `c`を量子状態へ変換してからHを作用させる  
+B. qを`|+>`へし、測定結果をclassical bit cへ格納する  
+C. qを測定せずstatevectorをcへ代入する  
+D. H gateの定義をcへ保存する
 
-### Q8
+### Q4
+OpenQASM 3の`if`文について最も適切な説明はどれか。
+
+A. measurement等で得たclassical dataに応じたcontrol flowを表現できる  
+B. quantum statevectorそのものをPython objectとして比較する構文である  
+C. OpenQASM 3ではclassical controlは廃止された  
+D. `if`はQiskitの描画専用annotationである
+
+### Q5
 `include "stdgates.inc";` の役割として最も適切なのはどれか。
 
-A. 標準的なゲート定義を利用可能にする  
-B. Python standard libraryを読む  
-C. backend calibrationをdownloadする  
-D. shot数を指定する
+A. IBM account credentialsを読む  
+B. Python standard libraryをimportする  
+C. standard gate definitionsを利用可能にする  
+D. shotsの既定値を指定する
+
+### Q6
+Qiskit circuitをOpenQASM 3 textへexportするAPIについて正しいものはどれか。
+
+A. `loads(qc)`がstringを返し、`load(qc)`がstreamへ書く  
+B. `dump(qc, stream)`はstreamへ書き、`dumps(qc)`はstringを返す  
+C. `QuantumCircuit.qasm()`だけがOpenQASM 3 exporterである  
+D. OpenQASM 3 exportには`qiskit-qasm3-import`が必須である
+
+### Q7
+OpenQASM 3 programをQiskitへimportする`load()` / `loads()`について正しいものはどれか。
+
+A. `load()`はstringだけを受け、`loads()`はbackendを受ける  
+B. importはQiskit 2.xでは完全に削除された  
+C. import機能は成熟済みでAPI変更の可能性はない  
+D. current docsでは`qiskit-qasm3-import` optional packageが必要で、機能はexploratoryとされている
+
+### Q8
+QiskitのOpenQASM 2とOpenQASM 3 APIについて正しいものはどれか。
+
+A. `qiskit.qasm2`と`qiskit.qasm3`は別moduleであり、version-specific syntax/supportを区別する  
+B. QASM2 sourceは文字列の先頭だけ3.0へ書き換えれば常にQASM3として等価  
+C. `qiskit.qasm3.dumps`はOpenQASM 2 textを生成する  
+D. QASM2とQASM3にはclassical-control機能上の差がない
 
 ### Q9
-OpenQASM 3 が OpenQASM 2 と比べて重視する拡張方向の一つはどれか。
+OpenQASM 3 feature supportについて最も安全な理解はどれか。
 
-A. richer classical control / dynamic circuit表現  
-B. 量子ビットを完全廃止する  
-C. Pythonコードそのものに置換する  
-D. measurementを禁止する
+A. OpenQASM 3 specificationにある全featureはIBM QPUで必ずそのまま実行できる  
+B. Qiskitでparse/represent/exportできる範囲とIBM Quantum Computeで実行可能な範囲は同一とは限らない  
+C. QiskitでparseできなければOpenQASM 3 specificationにも存在しない  
+D. hardware supportはOpenQASM versionと無関係なので確認不要
 
 ### Q10
-Qiskit の OpenQASM 3 support について適切な姿勢はどれか。
+IBM Quantum Compute ServiceのREST APIとOpenQASM/primitive executionについて正しいものはどれか。
 
-A. import/export機能は発展中なので最新版ドキュメントを確認する  
-B. APIは永久に固定されている  
-C. QASM3はQiskit v2.xでは使用できない  
-D. `dumps()` は常にbinaryを返す
+A. REST APIではjob modeしか存在しない  
+B. REST APIはOpenQASM 2 sourceしか受け付けない  
+C. REST API経由でもprimitive workloadをjob / session / batchのexecution modesで扱える  
+D. REST APIを使う場合Sampler/Estimatorというprimitive conceptはなくなる
 
 ---
 
 # Answers & Explanations
 
-### A1 — A
-OpenQASM 3 のversion宣言は `OPENQASM 3.0;`。
+### A1 — B
+- A/C/D: OpenQASM 3のtype/declaration syntaxではない。
+- B: 正解。`qubit[n]`はquantum bits、`bit[n]`はclassical bits。
 
-### A2 — A
-OpenQASM 3 は `qubit[2] q;` のように量子ビット配列を宣言できる。
+### A2 — C
+- A/D: Python等の一般-purpose language typeをそのまま採用したものではない。
+- B: `qubit`はquantum typeでclassical typeではない。
+- C: 正解。OpenQASM 3には`bit`, `int`, `uint`, `float`, `angle`等のclassical typesがある。
 
-### A3 — A
-classical bit は `bit` 型で宣言する。`bit[2] c;` は2bit配列。
+### A3 — B
+- A: `c`はclassical bitでquantum stateへ変換しない。
+- B: 正解。`stdgates.inc`でHを使えるようにし、qへH、measurement resultをcへ代入する。
+- C: measurementを実行している。
+- D: gate definitionをclassical bitへ保存するコードではない。
 
 ### A4 — A
-`qiskit.qasm3.dumps` は circuit をOpenQASM 3 textへserializeし、Python stringとして返す。
+- A: 正解。OpenQASM 3はclassical control/dynamic-circuit semanticsを表現できる。
+- B: statevector objectを直接比較するPython構文ではない。
+- C/D: OpenQASM 3のcontrol-flowの位置付けと異なる。
 
-### A5 — A
-Pythonの一般的な `dump` / `dumps` 命名と同様、前者はstream、後者はstringを主に扱う。
+### A5 — C
+- A/B/D: include fileの目的ではない。
+- C: 正解。standard gatesを定義するlibrary include。
 
-### A6 — A
-2026-09時点の公式docsでは、OpenQASM 3 import に `qiskit_qasm3_import` (`qiskit-qasm3-import`) が必要と案内されている。将来統合される可能性があるため最新版確認が重要。
+### A6 — B
+- A: import/export方向が逆。
+- B: 正解。`dump`はfile-like stream、`dumps`はPython string。
+- C: current OpenQASM 3 high-level exporterは`qiskit.qasm3.dump/dumps`。
+- D: optional import packageはOpenQASM 3からQiskitへimportする側で必要。
 
-### A7 — A
-H後のqは `|+>`。measurement結果0/1をclassical bit cへ代入する。
+### A7 — D
+- A: `load(filename)`と`loads(program_string)`。
+- B: current Qiskit 2.xで利用できる。
+- C: IBM docsはexploratoryで変更があり得ると明記している。
+- D: 正解。
 
 ### A8 — A
-`stdgates.inc` は標準ゲート群を定義・利用するためのinclude。
+- A: 正解。version-specific moduleとsemanticsを区別する。
+- B: version declarationだけを換えて意味を保証できない。
+- C: `qiskit.qasm3.dumps`はOpenQASM 3を出力する。
+- D: OpenQASM 3はより豊かなclassical computation/controlを持つ。
 
-### A9 — A
-OpenQASM 3 は古典制御やdynamic circuitの表現力を拡張する方向を持つ。
+### A9 — B
+- A: specification supportとQPU executable supportは同一ではない。
+- B: 正解。IBMはfeature tableでparse/representation/export/hardware supportを分けて示している。
+- C: Qiskit importerの実装範囲はlanguage specificationそのものではない。
+- D: hardware supportは必ずcurrent documentationを確認する。
 
-### A10 — A
-IBM/Qiskit自身がOpenQASM 3 interoperabilityを発展中の領域として説明している。資格対策でも古いサンプルの丸暗記より最新版を優先する。
+### A10 — C
+- A: REST APIにもjob/session/batchがある。
+- B: current REST primitive workflowではOpenQASM 3を含むprimitive payload例がある。
+- C: 正解。
+- D: REST APIでもEstimator/Sampler primitive workloadとして送信する。
+
+## Official references
+
+- OpenQASM 3 + Qiskit: https://quantum.cloud.ibm.com/docs/en/guides/interoperate-qiskit-qasm3
+- QASM feature table: https://quantum.cloud.ibm.com/docs/en/guides/qasm-feature-table
+- REST execution modes: https://quantum.cloud.ibm.com/docs/en/guides/execution-modes-rest-api
+- OpenQASM types: https://openqasm.com/versions/3.0/language/types.html
