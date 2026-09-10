@@ -1,54 +1,37 @@
 # Qiskit v2.X Practice Bank
 
-IBM Certified Quantum Computation using Qiskit v2.X Developer – Associate (C1000-179) 向けの、公開Exam Objectives準拠を目標とするオリジナル演習セットです。
+IBM Certified Quantum Computation using Qiskit v2.X Developer – Associate (C1000-179) 向けのオリジナル演習セットです。既存の`exams/`は変更せず、教材は`practice-bank/`で完結します。CI設定は`.github/workflows/practice-bank-validation.yml`です。
 
-既存の `exams/` は変更せず、`practice-bank/` だけで完結します。
+## 基準と確認範囲
 
-## この問題集の基準
+**2026-09-11 JSTにIBM公式の公開試験レコードから8領域・21のObjectives・weight・試験形式を確認しました。** [Exam Objectives Map](exam-objectives-map.md)は、公式の原文と教材の出題内容を分離し、未出題の細目も明記しています。公式レコードの必要fieldを[JSON](validation/official-objectives-2026-09-11.json)へ保存しました。
 
-2026-09-10時点の以下を優先して作成・検証します。
+別添Study Guide PDF本文は未閲覧です。公開Objectivesの確認を、PDF内の全参考資料や細目まで検証したことと同一視しません。また、構造validatorや一部のSDKテストの合格は、全148問の技術的一意性や本試験相当の難易度の証明ではありません。
 
-1. IBMの現行certification / Study Guideで公開されているExam Objectives
-2. IBM Quantum Documentationの現行Qiskit SDK / IBM Quantum Compute (Qiskit Runtime) API
-3. OpenQASM 3の現行仕様とIBM Quantumのinterop documentation
-4. 本リポジトリの解説
-
-本問題集と公式情報が食い違う場合は公式情報を優先してください。
+APIの正しさは現行IBM Quantum / Qiskit公式資料とOpenQASM仕様を基準にし、本問題集や過去のレビューと矛盾する場合は公式情報を優先してください。今回の訂正・再検証・残る制約は[revision report](validation/revision-report-2026-09-11.md)に記録しています。
 
 ## 試験形式
 
-IBM公開情報ではC1000-179は次の形式です。
-
-- 68 questions
-- 90 minutes
-- 47 correct answers to pass
-- English exam
-
-本問題集は実試験問題、dump、受験者から得た非公開問題の再現ではありません。
+公式C1000-179レコードの確認値は68問、90分、47正答で合格、英語です。本問題集は実試験問題、dump、非公開問題の再現ではありません。模試の得点が実試験の合否を保証するものでもありません。
 
 ## 公開領域とweight
 
 | Domain | Weight | Mock 01 |
 |---|---:|---:|
-| Performing quantum operations | 16% | 11 |
-| Visualizing quantum circuits, measurements, and states | 11% | 8 |
-| Creating quantum circuits | 18% | 12 |
-| Running quantum circuits | 15% | 10 |
-| Using the sampler primitive | 12% | 8 |
-| Using the estimator primitive | 12% | 8 |
-| Retrieving and analyzing results | 10% | 7 |
-| Operating with OpenQASM | 6% | 4 |
+| Perform quantum operations | 16% | 11 |
+| Visualize quantum circuits, measurements, and states | 11% | 8 |
+| Create quantum circuits | 18% | 12 |
+| Run quantum circuits | 15% | 10 |
+| Use the sampler primitive | 12% | 8 |
+| Use the estimator primitive | 12% | 8 |
+| Retrieve and analyze the results of quantum circuits | 10% | 7 |
+| Operate with OpenQASM | 6% | 4 |
 
-合計68問です。整数化のため公開weightとの完全一致ではありませんが、各領域の比率を近似しています。
+合計68問。最大剰余方式による整数近似です。実試験の領域別問題数を公開値として示したものではありません。
 
-## Local primitives と IBM Quantum Compute primitives
+## LocalとRuntimeの区別
 
-V2 Primitivesには、用途の異なる実装があります。本問題集では混同しません。
-
-- `qiskit.primitives.StatevectorSampler` / `StatevectorEstimator`: ローカルのstatevector-based V2 reference implementations
-- `qiskit_ibm_runtime.SamplerV2` / `EstimatorV2`: IBM Quantum Compute ServiceでQPU等へworkloadを送るV2 primitives
-
-資格対策では両方を扱いますが、Runtime側についてはexecution mode、ISA circuit、PUB、options、job/result lifecycleまで含めます。
+`qiskit.primitives.StatevectorSampler` / `StatevectorEstimator`はlocal statevector-based V2実装です。`qiskit_ibm_runtime.SamplerV2` / `EstimatorV2`はRuntime側の実装で、QPU workflowではISA circuit、observable layout、execution mode、options、job/result lifecycleも考慮します。V2 interfaceが同じでも、実装の機能・実行環境がすべて同じとは限りません。
 
 ## 構成
 
@@ -56,70 +39,55 @@ V2 Primitivesには、用途の異なる実装があります。本問題集で�
 practice-bank/
 ├── README.md
 ├── exam-objectives-map.md
-├── topic-tests/
-│   ├── 01-quantum-operations.md
-│   ├── 02-visualization-measurement-states.md
-│   ├── 03-circuit-construction.md
-│   ├── 04-running-circuits.md
-│   ├── 05-sampler.md
-│   ├── 06-estimator.md
-│   ├── 07-results-analysis.md
-│   └── 08-openqasm3.md
-├── mock-exams/
-│   └── mock-01.md
-├── answers/
-│   └── mock-exams/
-│       └── mock-01-answers.md
+├── topic-tests/                         # 8ファイル × 10問 = 80問
+├── mock-exams/mock-01.md                # 68問
+├── answers/mock-exams/mock-01-answers.md
 └── validation/
     ├── notes.md
+    ├── requirements.txt
+    ├── validate_bank.py
+    ├── test_validate_bank.py
     ├── smoke_checks.py
-    └── validate_bank.py
+    ├── run_check.py
+    ├── collect_exam_evidence.py
+    ├── official-objectives-2026-09-11.json
+    └── revision-report-2026-09-11.md
 ```
 
-## 推奨利用順序
+## 利用方法
 
-1. `exam-objectives-map.md` でTask-level coverageを確認する
-2. topic testsを解く
-3. 正解だけでなく各distractorの解説を読む
-4. API依存問題は公式documentationとコードで再確認する
-5. `mock-exams/mock-01.md` を90分・資料なしで解く
-6. `answers/mock-exams/mock-01-answers.md` で採点・復習する
-7. `python practice-bank/validation/validate_bank.py` で構造上の整合性を確認する
+最初にObjective mapで出題範囲と薄い細目を確認し、Topic testsを解き、正答だけでなくdistractorの説明も読んでください。その後、Mock 01を資料なし・90分で解き、別ファイルの解答で復習します。TopicとMockには重複した概念があり、独立した実力測定としての限界があります。
 
-## Topic tests
+各問は1つ選択です。MockのA/B/C/Dは各17問。Topic全体の位置分布はA20/B21/C21/D18です。全列を説明する短周期をvalidatorで検査しますが、配置の乱数性を証明するものではありません。
 
-各ファイル10問、合計80問です。各領域の公開Taskを横断し、単純暗記だけでなくコード読解・概念の区別・version-sensitive APIを扱います。
+## 検証
 
-## Mock exam
+Python 3.12の環境で、repository rootから次を実行します。構造検査とその回帰テストにはQiskitは不要です。
 
-`mock-01.md` は68問です。公開weightに近い領域配分を使い、正答位置はA/B/C/Dを各17問にしています。配置は規則的な繰り返しにはしていません。
+```bash
+python practice-bank/validation/validate_bank.py
+python practice-bank/validation/test_validate_bank.py
+python -m pip install -r practice-bank/validation/requirements.txt
+python practice-bank/validation/smoke_checks.py
+```
 
-## 解説方針
+主要依存はQiskit 2.5.2、qiskit-ibm-runtime 0.49.0、qiskit-qasm3-import 0.6.0です。詳細は[Validation Notes](validation/notes.md)を参照してください。
 
-各問について次を説明します。
+GitHub Actionsでは対象head SHAをcheckoutして、全教材の構造検査、26件のvalidator回帰テスト、15件のSDK/client smoke testsを実行し、version・command・終了コード・ログをartifactに残します。実行成功/失敗はそのSHAのrunで確認してください。workflowを置いたことだけを実行成功とはしません。
 
-- 正答の理由
-- 各誤答がなぜ不適切か
-- version-sensitiveな場合の注意点
-- 必要に応じて数式・コードによる検算ポイント
+SDK/client testsは認証不要です。実Runtime serviceへの送信・job取得や実QPUの挙動は検証しません。公式試験レコードのネットワーク取得jobも、教材の技術的合格判定とは分離しています。
 
-## 重要なversion-sensitive領域
+## Version-sensitiveな範囲
 
-次は特に最新版公式documentationを再確認してください。
-
-- IBM Quantum Compute execution modes (job / session / batch)
-- `SamplerV2` / `EstimatorV2` options
-- resilience / dynamical decoupling / twirling等のnoise-management options
-- `RuntimeJobV2` とjob retrieval / status
-- dynamic circuitsのhardware support
-- OpenQASM 3 import/exportおよび実行可能featureの範囲
+Runtime execution modes、Sampler/Estimator options、DD/ZNE/twirling、job/result API、dynamic circuitsのhardware support、OpenQASM import/export・実行可能featureは試験直前にも公式資料を再確認してください。
 
 ## 公式参照
 
-- IBM certification announcement: https://www.ibm.com/quantum/blog/qiskit-v2x-developer-certification
+- Current Exam Objectives: https://www.ibm.com/training/credentials/getExam/C1000-179
+- Certification / Study Guide entry point: https://www.ibm.com/training/certification/ibm-certified-quantum-computation-using-qiskit-v2x-developer-associate-C9008400
 - Qiskit documentation: https://quantum.cloud.ibm.com/docs/
 - Execution modes: https://quantum.cloud.ibm.com/docs/en/guides/execution-modes
-- SamplerV2: https://quantum.cloud.ibm.com/docs/api/qiskit-ibm-runtime/sampler-v2
+- SamplerV2: https://quantum.cloud.ibm.com/docs/en/api/qiskit-ibm-runtime/sampler-v2
 - EstimatorV2: https://quantum.cloud.ibm.com/docs/en/api/qiskit-ibm-runtime/estimator-v2
 - Dynamic circuits: https://quantum.cloud.ibm.com/docs/en/guides/classical-feedforward-and-control-flow
-- OpenQASM 3 interoperability: https://quantum.cloud.ibm.com/docs/en/guides/interoperate-qiskit-qasm3
+- OpenQASM 3: https://quantum.cloud.ibm.com/docs/en/guides/interoperate-qiskit-qasm3

@@ -69,12 +69,21 @@ C. `(circuit, shots)`だけ
 D. `(session, qasm_version)`
 
 ### Q9
-Estimator V2のbroadcastingについて正しいものはどれか。
+次のlocal V2 EstimatorのPUBを評価したとき、`evs.shape`はどれか。必要なimportは完了しているとする。
 
-A. observablesとparameter valuesは必ず同一Python list長でなければならない  
-B. broadcastingはSamplerだけの機能  
-C. array形状は無視され常にscalar resultになる  
-D. observablesとparameter valuesはNumPy型のbroadcasting rulesに従って組み合わせられる
+```python
+theta = Parameter("theta")
+qc = QuantumCircuit(1)
+qc.ry(theta, 0)
+values = np.array([[0.0], [np.pi / 2], [np.pi]])
+observables = [["Z"], ["X"]]
+evs = StatevectorEstimator().run([(qc, observables, values)]).result()[0].data.evs
+```
+
+A. `(3, 2)`  
+B. `(2, 3, 1)`  
+C. shapeが2と3で異なるため必ず例外になる  
+D. `(2, 3)`
 
 ### Q10
 `job = estimator.run(pubs)` の後の一般的な関係として正しいものはどれか。
@@ -128,14 +137,17 @@ D. `run()`は必ず同期的に全結果をlistとして返す
 ### A8 — B
 - A: Estimator入力ではない。
 - B: 正解。PUBはsingle circuit + observablesを核にする。
-- C: Sampler PUBに近いがEstimatorではobservableが必要。
+- C: `(circuit, shots)`はそのまま正しいSampler PUBでもない。Samplerでparameter valuesなしにshotsを渡すなら`(circuit, None, shots)`。Estimatorではさらにobservableが必要。
 - D: PUBの構造ではない。
 
 ### A9 — D
-- A: size 1 dimensions等を使ったbroadcastingが可能。
-- B: Estimatorで重要な機能。
-- C: broadcasted shapeに応じてarray resultを返し得る。
-- D: 正解。
+`values`の最後の軸は1個のcircuit parameterに対応するため、broadcastするbinding shapeは`(3,)`。observable shape `(2,1)`とbroadcastして`(2,3)`になる。
+- A: observableの軸とparameter-setの軸を逆にしている。
+- B: 最後のparameter軸は出力に残らない。
+- C: size 1の軸を利用できるため、この2つのshapeは互換である。
+- D: 正解。2種類のobservableを3つのparameter setで評価する。
+
+理想的な`evs`は、Zの行が`[1,0,-1]`、Xの行が`[0,1,0]`（数値誤差を除く）。このbroadcasting規則はV2 PUBのものであり、Runtime QPUへ送る際には別途ISA circuit / observable layoutを整える。このlocalコードをQPU上で実行したという意味ではない。
 
 ### A10 — C
 - A/D: `run()`はjob handleを返す。

@@ -14,6 +14,7 @@ import numpy as np
 from qiskit import QuantumCircuit
 from qiskit.circuit import Gate, Instruction, Parameter
 from qiskit.circuit.library import RXGate, RZGate, XGate, YGate, ZGate
+from qiskit.exceptions import QiskitError
 from qiskit.primitives import StatevectorEstimator, StatevectorSampler
 from qiskit.primitives.containers import BitArray
 from qiskit.providers.fake_provider import GenericBackendV2
@@ -171,7 +172,7 @@ class SDKChecks(unittest.TestCase):
         mid.measure(0, 0)
         mid.x(0)
         mid.measure(0, 0)
-        with self.assertRaises(ValueError):
+        with self.assertRaisesRegex(QiskitError, "cannot handle mid-circuit measurements"):
             StatevectorSampler().run([mid]).result()
 
     def test_runtime_client_option_objects_only(self):

@@ -87,12 +87,12 @@ C. QiskitでparseできなければOpenQASM 3 specificationにも存在しない
 D. hardware supportはOpenQASM versionと無関係なので確認不要
 
 ### Q10
-IBM Quantum Compute ServiceのREST APIとOpenQASM/primitive executionについて正しいものはどれか。
+IBM Quantum Compute REST APIで、アクセス権のある完了済みjobの最終結果を取得したい。認証header等は設定済みとし、`{id}`を既知のjob IDに置き換える。API base URLに続くHTTP method/pathとして適切なのはどれか。
 
-A. REST APIではjob modeしか存在しない  
-B. REST APIはOpenQASM 2 sourceしか受け付けない  
-C. REST API経由でもprimitive workloadをjob / session / batchのexecution modesで扱える  
-D. REST APIを使う場合Sampler/Estimatorというprimitive conceptはなくなる
+A. `GET /v1/jobs/{id}`  
+B. `POST /v1/jobs`  
+C. `GET /v1/jobs/{id}/results`  
+D. `DELETE /v1/jobs/{id}`
 
 ---
 
@@ -150,15 +150,18 @@ OpenQASM 3.0仕様ではqubitの初期状態は未定義であり、`qubit q;`�
 - D: hardware supportは必ずcurrent documentationを確認する。
 
 ### A10 — C
-- A: REST APIにもjob/session/batchがある。
-- B: current REST primitive workflowではOpenQASM 3を含むprimitive payload例がある。
-- C: 正解。
-- D: REST APIでもEstimator/Sampler primitive workloadとして送信する。
+- A: jobの詳細やstatusを取得するendpointで、最終result取得とは区別する。
+- B: 新しいprimitive jobの送信であり、既存jobの結果取得ではない。
+- C: 正解。2026-09-11に確認した公式REST APIの最終結果取得endpoint。結果未取得・権限・保存期限等によって成功応答が保証されるわけではない。
+- D: 終了済みjobと関連dataの削除を要求する操作であり、結果を読む操作ではない。
+
+例えばUS側のbase URLは`https://quantum.cloud.ibm.com/api`。利用instanceのregionに応じたbase URLと、現行API-version/authentication headersを確認する。この問題の検証では実serviceへGET/POST/DELETEを発行していない。Job/Session/BatchのRESTでの区別はMock Q68も参照。
 
 ## Official references
 
 - OpenQASM 3 + Qiskit: https://quantum.cloud.ibm.com/docs/en/guides/interoperate-qiskit-qasm3
 - QASM feature table: https://quantum.cloud.ibm.com/docs/en/guides/qasm-feature-table
 - REST execution modes: https://quantum.cloud.ibm.com/docs/en/guides/execution-modes-rest-api
+- REST job endpoints: https://quantum.cloud.ibm.com/docs/en/api/qiskit-runtime-rest/tags/jobs
 - OpenQASM types and initial state: https://openqasm.com/versions/3.0/language/types.html
 - OpenQASM reset: https://openqasm.com/versions/3.0/language/insts.html

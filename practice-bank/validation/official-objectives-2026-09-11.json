@@ -1,0 +1,98 @@
+{
+  "source_url": "https://www.ibm.com/training/credentials/getExam/C1000-179",
+  "retrieved_at_utc": "2026-09-10T17:45:32.387151+00:00",
+  "reviewed_date_jst": "2026-09-11",
+  "retrieval_run_id": 34510149269,
+  "retrieval_job_id": 102981976567,
+  "raw_response_sha256": "5f17fba9a055274a9781b18c02d6b591899387df80f39b0996cf6f48758c827a",
+  "verification": "Official exam-record objectives and weights read and compared with the bank. Not a claim that the separate Study Guide PDF was read.",
+  "normalization": "Relevant public fields only. HTML list items converted to strings; nonbreaking/trailing whitespace normalized. Task IDs are positional labels derived from the ordered domain/task lists, not an additional IBM API field. Personal contact fields and signed download links are omitted.",
+  "exam_code": "C1000-179",
+  "exam_title": "Fundamentals of Quantum Computing Using Qiskit v2.X Developer",
+  "exam_status": "Live",
+  "questions": 68,
+  "minutes": 90,
+  "correct_answers_to_pass": 47,
+  "language": "English",
+  "objective_task_count": 21,
+  "study_guide_pdf_reviewed": false,
+  "domains": [
+    {
+      "id": 1,
+      "title": "Perform quantum operations",
+      "weight_percent": 16,
+      "tasks": [
+        {"id": "1.1", "text": "Define Pauli Operators"},
+        {"id": "1.2", "text": "Apply quantum operations"}
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Visualize quantum circuits, measurements, and states",
+      "weight_percent": 11,
+      "tasks": [
+        {"id": "2.1", "text": "Visualize quantum circuits"},
+        {"id": "2.2", "text": "Visualize quantum measurements"},
+        {"id": "2.3", "text": "Visualize quantum states"}
+      ]
+    },
+    {
+      "id": 3,
+      "title": "Create quantum circuits",
+      "weight_percent": 18,
+      "tasks": [
+        {"id": "3.1", "text": "Construct dynamic circuits"},
+        {"id": "3.2", "text": "Construct parameterized circuits"},
+        {"id": "3.3", "text": "Transpile and optimize circuits"},
+        {"id": "3.4", "text": "Construct basic quantum circuits"}
+      ]
+    },
+    {
+      "id": 4,
+      "title": "Run quantum circuits",
+      "weight_percent": 15,
+      "tasks": [
+        {"id": "4.1", "text": "Demonstrate an understanding of execution modes such as: session with dedicated, priority, and batch mode"},
+        {"id": "4.2", "text": "Demonstrate understanding of how to run quantum circuits with real hardware using Qiskit Runtime primitives and applying broadcasting rules"}
+      ]
+    },
+    {
+      "id": 5,
+      "title": "Use the sampler primitive",
+      "weight_percent": 12,
+      "tasks": [
+        {"id": "5.1", "text": "Set sampler primitive options such as dynamical decoupling"},
+        {"id": "5.2", "text": "Understand the theoretical background behind the sampler primitive"}
+      ]
+    },
+    {
+      "id": 6,
+      "title": "Use the estimator primitive",
+      "weight_percent": 12,
+      "tasks": [
+        {"id": "6.1", "text": "Set estimator primitive options (such as resilience levels)"},
+        {"id": "6.2", "text": "Understand the theoretical background behind the estimator primitive"}
+      ]
+    },
+    {
+      "id": 7,
+      "title": "Retrieve and analyze the results of quantum circuits",
+      "weight_percent": 10,
+      "tasks": [
+        {"id": "7.1", "text": "Retrieve previous experiment results (session/Qiskit Runtime)"},
+        {"id": "7.2", "text": "Monitor jobs"}
+      ]
+    },
+    {
+      "id": 8,
+      "title": "Operate with OpenQASM",
+      "weight_percent": 6,
+      "tasks": [
+        {"id": "8.1", "text": "Structure types in OpenQASM 3 programs"},
+        {"id": "8.2", "text": "Interpret OpenQASM semantics"},
+        {"id": "8.3", "text": "Interoperate different versions of OpenQASM with Qiskit"},
+        {"id": "8.4", "text": "Interact with the Qiskit IBM Runtime REST API"}
+      ]
+    }
+  ]
+}
