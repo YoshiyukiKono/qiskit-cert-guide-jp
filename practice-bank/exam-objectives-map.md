@@ -1,53 +1,195 @@
 # Exam Objectives Map
 
-2026-09 時点で IBM が公開している Qiskit v2.X Developer Associate の8主要領域に、本問題集を対応付けたものです。
+このファイルは、IBM Certified Quantum Computation using Qiskit v2.X Developer – Associate (C1000-179) の公開Study GuideをTask単位まで分解し、`practice-bank/` のcoverageを追跡するための学習用マップです。
 
-> 注意: これは公開情報を整理した学習用マップであり、IBM が非公開としている問題配分や採点ロジックを推測したものではありません。
+**Source lock:** 2026-09-10。Exam ObjectivesとweightはIBM公開Study Guideを基準とし、APIの意味は同日時点のIBM Quantum Documentationで再検証します。
 
-| # | 公開主要領域 | Topic test | 主な練習内容 |
-|---|---|---|---|
-| 1 | Performing quantum operations | `01-quantum-operations.md` | X/Y/Z/H/S/T, rotation, controlled gates, global/relative phase, inverse |
-| 2 | Visualizing quantum circuits, measurements, and states | `02-visualization-measurement-states.md` | `draw`, measurement, Statevector, probabilities, Bloch intuition, bit ordering |
-| 3 | Creating quantum circuits | `03-circuit-construction.md` | registers, append/compose, parameters, inverse, control, classical bits |
-| 4 | Running quantum circuits | `04-running-circuits.md` | transpilation, target/basis, simulators, backend-oriented execution concepts |
-| 5 | Using the sampler primitive | `05-sampler.md` | V2 Sampler, PUB, shots, parameter values, sampled classical outputs |
-| 6 | Using the estimator primitive | `06-estimator.md` | V2 Estimator, observables, expectation values, SparsePauliOp, precision |
-| 7 | Retrieving and analyzing results | `07-results-analysis.md` | counts/bitstrings, expectation values, probability interpretation, metadata |
-| 8 | Operating with OpenQASM 3 | `08-openqasm3.md` | syntax, `OPENQASM 3.0`, `bit`/`qubit`, measurement assignment, dump/dumps/load/loads |
+> このmapは公開objectiveのcoverageを管理するためのものです。非公開の実試験問題、実際の問題数内訳、採点ロジックを推測しません。
 
-## 学習上の横断テーマ
+## Domain coverage
 
-試験領域は独立ではありません。特に以下は複数領域にまたがります。
+| # | Public domain | Weight | Topic test | Mock 01 | Target mock count |
+|---|---|---:|---|---|---:|
+| 1 | Performing quantum operations | 16% | `01-quantum-operations.md` | Q1–Q11 | 11 |
+| 2 | Visualizing quantum circuits, measurements, and states | 11% | `02-visualization-measurement-states.md` | Q12–Q19 | 8 |
+| 3 | Creating quantum circuits | 18% | `03-circuit-construction.md` | Q20–Q31 | 12 |
+| 4 | Running quantum circuits | 15% | `04-running-circuits.md` | Q32–Q41 | 10 |
+| 5 | Using the sampler primitive | 12% | `05-sampler.md` | Q42–Q49 | 8 |
+| 6 | Using the estimator primitive | 12% | `06-estimator.md` | Q50–Q57 | 8 |
+| 7 | Retrieving and analyzing the results of quantum circuits | 10% | `07-results-analysis.md` | Q58–Q64 | 7 |
+| 8 | Operating with OpenQASM | 6% | `08-openqasm3.md` | Q65–Q68 | 4 |
+
+## Task-level coverage
+
+### 1. Performing quantum operations — 16%
+
+#### Task 1.1 — Define Pauli operators
+
+最低限扱うもの: `Pauli` / Pauli strings、tensor-product ordering、`SparsePauliOp`につながるobservable表現。
+
+Coverage: Topic 01 Q8–Q10、Mock Q8–Q11。
+
+#### Task 1.2 — Apply quantum operations
+
+最低限扱うもの: X/Y/Z/H/S/Tとdagger、controlled gates、rotation gates、global/relative phase、gate identitiesと状態追跡。
+
+Coverage: Topic 01 Q1–Q7、Mock Q1–Q7。
+
+### 2. Visualizing quantum circuits, measurements, and states — 11%
+
+#### Task 2.1 — Visualize quantum circuits
+
+`QuantumCircuit.draw()`、text / mpl outputの区別。
+
+Coverage: Topic 02 Q1、Mock Q12。
+
+#### Task 2.2 — Visualize quantum measurements
+
+`plot_histogram`、counts / sampled distributionの読み方、bit ordering。
+
+Coverage: Topic 02 Q2–Q5、Mock Q13–Q16。
+
+#### Task 2.3 — Visualize quantum states
+
+`Statevector`、`plot_bloch_multivector`、`plot_state_qsphere`、amplitude / probability / phaseの区別。
+
+Coverage: Topic 02 Q6–Q10、Mock Q17–Q19。
+
+### 3. Creating quantum circuits — 18%
+
+#### Task 3.1 — Construct dynamic circuits
+
+mid-circuit measurement、classical feedforward、`QuantumCircuit.if_test`、SDKで表現できるcontrol flowと実QPU supportの区別。
+
+Coverage: Topic 03 Q7–Q8、Mock Q27–Q28。
+
+#### Task 3.2 — Construct parameterized circuits
+
+`Parameter`、`assign_parameters`、parameterized circuitをPrimitiveへ渡す考え方。
+
+Coverage: Topic 03 Q4–Q5、Mock Q23–Q24。
+
+#### Task 3.3 — Transpile and optimize circuits
+
+`generate_preset_pass_manager`、`optimization_level`、target / coupling / basis、ISA circuit。
+
+Coverage: Topic 03 Q9–Q10、Mock Q29–Q31。
+
+#### Task 3.4 — Construct basic quantum circuits
+
+registers / bits、gate application、measurement、`append` / `compose`、`inverse` / control。
+
+Coverage: Topic 03 Q1–Q3、Q6、Mock Q20–Q22、Q25–Q26。
+
+### 4. Running quantum circuits — 15%
+
+#### Task 4.1 — Choose and use execution modes
+
+Job mode、Session mode、Batch mode、`mode=backend/session/batch`、iterative workloadとindependent multi-job workloadの区別。
+
+Coverage: Topic 04 Q1–Q5、Mock Q32–Q36。
+
+#### Task 4.2 — Run with Runtime V2 primitives and PUB/broadcasting
+
+`qiskit_ibm_runtime.SamplerV2` / `EstimatorV2`、ISA circuit / observable、PUB、parameter/observable broadcasting、asynchronous job result。
+
+Coverage: Topic 04 Q6–Q10、Mock Q37–Q41。
+
+### 5. Using the sampler primitive — 12%
+
+#### Task 5.1 — Configure Sampler options
+
+`SamplerOptions`、`default_shots`、dynamical decoupling、feature compatibilityを固定暗記せずcurrent docsで確認する姿勢。
+
+Coverage: Topic 05 Q6–Q10、Mock Q46–Q49。
+
+#### Task 5.2 — Understand and use Sampler V2
+
+sampled classical outputs、local `StatevectorSampler` とRuntime `SamplerV2` の違い、PUB / parameter values / shots、`BitArray` / output register。
+
+Coverage: Topic 05 Q1–Q5、Mock Q42–Q45。
+
+### 6. Using the estimator primitive — 12%
+
+#### Task 6.1 — Configure Estimator options
+
+`EstimatorOptions`、`resilience_level`、current levels 0 / 1 / 2、precisionとshotsを混同しない、ZNE / twirling等との関係。
+
+Coverage: Topic 06 Q6–Q10、Mock Q54–Q57。
+
+#### Task 6.2 — Understand and use Estimator V2
+
+circuit + observable、expectation value、`SparsePauliOp`、local `StatevectorEstimator` とRuntime `EstimatorV2` の違い、`data.evs`。
+
+Coverage: Topic 06 Q1–Q5、Mock Q50–Q53。
+
+### 7. Retrieving and analyzing results — 10%
+
+#### Task 7.1 — Retrieve results and previous jobs
+
+`job.result()`、`QiskitRuntimeService.job(job_id)`、`QiskitRuntimeService.jobs(...)`、Sampler / Estimator result structure。
+
+Coverage: Topic 07 Q1–Q5、Mock Q58–Q61。
+
+#### Task 7.2 — Monitor jobs and analyze output
+
+`job.status()`、job lifecycle、counts / `BitArray` / `evs`、metadata、statistical interpretation。
+
+Coverage: Topic 07 Q6–Q10、Mock Q62–Q64。
+
+### 8. Operating with OpenQASM — 6%
+
+#### Task 8.1 — Structure types in OpenQASM 3
+
+`qubit`, `bit`、classical scalar/array types such as `int`, `float`, `angle`。
+
+Coverage: Topic 08 Q1–Q2、Mock Q65。
+
+#### Task 8.2 — Interpret OpenQASM semantics
+
+measurement assignment、`if` / control-flow semantics、`stdgates.inc`。
+
+Coverage: Topic 08 Q3–Q5、Mock Q66。
+
+#### Task 8.3 — Interoperate OpenQASM and Qiskit
+
+`qiskit.qasm3.dump` / `dumps`、`load` / `loads`、`qiskit-qasm3-import` optional dependency、QASM2とQASM3 APIを混同しない。
+
+Coverage: Topic 08 Q6–Q8、Mock Q67。
+
+#### Task 8.4 — OpenQASM and IBM Quantum Compute interoperability
+
+OpenQASM 3 supportはfeatureごとに差がある、SDKでparse/representできることとQPUで実行できることを区別する、REST API経由のexecution modesが存在する。
+
+Coverage: Topic 08 Q9–Q10、Mock Q68。
+
+## Cross-cutting concepts
 
 ### Endianness / bit ordering
 
-Qiskit の表示では、量子ビット番号と文字列の左右関係を取り違えやすいため、回路追跡・測定結果解析の双方で反復します。
+Qiskitのbitstring、Pauli string、register表示は同じ「左右」の直感で雑に扱わない。問題文がどのorderingを指すかを明示する。
 
-### Phase
+### Local vs Runtime
 
-グローバル位相は単独の測定確率を変えませんが、相対位相はその後の干渉で観測可能になります。Z/S/T と H を組み合わせた問題を多めに配置しています。
+`StatevectorSampler` / `StatevectorEstimator` はV2 reference implementationだが、IBM QPU executionを表すものではない。Runtime側は `qiskit_ibm_runtime.SamplerV2` / `EstimatorV2` を扱う。
 
-### Parameters
+### ISA boundary
 
-parameterized circuit は circuit construction だけでなく Sampler / Estimator の PUB 入力理解にも関係します。
+IBM Quantum Compute primitivesへ送る回路・observableはbackendのISA/layoutへ合わせる必要がある。local statevector reference primitivesは抽象命令を直接扱える場合がある。
 
-### Transpilation
+### Dynamic circuits
 
-「回路の数学的意味」と「ターゲットハードウェアで実行可能な命令列への変換」を区別することが重要です。
+Qiskit SDKは複数のcontrol-flow constructを表現できるが、実QPU側のsupportは別問題でありcurrent documentationを確認する。
 
-### Primitive V2
+## Source references
 
-本問題集では V1 より V2 の考え方を優先します。概念として、Sampler は**古典出力のサンプル**、Estimator は**observable の期待値**を得るための primitive と整理します。
-
-## 模擬試験での配分
-
-`mock-01.md` は全8領域を含みます。ただし、問題数配分は学習上のバランスを取るための独自設計であり、IBM 本試験の正確な weighting を表しません。
-
-## 公式情報で必ず再確認する項目
-
-- 試験名・試験コード
-- 問題数・試験時間
-- 現在の受験ポリシー
-- Qiskit の最新 API
-- Runtime / IBM Quantum Compute Service の名称や API の更新
-- OpenQASM 3 import/export のサポート状況
+- IBM certification: https://www.ibm.com/quantum/blog/qiskit-v2x-developer-certification
+- IBM Quantum Documentation: https://quantum.cloud.ibm.com/docs/
+- Dynamic circuits: https://quantum.cloud.ibm.com/docs/en/guides/classical-feedforward-and-control-flow
+- Execution modes: https://quantum.cloud.ibm.com/docs/en/guides/execution-modes
+- Primitives: https://quantum.cloud.ibm.com/docs/en/guides/primitives
+- Sampler options: https://quantum.cloud.ibm.com/docs/en/guides/sampler-options
+- Estimator options: https://quantum.cloud.ibm.com/docs/en/guides/estimator-options
+- Runtime service API: https://quantum.cloud.ibm.com/docs/en/api/qiskit-ibm-runtime/qiskit-runtime-service
+- OpenQASM 3 interop: https://quantum.cloud.ibm.com/docs/en/guides/interoperate-qiskit-qasm3
+- OpenQASM 3 feature table: https://quantum.cloud.ibm.com/docs/en/guides/qasm-feature-table
