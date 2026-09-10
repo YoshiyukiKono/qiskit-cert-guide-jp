@@ -83,9 +83,16 @@ Coverage: Topic 03 Q1–Q3、Q6、Mock Q20–Q22、Q25–Q26。
 
 ### 4. Running quantum circuits — 15%
 
-#### Task 4.1 — Choose and use execution modes
+#### Task 4.1 — Demonstrate understanding of execution modes
 
-Job mode、Session mode、Batch mode、`mode=backend/session/batch`、iterative workloadとindependent multi-job workloadの区別。
+公開Study Guideでは execution modes の例として **session / dedicated / priority / batch** が挙げられています。2026-09-10時点のIBM Quantum Documentationでは、ユーザーが選択するexecution modeを **Job / Session / Batch** と整理しています。
+
+対応関係を次のように理解します。
+
+- **Job mode**: 単発job。primitiveへ`mode=backend`を渡す代表的workflow。
+- **Session mode**: 複数jobを扱うdedicated/exclusive execution window。sessionがactiveな間はそのsession内workloadがscheduling上priorityを得る。前jobの結果を次jobへ反映するiterative workloadに向く。
+- **Batch mode**: 互いに独立して実行できる複数jobをまとめるworkload manager。
+- REST `/sessions` APIではsession resourceの`mode`として`dedicated`または`batch`を使う。このREST上の値とPython guideのJob/Session/Batchという分類を混同しない。
 
 Coverage: Topic 04 Q1–Q5、Mock Q32–Q36。
 
@@ -114,6 +121,8 @@ Coverage: Topic 05 Q1–Q5、Mock Q42–Q45。
 #### Task 6.1 — Configure Estimator options
 
 `EstimatorOptions`、`resilience_level`、current levels 0 / 1 / 2、precisionとshotsを混同しない、ZNE / twirling等との関係。
+
+> 古いstudy/sample materialに数値levelの例が残っていても、version-sensitiveなAPI値はcurrent IBM Quantum Documentationを優先します。
 
 Coverage: Topic 06 Q6–Q10、Mock Q54–Q57。
 
@@ -159,7 +168,7 @@ Coverage: Topic 08 Q6–Q8、Mock Q67。
 
 #### Task 8.4 — OpenQASM and IBM Quantum Compute interoperability
 
-OpenQASM 3 supportはfeatureごとに差がある、SDKでparse/representできることとQPUで実行できることを区別する、REST API経由のexecution modesが存在する。
+OpenQASM 3 supportはfeatureごとに差がある、SDKでparse/represent/exportできることとQPUで実行できることを区別する、REST API経由のexecution modesが存在する。
 
 Coverage: Topic 08 Q9–Q10、Mock Q68。
 
@@ -193,3 +202,4 @@ Qiskit SDKは複数のcontrol-flow constructを表現できるが、実QPU側の
 - Runtime service API: https://quantum.cloud.ibm.com/docs/en/api/qiskit-ibm-runtime/qiskit-runtime-service
 - OpenQASM 3 interop: https://quantum.cloud.ibm.com/docs/en/guides/interoperate-qiskit-qasm3
 - OpenQASM 3 feature table: https://quantum.cloud.ibm.com/docs/en/guides/qasm-feature-table
+- REST execution modes: https://quantum.cloud.ibm.com/docs/en/guides/execution-modes-rest-api
