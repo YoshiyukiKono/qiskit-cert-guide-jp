@@ -1,57 +1,89 @@
 # Validation Notes
 
-このディレクトリは、問題文のうちコードで再確認しやすい主張を Qiskit で spot-check するための補助資料です。
+このディレクトリは、practice bankの技術的主張と構造を再確認するための補助資料です。
 
-## 方針
+## Validation layers
 
-- 問題の正答を「実行結果だけ」に依存させず、数学的理由も解説する。
-- API 依存の問題は現行 Qiskit v2.x の公式ドキュメントで再確認する。
-- `smoke_checks.py` は資格問題の全問自動テストではなく、主要な状態変換・Primitives・QASM3 export の sanity check。
-- IBM 実機への資格情報やネットワーク接続は不要なローカル検証だけを含める。
+### 1. `validate_bank.py`
 
-## 推奨環境
+Qiskitをimportせずに実行できる教材構造チェックです。
 
-2026-09 の教材初版では Qiskit v2.x を想定しています。
+- topic testsが各10問であること
+- 各問題にA–Dの4 choicesがあること
+- 各topicに10個のanswer headingsがあること
+- topic testsの正答位置が一つのletterへ極端に集中していないこと
+- Mock 01が68問であること
+- Mock 01のanswer keyが68問分あること
+- Mock 01の正答位置がA/B/C/D各17問であること
+- Mock 01の各解説がA–Dすべてに言及していること
+- 公開weightを近似したdomain rangesが11/8/12/10/8/8/7/4であること
+
+実行:
+
+```bash
+python practice-bank/validation/validate_bank.py
+```
+
+### 2. `smoke_checks.py`
+
+Qiskit SDKだけで再現可能な主張をlocalで検証します。
+
+- H/Z/HとH/X/Hのoperator identity
+- `Rx(pi)=-iX` の厳密な行列等式
+- Bell-state probabilities
+- `compose()`のdefault / `inplace=True` semantics
+- local `StatevectorSampler`
+- local `StatevectorEstimator`
+- OpenQASM 3 export
+
+実行環境の一例:
 
 ```bash
 python -m venv .venv
 source .venv/bin/activate   # Windows: .venv\Scripts\activate
-pip install "qiskit>=2,<3"
+pip install "qiskit[all]~=2.5.2"
 python practice-bank/validation/smoke_checks.py
 ```
 
-OpenQASM 3 import (`load` / `loads`) を別途試す場合は、現行ドキュメントに従って import package も追加してください。
+OpenQASM 3 import (`load` / `loads`) もlocalで試す場合:
 
 ```bash
 pip install qiskit-qasm3-import
 ```
 
-## バージョン差に注意する対象
+IBM Quantum Compute Serviceのコードを手元で試す場合は、別途current `qiskit-ibm-runtime` とIBM Quantum credentials/service accessが必要です。このvalidation directoryはcredentialsを要求しません。
 
-特に以下は更新が入りやすいため、問題集より公式 API reference を優先します。
+## Runtime/API claimsの検証方針
 
-- Primitive V2 の result data / metadata の具体的な属性
-- IBM managed service 側の Sampler / Estimator class 名や import path
-- backend selection / execution workflow
-- OpenQASM 3 import/export の対応範囲
-- transpiler preset pass manager の細かな引数
+以下はlocal smoke testだけでは正しさを保証できないため、2026-09-10時点の公式IBM Quantum Documentationと照合しています。
 
-## 安定した概念とAPI依存知識を分ける
+- `qiskit_ibm_runtime.SamplerV2` / `EstimatorV2`
+- Job / Session / Batch execution modes
+- backend ISAへtranspileしたcircuit/observableをRuntimeへ渡すworkflow
+- PUB structureとbroadcasting
+- Sampler `default_shots` / `run(..., shots=...)`
+- Sampler dynamical decoupling options
+- Estimator precision / `resilience_level`
+- `QiskitRuntimeService.job()` / `jobs()`
+- `RuntimeJobV2.status()` / `result()`
+- OpenQASM 3 feature supportとREST execution modes
 
-比較的安定:
+これらはversion-sensitiveなので、試験直前にも公式資料を再確認してください。
 
-- Pauli/H/S/T の数学的作用
-- Born rule
-- Bell state の相関
-- Sampler と Estimator の役割の違い
-- transpilation の目的
-- OpenQASM 3 の `OPENQASM 3.0;`, `qubit`, `bit` という基本概念
+## 以前のfalse-positiveと修正
 
-API確認を伴う:
+旧`smoke_checks.py`では`HXH=Z`をcomputational-basis statesへ作用させ、`Statevector.equiv()`で比較していました。しかし`equiv()`はglobal phaseを無視するため、basis stateだけではIdentityとの違いを見逃せます。
 
-- exact class/import names
-- result object の field access
-- optional dependency
-- provider-specific options
+現在は`Operator`の行列を`np.allclose`で**厳密に比較**し、global phaseまで区別します。
 
-試験直前には IBM が公開する certification study guide と Qiskit API reference を再確認してください。
+## Official references
+
+- Qiskit / IBM Quantum docs: https://quantum.cloud.ibm.com/docs/
+- Execution modes: https://quantum.cloud.ibm.com/docs/en/guides/execution-modes
+- Primitive I/O: https://quantum.cloud.ibm.com/docs/en/guides/primitive-input-output
+- Sampler options: https://quantum.cloud.ibm.com/docs/en/guides/sampler-options
+- Estimator options: https://quantum.cloud.ibm.com/docs/en/guides/estimator-options
+- Runtime service API: https://quantum.cloud.ibm.com/docs/en/api/qiskit-ibm-runtime/qiskit-runtime-service
+- OpenQASM 3 interoperability: https://quantum.cloud.ibm.com/docs/en/guides/interoperate-qiskit-qasm3
+- OpenQASM feature table: https://quantum.cloud.ibm.com/docs/en/guides/qasm-feature-table
+- REST execution modes: https://quantum.cloud.ibm.com/docs/en/guides/execution-modes-rest-api
