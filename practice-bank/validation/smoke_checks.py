@@ -9,7 +9,7 @@ from math import isclose, pi, sqrt
 
 import numpy as np
 from qiskit import QuantumCircuit
-from qiskit.circuit.library import RXGate
+from qiskit.circuit.library import RXGate, XGate, ZGate
 from qiskit.primitives import StatevectorEstimator, StatevectorSampler
 from qiskit.qasm3 import dumps
 from qiskit.quantum_info import Operator, SparsePauliOp, Statevector
@@ -35,21 +35,23 @@ def check_basic_states():
 def check_operator_identities():
     """Compare operators exactly, not basis-state rays up to global phase."""
 
+    x = Operator(XGate()).data
+    z = Operator(ZGate()).data
+
     hzh = QuantumCircuit(1)
     hzh.h(0)
     hzh.z(0)
     hzh.h(0)
-    assert np.allclose(Operator(hzh).data, Operator.from_label("X").data)
+    assert np.allclose(Operator(hzh).data, x)
 
     hxh = QuantumCircuit(1)
     hxh.h(0)
     hxh.x(0)
     hxh.h(0)
-    assert np.allclose(Operator(hxh).data, Operator.from_label("Z").data)
+    assert np.allclose(Operator(hxh).data, z)
 
     rx_pi = Operator(RXGate(pi)).data
-    minus_i_x = -1j * Operator.from_label("X").data
-    assert np.allclose(rx_pi, minus_i_x)
+    assert np.allclose(rx_pi, -1j * x)
 
 
 def check_bell_state():
@@ -96,8 +98,8 @@ def check_estimator():
     x = SparsePauliOp.from_list([("X", 1.0)])
     z = SparsePauliOp.from_list([("Z", 1.0)])
 
-    x_result = estimator.run([(qc, x)]).result()[0].data.evs
-    z_result = estimator.run([(qc, z)]).result()[0].data.evs
+    x_result = np.asarray(estimator.run([(qc, x)]).result()[0].data.evs).item()
+    z_result = np.asarray(estimator.run([(qc, z)]).result()[0].data.evs).item()
 
     assert isclose(float(x_result), 1.0, abs_tol=1e-9)
     assert isclose(float(z_result), 0.0, abs_tol=1e-9)
