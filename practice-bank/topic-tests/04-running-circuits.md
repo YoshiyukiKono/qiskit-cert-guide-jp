@@ -13,12 +13,12 @@ C. target `BackendV2` object
 D. `Statevector`
 
 ### Q2
-Session modeが最も適するworkloadはどれか。
+2026-09時点のSession modeについて最も適切な説明はどれか。
 
-A. 相互依存のない多数jobをまとめて効率良く投入するだけのworkload  
-B. 前のjob結果を使って次のjobを決める反復的workload  
-C. 1つのlocal Statevector計算  
-D. OpenQASM textのserialization
+A. 相互依存のない多数jobをまとめるだけのBatchと同義である  
+B. 複数jobを扱うdedicated/exclusive execution windowで、activeなsession内workloadはscheduling上priorityを得る。result-dependentな反復workloadにも向く  
+C. 1つのlocal Statevector計算だけを指す  
+D. OpenQASM textのserialization modeである
 
 ### Q3
 Batch modeの説明として最も適切なのはどれか。
@@ -94,9 +94,9 @@ D. `run()`は必ず同期的に全結果をlistとして返す
 - C: 正解。
 
 ### A2 — B
-- A: independent multi-job workloadはBatchが自然。
-- B: 正解。iterative workloadでSessionが有効。
-- C/D: IBM Quantum execution scheduling modeを必要としない。
+- A: SessionとBatchは用途が異なる。independent multi-job workloadはBatchが自然。
+- B: 正解。current docsではSessionはdedicated/exclusive execution windowで、activeなsession内workloadはpriorityを得る。前job結果を次jobへ反映するiterative workloadにも適する。
+- C/D: IBM Quantum execution scheduling modeの説明ではない。
 
 ### A3 — A
 - A: 正解。Batchはindependently executable jobsを効率よくまとめる。
@@ -105,7 +105,7 @@ D. `run()`は必ず同期的に全結果をlistとして返す
 - D: circuit control flowとexecution schedulingを混同している。
 
 ### A4 — D
-- A: Sessionはiterative、Batchはindependent multi-job向けで目的が異なる。
+- A: Sessionはdedicated/priorityなmulti-job window、Batchはindependent multi-job向けで目的が異なる。
 - B: Job modeもprimitive request。
 - C: 逐次依存はSession側の代表ユースケース。
 - D: 正解。
