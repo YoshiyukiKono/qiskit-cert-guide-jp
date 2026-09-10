@@ -2,237 +2,473 @@
 
 対応問題: `../../mock-exams/mock-01.md`
 
+この解説は、正答だけでなく各distractorがなぜ不適切かを確認するためのものです。API依存事項は2026-09-10時点のIBM Quantum Documentationを基準にしています。
+
 ## Answer Key
 
-1 A / 2 A / 3 B / 4 C / 5 B / 6 C / 7 A / 8 D / 9 B / 10 B  
-11 A / 12 A / 13 A / 14 B / 15 A / 16 A / 17 B / 18 A / 19 A / 20 A  
-21 A / 22 A / 23 A / 24 A / 25 A / 26 A / 27 A / 28 A / 29 A / 30 A  
-31 A / 32 A / 33 A / 34 A / 35 A / 36 A / 37 A / 38 A / 39 A / 40 A  
-41 A / 42 A / 43 A / 44 A / 45 C / 46 B / 47 A / 48 A / 49 A / 50 A  
-51 A / 52 A / 53 A / 54 A / 55 A / 56 A / 57 A / 58 A / 59 A / 60 A  
-61 A / 62 A / 63 A / 64 A / 65 A / 66 A / 67 A / 68 A
+1 C / 2 D / 3 C / 4 B / 5 D / 6 B / 7 C / 8 D / 9 D / 10 C  
+11 C / 12 A / 13 D / 14 C / 15 B / 16 A / 17 D / 18 A / 19 A / 20 C  
+21 B / 22 B / 23 A / 24 A / 25 D / 26 D / 27 D / 28 B / 29 B / 30 D  
+31 C / 32 A / 33 B / 34 C / 35 A / 36 B / 37 D / 38 A / 39 A / 40 B  
+41 C / 42 D / 43 C / 44 D / 45 B / 46 D / 47 B / 48 B / 49 C / 50 C  
+51 C / 52 B / 53 A / 54 D / 55 D / 56 A / 57 A / 58 A / 59 D / 60 A  
+61 C / 62 B / 63 C / 64 C / 65 B / 66 A / 67 B / 68 A
 
-> 選択肢位置の偏りは内容理解を優先した初版設計によるものです。本番の選択肢分布を模倣する意図はありません。次版ではランダム化候補です。
+正答位置: **A=17 / B=17 / C=17 / D=17**。
 
 ---
 
 ## Detailed Explanations
 
-### Q1 — A
-Pauli-X は computational basis を反転するので `X|1>=|0>`。`i|0>` ではなく、行列としても係数は1。
+### Q1 — C
+Hadamard conjugationでXとZは交換されるため`HZH=X`。
+- A: Yにはならない。
+- B: Hで挟む前のoperatorのままではない。
+- C: 正解。
+- D: identityではない。
 
-### Q2 — A
-`H|0>=(|0>+|1>)/sqrt(2)=|+>`。符号がマイナスの選択肢は `H|1>=|->`。
+### Q2 — D
+`Rz(theta)=exp(-i theta Z/2)`なので`Rz(pi)=diag(-i,i)=-iZ`。
+- A: global phaseを無視したphysical actionとしてZ相当だが、設問は厳密な行列等式を要求する。
+- B: phaseの符号が逆。
+- C: `-Z`ではない。
+- D: 正解。
 
-### Q3 — B
-Zは`|0>`に+1、`|1>`に-1を与える。したがって `Z|1>=-|1>`。
+### Q3 — C
+`|+>=(|0>+|1>)/sqrt(2)`の`|1>`成分をZが反転し`|->`になる。
+- A: `-|+>`は両成分を反転するglobal phaseでありZの作用ではない。
+- B: Zはprojective measurementではない。
+- C: 正解。
+- D: 余分なglobal phaseが付いており、厳密なstatevector等式ではない。
 
-### Q4 — C
-`S=diag(1,i)`。`|1>` 成分に90度の相対位相 `i` を掛ける。
+### Q4 — B
+`S†=diag(1,-i)`で、`i(-i)=1`。したがって`|+>`。
+- A: `|-i>`にはならない。
+- B: 正解。
+- C: `|1>`成分の符号はマイナスにならない。
+- D: `|0>`成分も残る。
 
-### Q5 — B
-dagger は随伴で、unitary gateではinverse。したがって `T†T=I`。
+### Q5 — D
+global phaseはstatevector全体への共通因子で、同じray/physical stateを表す。
+- A: Born ruleの絶対値二乗では共通位相は消える。
+- B: relative phaseは成分間の位相差であり別概念。
+- C: Qiskit circuitはglobal phaseを保持できる。
+- D: 正解。
 
-### Q6 — C
-Hadamard conjugation は X と Z を交換するので `HXH=Z`、`HZH=X`。
+### Q6 — B
+CXはcontrol=1のときtargetを反転するので`10 -> 11`。
+- A: targetを反転していない。
+- B: 正解。
+- C/D: control/targetのbit patternと一致しない。
 
-### Q7 — A
-`Rz(theta)=exp(-i theta Z/2)` で Bloch 球上のZ軸回転に対応する。
+### Q7 — C
+QiskitのPauli labelは右端がq0なので`XZ`ではZがq0、Xがq1。
+- A: orderingが逆。
+- B: tensor-product operatorを単一qubitへの逐次操作と誤解している。
+- C: 正解。
+- D: Pauli stringには明確なorderingがある。
 
 ### Q8 — D
-CX はcontrolが1ならtargetを反転する。`|10>` を control first の論理記法で考えればtarget 0→1で `|11>`。
+`SparsePauliOp`はPauli stringsと係数からなる疎な線形結合を表す。
+- A: measurement countsではない。
+- B: circuit compositionではない。
+- C: eigenvalueだけを保存するcontainerではない。
+- D: 正解。
 
-### Q9 — B
-状態全体への `-1=e^{iπ}` はglobal phase。Born則の絶対値二乗で消えるため同じ基底の測定確率は不変。
+### Q9 — D
+Pauli XとZはanticommuteし、`XZ=-ZX`。
+- A: commuteしない。
+- B/C: operator productの等式として誤り。
+- D: 正解。
 
-### Q10 — B
-標準Bloch球では `|0>`=+Z、`|1>`=-Z。
+### Q10 — C
+Pauli-Y行列から`Y|0>=i|1>`。
+- A/B/D: physical rayとしてglobal phaseの違いを無視する文脈はあり得るが、設問は厳密な行列積を問う。
+- C: 正解。
 
-### Q11 — A
-`|+>` はPauli-Xの+1固有状態。X basis measurementでは+1が確定する。
+### Q11 — C
+`|+>`はXの+1 eigenstateなので、`|++>`は`X⊗X`のeigenvalue `(+1)(+1)=+1`。
+- A/B: eigenstate propertyと一致しない。
+- C: 正解。
+- D: Pauli observableのeigenvalue範囲を超える。
 
 ### Q12 — A
-Hでq0を重ね合わせにし、CXでBell state `( |00>+|11> )/sqrt(2)` を作る。computational basis measurementは00/11が各約1/2。
+`QuantumCircuit.draw("mpl")`はMatplotlib-based circuit drawerを選ぶ。
+- A: 正解。
+- B: sampled distributionのvisualization。
+- C: circuit drawing APIではない。
+- D: measurement命令を追加する。
 
-### Q13 — A
-`Statevector.from_label("0")` はbasis labelから `|0>` を作る。混合状態ではなくpure state。
+### Q13 — D
+countsの棒グラフには`plot_histogram`が代表的。
+- A/B: quantum-state visualizationでありcounts用途とは異なる。
+- C: circuit drawer。
+- D: 正解。
 
-### Q14 — B
-確率は複素振幅の絶対値二乗。`|-i/sqrt(2)|^2=1/2`。
+### Q14 — C
+Qiskitの通常のbitstring表記ではbit 0が右端。
+- A: orderingが逆。
+- B: classical bitとphysical qubit mappingを混同している。
+- C: 正解。
+- D: Qiskitの表示規約は定義されている。
 
-### Q15 — A
-`QuantumCircuit.draw()` は回路を描画する。実行・sampling・serializationとは別機能。
+### Q15 — B
+Q-sphereはbasis componentの大きさ/確率とphaseを視覚化できる。
+- A: circuit metricsのplotではない。
+- B: 正解。
+- C: coupling map visualizationではない。
+- D: statevector由来のphase情報も扱える。
 
 ### Q16 — A
-0と1の振幅の大きさはともに `1/sqrt(2)`。相対位相 `i` はcomputational basisの直接確率を変えない。
+`plot_bloch_multivector`はstateをqubitごとのBloch sphereとして描く代表的関数。
+- A: 正解。
+- B/D: sampled distributions用。
+- C: circuit drawing用。
 
-### Q17 — B
-Qiskitの通常のbitstring表示ではbit 0が右端。複数量子ビット問題で頻出の取り違えポイント。
+### Q17 — D
+Bell stateの非零amplitudeは00と11だけで各`1/sqrt(2)`。
+- A/B/C: statevectorの非零成分と一致しない。
+- D: 正解。
 
 ### Q18 — A
-`QuantumCircuit(3)` は3 quantum bits、classical bitsなしの回路を作る。
+`Statevector.from_instruction(qc)`は測定のないcircuitを初期stateへ作用させたstatevectorを構成できる。
+- A: 正解。
+- B: visualizationだけ。
+- C: countsが必要なplot用途。
+- D: `transpile`の戻り値に`result()`を呼ぶものではない。
 
 ### Q19 — A
-Qiskitの回路メソッドでは `qc.h(2)` でq2へHadamardを追加する。
+`H|->=|1>`なのでcomputational basis measurementは1が確定する。
+- A: 正解。
+- B/C: H transformの結果と不一致。
+- D: measurement bitは0/1。
 
-### Q20 — A
-`Parameter` はsymbolic parameterを作り、後で値を束縛したりPrimitiveへparameter valuesを渡したりできる。
+### Q20 — C
+`QuantumCircuit(2,2)`は2 qubitsと2 clbitsを作る。
+- A: 4 qubitsのみ。
+- B: 0 qubits + 4 clbits。
+- C: 正解。
+- D: 有効なconstructor指定ではない。
 
-### Q21 — A
-`compose(..., inplace=True)` は合成結果を新規回路として返すのではなく対象回路へ反映する用途で使う。
+### Q21 — B
+`measure(qubit, clbit)`の順なのでq0→c1は`qc.measure(0,1)`。
+- A: q1→c0。
+- B: 正解。
+- C: `measure_all`は個別mapping指定ではない。
+- D: 対応するstandard APIではない。
 
-### Q22 — A
-`measure_all()` は原則として全qubitを測定する命令を追加する便利メソッド。実行そのものではない。
+### Q22 — B
+`compose`のdefaultは`inplace=False`で、新しいcircuitを返す。
+- A: `inplace=True`の場合の説明。
+- B: 正解。
+- C: measurementだけを合成するAPIではない。
+- D: current Qiskit v2.xで利用できる。
 
 ### Q23 — A
-`inverse()` はunitary/reversible circuitに対して自然な操作。測定など非可逆命令を含む回路では単純な逆ユニタリとして扱えない。
+`qiskit.circuit.Parameter`がsymbolic parameterを作る。
+- A: 正解。
+- B: transpiler target表現。
+- C: execution primitive。
+- D: classical bits container。
 
 ### Q24 — A
-`QuantumRegister(2,"data")` の第2引数はregister name。
+`assign_parameters`でParameterを数値や別Parameterへ置換できる。
+- A: 正解。
+- B/C/D: current standard APIではない。
 
-### Q25 — A
-`append` はinstructionと、それを割り当てるqargs/cargsを指定する。2-qubit gateなら2つの対象qubitが必要。
+### Q25 — D
+Gate/Instructionの`control()`でcontrolled versionを構成できる。
+- A/B/C: controlled-Xを生成する方法ではない。
+- D: 正解。
 
-### Q26 — A
-barrierは主に論理的区切り・transpilation上の境界として使う。量子情報を測定・resetする操作ではない。
+### Q26 — D
+current control-flow builderでは`with qc.if_test((c0, 1)):`のようにclassical conditionを表せる。
+- A: Pythonのruntime `if`でquantum measurementを直接評価する構文ではない。
+- B/C: current recommended control-flow builder APIではない。
+- D: 正解。
 
-### Q27 — A
-routing は論理2-qubit interactionをhardware connectivityへ割り当てる工程。
+### Q27 — D
+dynamic circuitはmid-circuit measurementとclassical feedforward/control flowなどを含み得る。
+- A: parameter sweepだけではdynamic circuitとは限らない。
+- B: transpiler variabilityの名称ではない。
+- C: shots変更だけではない。
+- D: 正解。
 
-### Q28 — A
-ターゲットが高水準gateを直接持たなければ、transpilerがbasis gate setへ分解・変換する。
+### Q28 — B
+SDKが表現できるcontrol flowとhardware/serviceが実行できるfeature setは区別する。
+- A: 全QPUで全constructが実行可能とは限らない。
+- B: 正解。
+- C: SDKはmid-circuit measurementを表現できる。
+- D: IBM hardwareにはclassical feedforward supportがあるが制約を確認する。
 
-### Q29 — A
-coupling mapは主に2-qubit operationが可能な物理qubit間接続を表す。
+### Q29 — B
+`generate_preset_pass_manager(..., backend=backend)`がstandard staged transpilation pipelineを生成する代表的方法。
+- A/C/D: pass manager生成APIではない。
+- B: 正解。
 
-### Q30 — A
-transpilationは表現を変えても理想的な論理作用を保つことを目的とする。gate列やdepthが同一である必要はない。
+### Q30 — D
+preset optimization levelは0–3。高いlevelは一般により積極的なoptimizationを試みるが、特定のdepth削減を保証しない。
+- A: level範囲が不足。
+- B: optimization outcomeは保証されない。
+- C: shots設定ではない。
+- D: 正解。
 
-### Q31 — A
-高いoptimization levelは一般により多く/積極的な最適化passを試す。特定のdepth削減を保証するものではない。
+### Q31 — C
+QPU Runtime workflowではtarget backendのISA/layoutに適合するcircuitを準備する。
+- A: QASM2 conversionは必須要件ではない。
+- B: Samplerではclassical outputsのためmeasurementが必要。
+- C: 正解。
+- D: abstract circuitをtarget-independentにそのまま送れるという理解は誤り。
 
 ### Q32 — A
-実機にはgate/readout error等のnoiseがあり、さらに有限shotの統計揺らぎもある。理想statevector simulationとの差の代表要因。
+IBM Quantum Computeのexecution modesはJob, Session, Batch。
+- A: 正解。
+- B/C/D: official execution-mode namesではない。
 
-### Q33 — A
-preset pass managerは標準的なtranspilation stagesをまとめたpipelineを構成するための仕組み。
+### Q33 — B
+Sessionはquantum/classical間でresult-dependent iterationを行うmulti-job workloadに向く。
+- A: independent jobsならBatchが自然。
+- B: 正解。
+- C/D: Runtime scheduling modeを必要としない。
 
-### Q34 — A
-physical connectivityを満たすためのroutingでSWAP相当操作が挿入されることがある。
+### Q34 — C
+Batchは互いにconditional dependencyのない複数jobsをまとめるworkload向け。
+- A: iterative dependencyはSession寄り。
+- B: single-job専用modeではない。
+- C: 正解。
+- D: circuit内control flowとjob schedulingを混同している。
 
 ### Q35 — A
-shots増加はsampling errorを小さくする方向に働くが、systematic hardware noiseを自動で除去するわけではない。
+Job modeではprimitiveを`mode=backend`で作る代表的workflowがある。
+- A: 正解。
+- B: local reference primitiveにQPU modeを付けるAPIではない。
+- C/D: valid mode objectではない。
 
-### Q36 — A
-Samplerはclassical output samples、Estimatorはobservable expectation values。この対比はV2 Primitives理解の中心。
+### Q36 — B
+`QiskitRuntimeService().least_busy(...)`は条件に合う比較的空いているbackendを選ぶ代表API。
+- A/C/D: current service backend-selection APIではない。
+- B: 正解。
 
-### Q37 — A
-`qiskit.primitives.StatevectorSampler` がlocal statevector-based V2 Sampler reference implementation。
+### Q37 — D
+IBM Runtime implementationは`qiskit_ibm_runtime.SamplerV2`。
+- A/B: current import pathではない。
+- C: V1-style generic Samplerを指し、IBM Runtime V2 classではない。
+- D: 正解。
 
 ### Q38 — A
-Sampler PUBはcircuitを中心に、optional parameter valuesやshotsを含められる実行単位。
+Estimator PUBはcircuit + observablesを核に、parameter valuesとprecisionを追加できる。
+- A: 正解。
+- B: Sampler PUBの形。
+- C/D: Estimator PUBではない。
 
 ### Q39 — A
-`|0>` をcomputational basisで理想測定すれば0が確定するので100 shotsなら0が100に近い。
+Estimator V2はobservable arraysとparameter arraysにNumPy-style broadcastingを使う。
+- A: 正解。
+- B: exact同長listだけに限定されない。
+- C: Estimator V2の重要な機能。
+- D: broadcast shapeに応じてarray resultを返し得る。
 
-### Q40 — A
-parameter sweepは同じ回路構造を異なる角度・parameter setsで繰り返し評価するとき有効。
+### Q40 — B
+Runtime V2 `run()`はsubmitted job objectを返し、`job.result()`でPrimitiveResultを得る。
+- A: direct scalar returnではない。
+- B: 正解。
+- C/D: runのreturn typeではない。
 
-### Q41 — A
-`StatevectorSampler` はpure-state statevectorを基礎にするため、mid-circuit measurementを一般的にはサポートしない。
+### Q41 — C
+local statevector reference implementationはQPU target/schedulingを必要としないが、Runtime QPU executionではISAとexecution modeを考慮する。
+- A: local implementationはIBM QPU必須ではない。
+- B: Estimatorはobservableを受け取る。
+- C: 正解。
+- D: execution environmentは異なる。
 
-### Q42 — A
-理論0.5/0.5でも1000回なら509/491程度のずれは自然なbinomial fluctuation。
+### Q42 — D
+Samplerの目的はclassical output dataをsampleすること。
+- A/C: exact spectral analysisではない。
+- B: transpilerではない。
+- D: 正解。
 
-### Q43 — A
-PUB=Primitive Unified Bloc。V2 Primitivesで入力をまとめる基本単位。
+### Q43 — C
+`qiskit.primitives.StatevectorSampler`がlocal statevector-based V2 reference implementation。
+- A/B: Estimator側。
+- C: 正解。
+- D: service access class。
 
-### Q44 — A
-Estimatorはcircuitとobservableの組を評価する。parameterized circuitならparameter values等も伴い得る。
+### Q44 — D
+IBM Quantum Compute用は`qiskit_ibm_runtime.SamplerV2`。
+- A/B: current APIではない。
+- C: local statevector reference implementation。
+- D: 正解。
 
-### Q45 — C
-`Z|1>=-|1>` なので `|1>` はZの-1固有状態、期待値は-1。
+### Q45 — B
+Sampler PUBはcircuitとoptional parameter values/shots。
+- A: Estimator PUBに近い。
+- B: 正解。
+- C/D: valid Sampler PUB structureではない。
 
-### Q46 — B
-`|0>` をX basisで見ると+/-が等重みなので `<X>=0`。行列計算 `⟨0|X|0⟩=0` でも確認できる。
+### Q46 — D
+`SamplerV2.run(pubs, shots=128)`のrun-level shotsは、PUB-specific shotsがないPUBについてcurrent runの`default_shots`をoverrideする。
+- A: Estimator-side precision概念。
+- B: Sampler `run()`のinterfaceは`shots`。
+- C: Sampler shots設定ではない。
+- D: 正解。PUB-specific shotsがあればそちらがさらに優先される。
 
-### Q47 — A
-`SparsePauliOp` はPauli stringsの疎な線形結合を表し、Hamiltonianやobservableに使える。
+### Q47 — B
+current Sampler optionsでは`dynamical_decoupling.enable=True`。
+- A: Estimator resilience設定との混同。
+- B: 正解。
+- C/D: current option pathではない。
 
-### Q48 — A
-`StatevectorEstimator` はfull statevector simulationを用いて期待値を計算するlocal reference implementation。
+### Q48 — B
+dynamical decouplingはidle periodsへpulse sequencesを挿入し、decoherence等の影響を抑える方向で使う。
+- A: result conversionではない。
+- B: 正解。
+- C: serializationとは無関係。
+- D: hardware connectivityは変わらない。
 
-### Q49 — A
-`|+>` はXの+1固有状態なので、`|++>` に対する `X⊗X` の固有値は(+1)(+1)=+1。
+### Q49 — C
+2026-09時点のIBM feature compatibilityではdynamic circuitsとdynamical decouplingはincompatibleとして扱われる。
+- A/B: current documentationと一致しない。
+- C: 正解。version-sensitiveなので直前に再確認する。
+- D: DDはSampler optionsで設定できる。
 
-### Q50 — A
-`ZI` のどちら側をどのqubitと読むかはQiskit orderingに注意が必要だが、`|00>` ではどちらのZも+1なので結果は+1。
+### Q50 — C
+Estimatorはobservable expectation valuesを評価するprimitive。
+- A: Samplerの役割。
+- B/D: Estimatorの役割ではない。
+- C: 正解。
 
-### Q51 — A
-V2 Estimator resultの `evs` はexpectation valuesを表す命名。
+### Q51 — C
+local reference implementationは`qiskit.primitives.StatevectorEstimator`。
+- A/B/D: Estimatorのlocal statevector reference classではない。
+- C: 正解。
 
-### Q52 — A
-600+400=1000 shots。
+### Q52 — B
+IBM Quantum Compute用Runtime classは`qiskit_ibm_runtime.EstimatorV2`。
+- A/C: current import path/APIではない。
+- B: 正解。
+- D: Sampler implementation。
 
 ### Q53 — A
-経験確率は400/1000=0.4。
+Estimator PUBはcircuitとobservable(s)を核にする。
+- A: 正解。
+- B: Sampler/result conceptsとの混同。
+- C/D: primitive scientific inputではない。
 
-### Q54 — A
-expectation 0は+1/-1寄与の平均が相殺したことを意味するだけで、状態を一意に決めない。`|+>`以外にも多くの状態があり得る。
+### Q54 — D
+`|+>`をZ basisで見れば+1/-1が等重みなので`<Z>=0`。
+- A: `<X>`なら+1。
+- B: `|1>`の`<Z>`に対応。
+- C: eigenvalue-weighted averageとして不適切。
+- D: 正解。
 
-### Q55 — A
-複数registerではspaceを含む表示やbit orderingが結果解釈に影響する。measurement mappingと合わせて確認する。
+### Q55 — D
+2026-09時点のRuntime Estimator resilience levelsは0,1,2。
+- A/B/C: current official optionsと一致しない。
+- D: 正解。
 
 ### Q56 — A
-shot数増加は統計精度を改善するが、gate biasやreadout errorなどsystematic noiseをそれだけで消さない。
+`resilience_level=0`はEstimatorのresilience mitigationを適用しないbaseline。
+- A: 正解。
+- B/C: higher resilience settings等と混同している。
+- D: shotsの値ではない。
 
 ### Q57 — A
-histogramはoutcome frequency/distributionを視覚化する。unitary matrixやcoupling mapそのものではない。
+`data.evs`はestimated expectation values。
+- A: 正解。
+- B: sampled bitsはSampler result側。
+- C/D: field名の意味ではない。
 
 ### Q58 — A
-有限標本のrelative frequencyは母確率から揺らぐ。独立samplingならshots増加に伴い経験分布が理論分布へ近づくことを期待する。
+過去job IDからは`QiskitRuntimeService.job(job_id)`でjob objectを取得できる。
+- A: 正解。
+- B/C/D: current representative retrieval APIではない。
 
-### Q59 — A
-expectation valueはobservableの固有値を確率重み付きで平均した量。単純なevent countではない。
+### Q59 — D
+`QiskitRuntimeService.jobs(...)`は過去jobsをlist/filterするAPI。
+- A: single job result取得とは異なる。
+- B/C: jobs retrieval APIではない。
+- D: 正解。
 
 ### Q60 — A
-OpenQASM 3のversion declarationは `OPENQASM 3.0;`。
+`job.status()`がRuntime jobの現在状態を取得する代表method。
+- A: 正解。
+- B/C/D: job lifecycle status methodではない。
 
-### Q61 — A
-`qubit[3] q;` は3要素のqubit array/registerを宣言する代表的構文。
+### Q61 — C
+Sampler resultの`BitArray.get_counts()`でoutcome countsを得られる。
+- A: expectation-value APIではない。
+- B: sampled dataからexact probabilitiesを返すmethodではない。
+- C: 正解。
+- D: observableを返すものではない。
 
-### Q62 — A
-`bit` はclassical bit type。`bit[4] c;` は4 classical bitsを宣言する。
+### Q62 — B
+Estimator `data.stds`は`evs`に対応するstandard deviation/uncertainty情報を持つ。error-mitigation settingsにより追加fieldsもあり得る。
+- A: bitstringsではない。
+- B: 正解。
+- C/D: result uncertainty fieldではない。
 
-### Q63 — A
-`qiskit.qasm3.dumps(qc)` はQuantumCircuitをOpenQASM 3 stringとしてexportする。
+### Q63 — C
+経験確率は`240/1000=0.24`。
+- A: P(0)に相当する。
+- B/D: countsから導かれない。
+- C: 正解。
 
-### Q64 — A
-`dump(qc, stream)` は文字列を返す `dumps` と異なりfile-like streamへ書く。
+### Q64 — C
+Primitive result metadataにはshots、target precision、resilience/execution関連情報等が含まれ得る。
+- A: metadataはquantum stateそのものではない。
+- B: 常に空ではない。
+- C: 正解。
+- D: metadata readingはjob resubmissionではない。
 
-### Q65 — A
-`loads(program)` はOpenQASM 3 program文字列からQuantumCircuitをimportする高水準関数。`load(filename)` はfile名を受ける。
+### Q65 — B
+OpenQASM 3では`qubit[2] q;`と`bit[2] c;`。
+- A/C/D: OpenQASM 3のdeclaration syntaxではない。
+- B: 正解。
 
 ### Q66 — A
-2026-09時点のQiskit docsではOpenQASM 3 importに `qiskit-qasm3-import` packageが必要。exportはcore APIに含まれる。
+version declarationと`stdgates.inc`を読み、qへHを作用させ、measurement resultをcへ格納する。
+- A: 正解。
+- B: cはclassical bitでqubitへ変換しない。
+- C: measurementを明示的に実行している。
+- D: gate definitionをcへ保存するコードではない。
 
-### Q67 — A
-OpenQASM 3ではmeasurement resultをclassical bitへassignmentできる。ここではqの測定結果がcに入る。
+### Q67 — B
+`dumps`はOpenQASM 3 string export、`loads`はprogram string import。current importには`qiskit-qasm3-import` optional packageが必要。
+- A: import/export方向が逆。
+- B: 正解。
+- C: `qiskit.qasm3`はOpenQASM 3用。
+- D: circuit serialization/import APIでありSampler result専用ではない。
 
 ### Q68 — A
-QiskitのOpenQASM 3 interoperabilityは発展中。資格対策でも古いsyntax/APIを固定的に暗記せず、最新版のIBM/Qiskit docsと仕様を基準にする。
+language/specification、Qiskit parse/representation、IBM QPU executable supportは別レイヤー。IBM Quantum Compute REST APIでもprimitive workloadsをJob/Session/Batchで扱える。
+- A: 正解。
+- B: specification featureが全てhardware executableとは限らない。
+- C: RESTでも3 execution modesがある。
+- D: REST APIでもEstimator/Sampler primitive workloadという構造を使う。
 
 ---
 
 ## Review by Domain
 
-- Q1–Q9: quantum operations
-- Q10–Q17: visualization / measurement / states
-- Q18–Q26: circuit construction
-- Q27–Q35: running / transpilation
-- Q36–Q43: Sampler
-- Q44–Q51: Estimator
-- Q52–Q59: results analysis
-- Q60–Q68: OpenQASM 3
+- Q1–Q11: Performing quantum operations — 11 questions
+- Q12–Q19: Visualization / measurements / states — 8 questions
+- Q20–Q31: Creating quantum circuits — 12 questions
+- Q32–Q41: Running quantum circuits — 10 questions
+- Q42–Q49: Sampler — 8 questions
+- Q50–Q57: Estimator — 8 questions
+- Q58–Q64: Results / jobs — 7 questions
+- Q65–Q68: OpenQASM — 4 questions
 
-間違いが2問以上まとまった領域は、対応する `topic-tests/` を再度解いてから次の模試へ進んでください。
+## Official references
+
+- Certification: https://www.ibm.com/quantum/blog/qiskit-v2x-developer-certification
+- Qiskit documentation: https://quantum.cloud.ibm.com/docs/
+- Bit ordering: https://quantum.cloud.ibm.com/docs/en/guides/bit-ordering
+- Dynamic circuits: https://quantum.cloud.ibm.com/docs/en/guides/classical-feedforward-and-control-flow
+- Execution modes: https://quantum.cloud.ibm.com/docs/en/guides/execution-modes
+- Primitive I/O: https://quantum.cloud.ibm.com/docs/en/guides/primitive-input-output
+- Sampler options: https://quantum.cloud.ibm.com/docs/en/guides/sampler-options
+- Estimator options: https://quantum.cloud.ibm.com/docs/en/guides/estimator-options
+- Runtime service API: https://quantum.cloud.ibm.com/docs/en/api/qiskit-ibm-runtime/qiskit-runtime-service
+- OpenQASM 3 interop: https://quantum.cloud.ibm.com/docs/en/guides/interoperate-qiskit-qasm3
+- REST execution modes: https://quantum.cloud.ibm.com/docs/en/guides/execution-modes-rest-api
