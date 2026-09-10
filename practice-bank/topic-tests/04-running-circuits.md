@@ -1,119 +1,150 @@
 # Topic Test 04 — Running Quantum Circuits
 
-全10問。各問1つ選択してください。
+全10問。IBM Quantum Compute execution modes、Runtime V2 primitives、PUBとISA boundaryを中心に扱います。
 
 ## Questions
 
 ### Q1
-transpilation の主目的として最も適切なのはどれか。
+`SamplerV2` / `EstimatorV2` を単発のJob modeで実行するとき、`mode` に渡す代表的なものはどれか。
 
-A. 回路をターゲットの命令セットや接続制約に適合させる  
-B. 測定確率を必ず50%にする  
-C. 古典ビットを削除する  
-D. 量子アルゴリズムを自動発見する
+A. `QuantumCircuit`  
+B. `Session`だけ  
+C. target `BackendV2` object  
+D. `Statevector`
 
 ### Q2
-`basis_gates` が表すものとして最も近いのはどれか。
+Session modeが最も適するworkloadはどれか。
 
-A. ターゲットが直接扱う基本ゲート集合  
-B. 測定結果の基底状態一覧  
-C. Bloch球の軸  
-D. Pythonの組み込み関数
+A. 相互依存のない多数jobをまとめて効率良く投入するだけのworkload  
+B. 前のjob結果を使って次のjobを決める反復的workload  
+C. 1つのlocal Statevector計算  
+D. OpenQASM textのserialization
 
 ### Q3
-物理デバイスの coupling map を考慮する理由はどれか。
+Batch modeの説明として最も適切なのはどれか。
 
-A. すべての量子ビット対で2量子ビットゲートが直接実行できるとは限らないから  
-B. shot数を決めるため  
-C. Statevectorの正規化のため  
-D. OpenQASMの文法チェックのため
+A. 互いに独立して実行できる複数jobをまとめて扱うexecution mode  
+B. 1つのjob内部のshotsを1に固定する機能  
+C. statevectorだけを保存するlocal mode  
+D. dynamic circuit内のif文そのもの
 
 ### Q4
-最適化レベルを上げた transpilation について一般に正しいものはどれか。
+Job / Session / Batchについて正しいものはどれか。
 
-A. より多くの最適化処理を試みる可能性がある  
-B. 必ず量子ビット数を半分にする  
-C. 必ず実行結果を変える  
-D. 測定命令を禁止する
+A. SessionとBatchは同じ意味で名前だけ異なる  
+B. Job modeではPrimitiveを使えない  
+C. Batchではjob同士が前の結果を待って逐次依存することが前提  
+D. scheduling/workload特性に応じて3つのexecution modeを使い分ける
 
 ### Q5
-理想的なローカル statevector simulation と実機実行の違いとして正しいものはどれか。
+IBM Quantum Compute用backendを選ぶ処理として現在の代表例に最も近いものはどれか。
 
-A. 実機ではデバイスノイズや有限shotの影響を考える必要がある  
-B. 実機は複素振幅を直接返すことしかできない  
-C. statevector simulation は量子回路を扱えない  
-D. 両者は常に完全に同一結果になる
+A. `Statevector.from_backend()`  
+B. `QiskitRuntimeService().least_busy(operational=True, simulator=False)`  
+C. `QuantumCircuit.least_busy()`  
+D. `SamplerV2.random_backend()`
 
 ### Q6
-`generate_preset_pass_manager(...)` の役割として最も適切なのはどれか。
+IBM Quantum ComputeのV2 Samplerをimportする現在の代表的な形はどれか。
 
-A. ターゲットに応じた標準的な transpilation pipeline を生成する  
-B. Sampler のshotを生成する  
-C. IBMアカウントを作る  
-D. 測定結果をヒストグラム化する
+A. `from qiskit.primitives import Sampler`  
+B. `from qiskit import RuntimeSampler`  
+C. `from qiskit_ibm_runtime import SamplerV2`  
+D. `from qiskit_aer import SamplerV2`
 
 ### Q7
-transpiled circuit に SWAP 相当の操作が増える典型的理由はどれか。
+Runtime primitiveへQPU用circuitを送る前のtranspilationについて正しいものはどれか。
 
-A. 論理量子ビット間の必要な相互作用を物理接続に合わせてルーティングするため  
-B. global phaseをゼロにするため  
-C. shotsを増やすため  
-D. classical registerを可視化するため
+A. backendのISAへ適合したcircuitを用意する  
+B. Runtime V2は任意のabstract instructionを必ずserver側で自動変換するので不要  
+C. measurementを全部削除する必要がある  
+D. QASM2へ必ず変換する
 
 ### Q8
-「論理回路が同じ意味を保つ」ことと「ゲート列が同じ」であることの関係として正しいものはどれか。
+Estimator PUBの構造として最も適切なのはどれか。
 
-A. transpilation後はゲート列が変わっても、意図した論理作用を保つことが目的  
-B. ゲート列が1文字でも変われば必ず別アルゴリズム  
-C. transpilationは回路を測定結果に置換する処理  
-D. 論理作用は考慮されない
+A. `(counts, backend)`  
+B. `(circuit, observables, optional parameter_values, optional precision)`  
+C. `(circuit, shots)`だけ  
+D. `(session, qasm_version)`
 
 ### Q9
-有限 shots で確率を推定する場合、shots を増やす主な効果はどれか。
+Estimator V2のbroadcastingについて正しいものはどれか。
 
-A. 統計的ばらつきを減らす方向に働く  
-B. qubit数が増える  
-C. gate depthが必ず減る  
-D. global phaseが観測可能になる
+A. observablesとparameter valuesは必ず同一Python list長でなければならない  
+B. broadcastingはSamplerだけの機能  
+C. array形状は無視され常にscalar resultになる  
+D. observablesとparameter valuesはNumPy型のbroadcasting rulesに従って組み合わせられる
 
 ### Q10
-実行先に応じた transpilation を行う際、最も重要な情報の一つはどれか。
+`job = estimator.run(pubs)` の後の一般的な関係として正しいものはどれか。
 
-A. backend/target の命令・接続制約  
-B. Markdownのテーマ  
-C. Gitのbranch名  
-D. Pythonファイル名
+A. `run()`はexpectation valueのPython floatだけを直接返す  
+B. `run()`はQuantumCircuitを書き換えて戻す  
+C. `run()`はjob objectを返し、完了後の結果は`job.result()`で取得する  
+D. `run()`は必ず同期的に全結果をlistとして返す
 
 ---
 
 # Answers & Explanations
 
-### A1 — A
-transpiler は抽象的な回路をターゲットが実行できる形へ変換する。basis、接続、最適化などが主な論点。
+### A1 — C
+- A/D: execution modeではない。
+- B: Sessionもmodeに使えるが、単発Job modeではbackend objectを指定する。
+- C: 正解。
 
-### A2 — A
-basis gates はターゲットで基本命令として利用できるゲート集合。任意の高水準ゲートは必要に応じてこの集合へ分解される。
+### A2 — B
+- A: independent multi-job workloadはBatchが自然。
+- B: 正解。iterative workloadでSessionが有効。
+- C/D: IBM Quantum execution scheduling modeを必要としない。
 
 ### A3 — A
-実デバイスでは2量子ビット相互作用の接続性が制限される。必要な論理接続を満たすため routing が必要になる。
+- A: 正解。Batchはindependently executable jobsを効率よくまとめる。
+- B: shots設定ではない。
+- C: local simulation modeではない。
+- D: circuit control flowとexecution schedulingを混同している。
 
-### A4 — A
-最適化レベルはコンパイル努力と結果の品質のトレードオフに関係する。高レベルでも「必ず」特定の改善が起こるわけではない。
+### A4 — D
+- A: Sessionはiterative、Batchはindependent multi-job向けで目的が異なる。
+- B: Job modeもprimitive request。
+- C: 逐次依存はSession側の代表ユースケース。
+- D: 正解。
 
-### A5 — A
-理想 simulator はデバイスノイズを無視できる一方、実機ではノイズ、readout error、shot noise などを考える必要がある。
+### A5 — B
+- A/C/D: 現行の代表APIではない。
+- B: 正解。serviceから利用可能backendを選択する代表例。
 
-### A6 — A
-preset pass manager は一般的な transpilation stage を組み合わせた pass manager を作る。ターゲットや optimization level と合わせて使う。
+### A6 — C
+- A: V1 `Sampler`を選ぶ形ではなく、またIBM Runtime implementationでもない。
+- B/D: 現行の標準import pathではない。
+- C: 正解。
 
 ### A7 — A
-非隣接な論理量子ビット間の相互作用を物理トポロジーで実現するため、routing によってSWAP等が挿入されることがある。
+- A: 正解。target backendのsupported instructions / connectivityへ合わせたISA circuitが必要。
+- B: local reference primitivesとの混同。
+- C: Samplerではclassical outputを得るmeasurementが必要になる。
+- D: QASM2変換は要件ではない。
 
-### A8 — A
-コンパイルは表現を変えても計算の意味を保つことを目指す。物理的な近似やノイズまで含めれば実測分布は変動し得るが、論理変換としての目的は等価性維持。
+### A8 — B
+- A: Estimator入力ではない。
+- B: 正解。PUBはsingle circuit + observablesを核にする。
+- C: Sampler PUBに近いがEstimatorではobservableが必要。
+- D: PUBの構造ではない。
 
-### A9 — A
-独立サンプル数が増えるほど頻度による確率推定の標準誤差は一般に小さくなる。
+### A9 — D
+- A: size 1 dimensions等を使ったbroadcastingが可能。
+- B: Estimatorで重要な機能。
+- C: broadcasted shapeに応じてarray resultを返し得る。
+- D: 正解。
 
-### A10 — A
-target/backend properties は、どの命令がどこで実行できるかを決めるため transpilation の中心情報。
+### A10 — C
+- A/D: `run()`はjob handleを返す。
+- B: circuit mutation APIではない。
+- C: 正解。`job.result()`は完了までblockし得る。
+
+## Official references
+
+- Execution modes: https://quantum.cloud.ibm.com/docs/en/guides/execution-modes
+- Primitive input/output: https://quantum.cloud.ibm.com/docs/en/guides/primitive-input-output
+- Estimator inputs/outputs: https://quantum.cloud.ibm.com/docs/en/guides/estimator-input-output
+- Transpilation/ISA: https://quantum.cloud.ibm.com/docs/en/guides/defaults-and-configuration-options
