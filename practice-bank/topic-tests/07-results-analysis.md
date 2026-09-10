@@ -1,119 +1,147 @@
 # Topic Test 07 — Retrieving and Analyzing Results
 
-全10問。各問1つ選択してください。
+全10問。Runtime job retrieval / monitoringとSampler・Estimator resultの読み方を扱います。
 
 ## Questions
 
 ### Q1
-1000 shots の counts が `{'0': 750, '1': 250}` だった。経験的な `P(1)` はいくつか。
+`job = sampler.run(pubs)` で得たjobの最終結果を取得する代表的な呼び出しはどれか。
 
-A. 0.25  
-B. 0.5  
-C. 0.75  
-D. 1.0
+A. `job.result()`  
+B. `job.counts()`  
+C. `job.transpile()`  
+D. `job.observable()`
 
 ### Q2
-counts と exact probability の違いとして正しいものはどれか。
+既知のRuntime job IDから過去のjob objectを取得する代表的なAPIはどれか。
 
-A. counts は有限shotの観測頻度、probability は理論分布を表し得る  
-B. 完全に同じ概念  
-C. counts は必ず複素数  
-D. probability は必ず整数
+A. `RuntimeJobV2.from_id(job_id)`  
+B. `QiskitRuntimeService().job(job_id)`  
+C. `SamplerV2.job(job_id)`  
+D. `QuantumCircuit.load_job(job_id)`
 
 ### Q3
-2ビット counts の `'01'` を Qiskit の通常の文字列表現として読むとき、右端は何に対応するか。
+複数の過去Runtime jobsを一覧・条件付きで取得する用途として最も適切なのはどれか。
 
-A. classical bit 0  
-B. classical bit 1  
-C. 常にqubit 1  
-D. physical qubit番号とは無関係なので何にも対応しない
+A. `service.jobs(...)`  
+B. `job.result(all=True)`  
+C. `qc.jobs()`  
+D. `Statevector.jobs()`
 
 ### Q4
-Sampler結果を分析するとき、最初に確認すべきものの一つはどれか。
+Sampler V2のPUB resultに `data.meas` があるとき、その典型的な読み方はどれか。
 
-A. どの classical register にどの measurement が格納されたか  
-B. Git commit hash  
-C. monitor解像度  
-D. Python実行ファイル名
+A. `meas`というobservableのexpectation value  
+B. `meas`というclassical output registerに対応するresult data  
+C. backendのmeasurement calibration table  
+D. transpilerのmeasurement pass
 
 ### Q5
-Estimator結果の `evs` という語が一般に指すものはどれか。
+`pub_result.data.meas.get_counts()` が返すものとして最も適切なのはどれか。
 
-A. expectation values  
-B. execution versions  
-C. error vectors  
-D. encoded variables
+A. measurement outcomeごとのcount辞書  
+B. exact statevector amplitudes  
+C. observable coefficients  
+D. backend instruction durations
 
 ### Q6
-理想的に `P(0)=0.8` の回路を100 shotsで実行し、0が76回だった。最も適切な判断はどれか。
+Runtime jobの現在の状態を確認する代表的なmethodはどれか。
 
-A. 有限標本として十分あり得る  
-B. 理論確率は必ず0.76に修正すべき  
-C. 回路は必ず誤っている  
-D. global phaseが76度になった
+A. `job.progress()`だけ  
+B. `job.statevector()`  
+C. `job.status()`  
+D. `job.measure()`
 
 ### Q7
-ヒストグラムを描く主な目的として最も適切なのはどれか。
+Estimator V2のPUB resultで `data.evs` と `data.stds` の関係として最も適切なのはどれか。
 
-A. outcome frequency を視覚的に比較する  
-B. statevectorを必ず復元する  
-C. transpilerを不要にする  
-D. QASMをコンパイルする
+A. `evs`はexpectation values、`stds`は対応するstandard-error/standard-deviation information  
+B. `evs`はevent strings、`stds`はstatevectors  
+C. 両方ともbitstring counts  
+D. 両方ともbackend names
 
 ### Q8
-期待値が `-0.98` の Pauli-Z 測定について最も自然な解釈はどれか。
+countsが `{'0': 760, '1': 240}`、total shotsが1000なら経験的な `P(1)` はどれか。
 
-A. Z=-1 側に強く偏った状態/結果  
-B. 確率が負なので不正  
-C. qubitが-0.98個存在する  
-D. shotsが-98回
+A. 0.76  
+B. 0.50  
+C. 0.24  
+D. 0.32
 
 ### Q9
-結果の metadata を確認する意味として適切なのはどれか。
+1000 shotsで理論的に50/50の回路から `{'0': 487, '1': 513}` が得られた。最も適切な解釈はどれか。
 
-A. 実装に応じて shots、precision、execution関連情報などの補助情報を得られることがある  
-B. metadataだけが量子状態そのもの  
-C. metadataは常に空である  
-D. metadataを読むと回路が再実行される
+A. global phaseが13度ずれた証拠  
+B. 理論確率を0.487/0.513へ変更すべき  
+C. 有限shotの統計揺らぎとして自然  
+D. Estimatorへ自動的に切り替わった証拠
 
 ### Q10
-countsから確率を推定する基本式はどれか。
+Primitive resultのmetadataについて正しい説明はどれか。
 
-A. `count(outcome) / total_shots`  
-B. `total_shots / count(outcome)`  
-C. `count(outcome)^2`  
-D. `sqrt(total_shots)`
+A. metadataだけから未知の量子状態を完全復元できる  
+B. metadataは常に空である  
+C. metadataへアクセスするとjobが再実行される  
+D. shots、precision、execution関連などの補助情報を実装に応じて含み得る
 
 ---
 
 # Answers & Explanations
 
 ### A1 — A
-250/1000=0.25。counts は頻度なので総shot数で割って経験確率を得る。
+- A: 正解。`run()`が返したjob handleから`result()`で結果を取得する。
+- B: countsはSampler result内のclassical dataから取得する。
+- C/D: RuntimeJobV2の結果取得methodではない。
 
-### A2 — A
-理論確率が0.5でも counts が常に50/50になるわけではない。有限shotによる統計揺らぎを区別する。
+### A2 — B
+- A: 現行の代表的なservice APIではない。
+- B: 正解。`QiskitRuntimeService.job(job_id)`で既存jobを取得する。
+- C/D: job retrieval APIではない。
 
 ### A3 — A
-Qiskit の通常の bitstring 表記では bit 0 が右端。この規約は頻出の混乱点。
+- A: 正解。`service.jobs(...)`は過去jobsの一覧・filterに使う。
+- B/C/D: 複数Runtime jobsを検索するAPIではない。
 
-### A4 — A
-結果の意味は measurement-to-classical-bit mapping に依存する。特に複数registerでは表示順を確認する。
+### A4 — B
+- A: Estimator observable resultとの混同。
+- B: 正解。Sampler V2 resultはclassical register名に対応するdata fieldを持つ。
+- C/D: calibrationやtranspiler passではない。
 
 ### A5 — A
-Estimator V2 の結果で `evs` は expectation values の略として用いられる。
+- A: 正解。`BitArray`等からcounts辞書を得る代表的なmethod。
+- B: sampled outcomesからexact amplitudesは復元できない。
+- C/D: resultの意味が異なる。
 
-### A6 — A
-真の確率0.8でも100回なら76回などのずれは自然。観測頻度と母確率を同一視しない。
+### A6 — C
+- A: current representative methodではない。
+- B/D: job lifecycle確認ではない。
+- C: 正解。`job.status()`で現在のjob statusを確認する。
 
 ### A7 — A
-histogram は counts/distribution の比較を視覚化するもの。状態の完全tomographyを自動で行うわけではない。
+- A: 正解。Estimator resultの`evs`はexpectation values、`stds`は対応する不確かさ情報。
+- B/C/D: fieldの意味と一致しない。
 
-### A8 — A
-Pauli observable の期待値は [-1,+1] に入り得る。負値は確率ではなく、固有値付き平均なので正常。
+### A8 — C
+`240/1000=0.24`。
+- A: P(0)に相当する。
+- B/D: countsから得られない値。
+- C: 正解。
 
-### A9 — A
-primitive/result object の metadata は実装に応じた補助情報を保持する。APIとfieldはバージョン依存なので最新版を確認する。
+### A9 — C
+- A: counts差はglobal phaseを直接示さない。
+- B: finite sample frequencyと理論母確率を同一視している。
+- C: 正解。50/50でも有限sampleでは揺らぐ。
+- D: primitiveが自動切替されることはない。
 
-### A10 — A
-経験頻度は当該outcomeの回数を総試行回数で割る。
+### A10 — D
+- A: metadataはquantum stateそのものではない。
+- B: implementationによって情報を含む。
+- C: 読み取りだけで再実行されない。
+- D: 正解。fieldはversion/implementation-sensitiveなのでcurrent APIを確認する。
+
+## Official references
+
+- Runtime service API: https://quantum.cloud.ibm.com/docs/en/api/qiskit-ibm-runtime/qiskit-runtime-service
+- RuntimeJobV2: https://quantum.cloud.ibm.com/docs/en/api/qiskit-ibm-runtime/runtime-job-v2
+- Primitive input/output: https://quantum.cloud.ibm.com/docs/en/guides/primitive-input-output
+- Estimator input/output: https://quantum.cloud.ibm.com/docs/en/guides/estimator-input-output
