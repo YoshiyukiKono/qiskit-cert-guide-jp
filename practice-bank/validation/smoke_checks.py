@@ -1,15 +1,18 @@
-"""Small local checks for the v2.x practice bank.
+"""Local, credential-free checks for the Qiskit v2.x practice bank.
 
-This is intentionally not a complete test suite for every question.  It checks a
-few facts that are easy to regress when examples are edited.
+These checks deliberately cover claims that can be verified with the Qiskit SDK
+alone. IBM Quantum Compute / Runtime claims are checked against current official
+documentation instead of requiring account credentials in this script.
 """
 
-from math import isclose, sqrt
+from math import isclose, pi, sqrt
 
+import numpy as np
 from qiskit import QuantumCircuit
+from qiskit.circuit.library import RXGate
 from qiskit.primitives import StatevectorEstimator, StatevectorSampler
 from qiskit.qasm3 import dumps
-from qiskit.quantum_info import SparsePauliOp, Statevector
+from qiskit.quantum_info import Operator, SparsePauliOp, Statevector
 
 
 def assert_close_complex(actual, expected, tol=1e-9):
@@ -29,32 +32,24 @@ def check_basic_states():
     assert_close_complex(sv.data[1], -1 / sqrt(2))
 
 
-def check_hzh_and_hxh():
+def check_operator_identities():
+    """Compare operators exactly, not basis-state rays up to global phase."""
+
     hzh = QuantumCircuit(1)
     hzh.h(0)
     hzh.z(0)
     hzh.h(0)
-    out = Statevector.from_instruction(hzh)
-    assert out.equiv(Statevector.from_label("1"))
+    assert np.allclose(Operator(hzh).data, Operator.from_label("X").data)
 
     hxh = QuantumCircuit(1)
+    hxh.h(0)
     hxh.x(0)
-    hxh.h(0)  # prepare |-> from |1>, then complete explicit HXH below differently
+    hxh.h(0)
+    assert np.allclose(Operator(hxh).data, Operator.from_label("Z").data)
 
-    # Direct matrix-free checks on computational basis for HXH = Z.
-    qc0 = QuantumCircuit(1)
-    qc0.h(0)
-    qc0.x(0)
-    qc0.h(0)
-    assert Statevector.from_instruction(qc0).equiv(Statevector.from_label("0"))
-
-    qc1 = QuantumCircuit(1)
-    qc1.x(0)  # prepare |1>
-    qc1.h(0)
-    qc1.x(0)
-    qc1.h(0)
-    expected = Statevector([0, -1])
-    assert Statevector.from_instruction(qc1).equiv(expected)
+    rx_pi = Operator(RXGate(pi)).data
+    minus_i_x = -1j * Operator.from_label("X").data
+    assert np.allclose(rx_pi, minus_i_x)
 
 
 def check_bell_state():
@@ -66,6 +61,19 @@ def check_bell_state():
     assert isclose(probs.get("11", 0.0), 0.5, abs_tol=1e-9)
     assert isclose(probs.get("01", 0.0), 0.0, abs_tol=1e-9)
     assert isclose(probs.get("10", 0.0), 0.0, abs_tol=1e-9)
+
+
+def check_compose_semantics():
+    qc = QuantumCircuit(1)
+    other = QuantumCircuit(1)
+    other.x(0)
+
+    composed = qc.compose(other)
+    assert len(qc.data) == 0, "compose() default should not mutate qc"
+    assert len(composed.data) == 1
+
+    qc.compose(other, inplace=True)
+    assert len(qc.data) == 1
 
 
 def check_sampler():
@@ -102,6 +110,7 @@ def check_qasm3_export():
     qc.measure([0, 1], [0, 1])
     text = dumps(qc)
     assert "OPENQASM 3.0;" in text
+    assert 'include "stdgates.inc";' in text
     assert "qubit[2]" in text
     assert "bit[2]" in text
     assert "measure" in text
@@ -109,8 +118,9 @@ def check_qasm3_export():
 
 def main():
     check_basic_states()
-    check_hzh_and_hxh()
+    check_operator_identities()
     check_bell_state()
+    check_compose_semantics()
     check_sampler()
     check_estimator()
     check_qasm3_export()
