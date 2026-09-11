@@ -1,0 +1,41 @@
+# Qiskit v2.x 開発者認定 日本語正本
+
+このディレクトリは、IBM Certified Quantum Computation using Qiskit v2.X Developer – Associate（C1000-179）の公開Objectivesを学ぶための、本リポジトリにおける正本です。Python経験者が量子計算を初めて学ぶ前提で、数式、Qiskitコード、実行結果の読み方を一つの流れにしました。
+
+> **検証境界（2026-09-12 JST）**: version-sensitiveな説明は **Qiskit 2.5.2 / qiskit-ibm-runtime 0.49.0** を基準に、IBM Quantum / Qiskit公式文書とOpenQASM 3仕様で確認しています。ローカル環境にこの組合せがある、または実QPUで全例を実行した、という意味ではありません。試験Objectivesは公開範囲の説明であり、この教材の補足をIBM公式要件として主張しません。実試験問題の再現でも合格保証でもありません。
+
+<a id="reading-order"></a>
+## 推奨読書順
+
+1. [学び方・境界](00-guide.md)
+2. [量子状態と演算](01-quantum-operations.md)
+3. [測定と可視化](02-visualization-measurement.md)
+4. [回路の構築](03-circuit-construction.md)
+5. [transpile・ISA・実行方式](04-transpile-execution.md)
+6. [Sampler V2](05-sampler.md)
+7. [Estimator V2](06-estimator.md)
+8. [jobと結果分析](07-results-analysis.md)
+9. [OpenQASM 3](08-openqasm3.md)
+10. [Objectives・Mock 01 coverage](coverage.md)
+
+各章末のチェックを解き、次にMock 01を解いてください。誤答時は解答解説にある「正本で深掘り」リンクから該当節へ戻ります。
+
+<a id="notation"></a>
+## 記法
+
+- 状態ベクトルはket `|ψ>`、複素共役転置は `†`、期待値は `<ψ|A|ψ>` と書きます。
+- `q0` はQiskitのindex 0のqubit、`c0` はindex 0のclassical bitです。
+- bitstring、整数、回路図、Pauli labelでは見せ方が違います。文字列の左右だけで判断せず、対象の規約を確認します。
+- 「厳密に等しい」と「global phaseを除き物理的に同じ」を区別します。
+
+## 一次情報
+
+- [公開試験レコード](https://www.ibm.com/training/credentials/getExam/C1000-179)
+- [Qiskit bit ordering](https://quantum.cloud.ibm.com/docs/en/guides/bit-ordering)
+- [Primitive input/output](https://quantum.cloud.ibm.com/docs/en/guides/primitive-input-output)
+- [Execution modes](https://quantum.cloud.ibm.com/docs/en/guides/execution-modes)
+- [Sampler options](https://quantum.cloud.ibm.com/docs/en/guides/sampler-options)
+- [Estimator options](https://quantum.cloud.ibm.com/docs/en/guides/estimator-options)
+- [OpenQASM 3 specification](https://openqasm.com/versions/3.0/)
+
+[次: 学び方・境界 →](00-guide.md)

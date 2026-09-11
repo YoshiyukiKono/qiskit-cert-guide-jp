@@ -21,6 +21,7 @@
 ## Detailed Explanations
 
 ### Q1 — C
+[正本で深掘り](../../../manuscript/ja/01-quantum-operations.md#matrix-order)
 Hadamard conjugationでXとZは交換されるため`HZH=X`。
 - A: Yにはならない。
 - B: Hで挟む前のoperatorのままではない。
@@ -28,6 +29,7 @@ Hadamard conjugationでXとZは交換されるため`HZH=X`。
 - D: identityではない。
 
 ### Q2 — D
+[正本で深掘り](../../../manuscript/ja/01-quantum-operations.md#phase)
 `Rz(theta)=exp(-i theta Z/2)`なので`Rz(pi)=diag(-i,i)=-iZ`。
 - A: global phaseを無視したphysical actionとしてZ相当だが、設問は厳密な行列等式を要求する。
 - B: phaseの符号が逆。
@@ -35,6 +37,7 @@ Hadamard conjugationでXとZは交換されるため`HZH=X`。
 - D: 正解。
 
 ### Q3 — C
+[正本で深掘り](../../../manuscript/ja/01-quantum-operations.md#phase)
 `|+>=(|0>+|1>)/sqrt(2)`の`|1>`成分をZが反転し`|->`になる。
 - A: `-|+>`は両成分を反転するglobal phaseでありZの作用ではない。
 - B: Zはprojective measurementではない。
@@ -42,6 +45,7 @@ Hadamard conjugationでXとZは交換されるため`HZH=X`。
 - D: Cと同じphysical stateを表すが、余分なglobal phaseが付いており、設問の要求する厳密なstatevector等式ではない。
 
 ### Q4 — B
+[正本で深掘り](../../../manuscript/ja/01-quantum-operations.md#basic-gates)
 `S†=diag(1,-i)`で、`i(-i)=1`。したがって`|+>`。
 - A: `|-i>`にはならない。
 - B: 正解。
@@ -49,6 +53,7 @@ Hadamard conjugationでXとZは交換されるため`HZH=X`。
 - D: `|0>`成分も残る。
 
 ### Q5 — D
+[正本で深掘り](../../../manuscript/ja/01-quantum-operations.md#phase)
 global phaseはstatevector全体への共通因子で、同じray/physical stateを表す。
 - A: Born ruleの絶対値二乗では共通位相は消える。
 - B: relative phaseは成分間の位相差であり別概念。
@@ -56,12 +61,14 @@ global phaseはstatevector全体への共通因子で、同じray/physical state
 - D: 正解。
 
 ### Q6 — B
+[正本で深掘り](../../../manuscript/ja/01-quantum-operations.md#multi-entanglement)
 CXはcontrol=1のときtargetを反転するので`10 -> 11`（ここではcontrol, targetの順で記載）。
 - A: targetを反転していない。
 - B: 正解。
 - C/D: control/targetのbit patternと一致しない。
 
 ### Q7 — C
+[正本で深掘り](../../../manuscript/ja/01-quantum-operations.md#bit-pauli-order)
 QiskitのPauli labelは右端がq0なので`XZ`ではZがq0、Xがq1。
 - A: orderingが逆。
 - B: tensor-product operatorを単一qubitへの逐次操作と誤解している。
@@ -69,6 +76,7 @@ QiskitのPauli labelは右端がq0なので`XZ`ではZがq0、Xがq1。
 - D: Pauli stringには明確なorderingがある。
 
 ### Q8 — D
+[正本で深掘り](../../../manuscript/ja/01-quantum-operations.md#bit-pauli-order)
 `SparsePauliOp`はPauli stringsと係数からなる疎な線形結合を表す。
 - A: measurement countsではない。
 - B: circuit compositionではない。
@@ -76,23 +84,27 @@ QiskitのPauli labelは右端がq0なので`XZ`ではZがq0、Xがq1。
 - D: 正解。
 
 ### Q9 — D
+[正本で深掘り](../../../manuscript/ja/01-quantum-operations.md#basic-gates)
 Pauli XとZはanticommuteし、`XZ=-ZX`。
 - A: commuteしない。
 - B/C: operator productの等式として誤り。
 - D: 正解。
 
 ### Q10 — C
+[正本で深掘り](../../../manuscript/ja/01-quantum-operations.md#basic-gates)
 Pauli-Y行列から`Y|0>=i|1>`。
 - A/B/D: physical rayとしてglobal phaseの違いを無視する文脈はあり得るが、設問は厳密な行列積を問う。
 - C: 正解。
 
 ### Q11 — C
+[正本で深掘り](../../../manuscript/ja/01-quantum-operations.md#expectation)
 `|+>`はXの+1 eigenstateなので、`|++>`は`X⊗X`のeigenvalue `(+1)(+1)=+1`。
 - A/B: eigenstate propertyと一致しない。
 - C: 正解。
 - D: Pauli observableのeigenvalue範囲を超える。
 
 ### Q12 — A
+[正本で深掘り](../../../manuscript/ja/02-visualization-measurement.md#circuit-drawing)
 `QuantumCircuit.draw("mpl")`はMatplotlib-based circuit drawerを選ぶ。
 - A: 正解。
 - B: sampled distributionのvisualization。
@@ -100,12 +112,14 @@ Pauli-Y行列から`Y|0>=i|1>`。
 - D: measurement命令を追加する。
 
 ### Q13 — D
+[正本で深掘り](../../../manuscript/ja/02-visualization-measurement.md#measurement-plots)
 countsの棒グラフには`plot_histogram`が代表的。
 - A/B: quantum-state visualizationでありcounts用途とは異なる。
 - C: circuit drawer。
 - D: 正解。
 
 ### Q14 — C
+[正本で深掘り](../../../manuscript/ja/02-visualization-measurement.md#bitstrings-counts)
 Qiskitの通常のbitstring表記ではbit 0が右端。
 - A: orderingが逆。
 - B: classical bitとphysical qubit mappingを混同している。
@@ -113,6 +127,7 @@ Qiskitの通常のbitstring表記ではbit 0が右端。
 - D: Qiskitの表示規約は定義されている。
 
 ### Q15 — B
+[正本で深掘り](../../../manuscript/ja/02-visualization-measurement.md#state-plots)
 Q-sphereはbasis componentの大きさ/確率とphaseを視覚化できる。
 - A: circuit metricsのplotではない。
 - B: 正解。
@@ -120,17 +135,20 @@ Q-sphereはbasis componentの大きさ/確率とphaseを視覚化できる。
 - D: statevector由来のphase情報も扱える。
 
 ### Q16 — A
+[正本で深掘り](../../../manuscript/ja/02-visualization-measurement.md#state-plots)
 `plot_bloch_multivector`はstateをqubitごとのBloch sphereとして描く代表的関数。
 - A: 正解。
 - B/D: sampled distributions用。
 - C: circuit drawing用。
 
 ### Q17 — D
+[正本で深掘り](../../../manuscript/ja/02-visualization-measurement.md#measurement-basis)
 Bell stateの非零amplitudeは00と11だけで各`1/sqrt(2)`。
 - A/B/C: statevectorの非零成分と一致しない。
 - D: 正解。
 
 ### Q18 — A
+[正本で深掘り](../../../manuscript/ja/02-visualization-measurement.md#statevector)
 `Statevector.from_instruction(qc)`は測定のないcircuitを初期stateへ作用させたstatevectorを構成できる。
 - A: 正解。
 - B: visualizationだけ。
@@ -138,12 +156,14 @@ Bell stateの非零amplitudeは00と11だけで各`1/sqrt(2)`。
 - D: `transpile`の戻り値に`result()`を呼ぶものではない。
 
 ### Q19 — A
+[正本で深掘り](../../../manuscript/ja/02-visualization-measurement.md#measurement-basis)
 `H|->=|1>`なのでcomputational basis measurementは1が確定する。
 - A: 正解。
 - B/C: H transformの結果と不一致。
 - D: measurement bitは0/1。
 
 ### Q20 — C
+[正本で深掘り](../../../manuscript/ja/03-circuit-construction.md#construct-registers)
 `QuantumCircuit(2,2)`は2 qubitsと2 clbitsを作る。
 - A: 4 qubitsのみ。
 - B: 0 qubits + 4 clbits。
@@ -151,6 +171,7 @@ Bell stateの非零amplitudeは00と11だけで各`1/sqrt(2)`。
 - D: 有効なconstructor指定ではない。
 
 ### Q21 — B
+[正本で深掘り](../../../manuscript/ja/03-circuit-construction.md#measure-mapping)
 `measure(qubit, clbit)`の順なのでq0→c1は`qc.measure(0,1)`。
 - A: q1→c0。
 - B: 正解。
@@ -158,6 +179,7 @@ Bell stateの非零amplitudeは00と11だけで各`1/sqrt(2)`。
 - D: 対応するstandard APIではない。
 
 ### Q22 — B
+[正本で深掘り](../../../manuscript/ja/03-circuit-construction.md#compose-control)
 `compose`のdefaultは`inplace=False`で、新しいcircuitを返す。
 - A: `inplace=True`の場合の説明。
 - B: 正解。
@@ -165,6 +187,7 @@ Bell stateの非零amplitudeは00と11だけで各`1/sqrt(2)`。
 - D: current Qiskit v2.xで利用できる。
 
 ### Q23 — A
+[正本で深掘り](../../../manuscript/ja/03-circuit-construction.md#parameters)
 `qiskit.circuit.Parameter`がsymbolic parameterを作る。
 - A: 正解。
 - B: transpiler target表現。
@@ -172,22 +195,26 @@ Bell stateの非零amplitudeは00と11だけで各`1/sqrt(2)`。
 - D: classical bits container。
 
 ### Q24 — A
+[正本で深掘り](../../../manuscript/ja/03-circuit-construction.md#parameters)
 `assign_parameters`でParameterを数値や別Parameterへ置換できる。
 - A: 正解。
 - B/C/D: current standard APIではない。
 
 ### Q25 — D
+[正本で深掘り](../../../manuscript/ja/03-circuit-construction.md#compose-control)
 `Gate.control()`でcontrolled versionを構成できる。例えば`XGate().control()`でcontrolled-Xを得る。基底`Instruction`にはこのmethodはなく、測定等を含む任意のInstructionへ一般化しない。
 - A/B/C: controlled-Xを生成する方法ではない。
 - D: 正解。
 
 ### Q26 — D
+[正本で深掘り](../../../manuscript/ja/03-circuit-construction.md#dynamic-circuits)
 current control-flow builderでは`with qc.if_test((c0, 1)):`のようにclassical conditionを表せる。
 - A: Pythonのruntime `if`でquantum measurementを直接評価する構文ではない。
 - B/C: current recommended control-flow builder APIではない。
 - D: 正解。
 
 ### Q27 — D
+[正本で深掘り](../../../manuscript/ja/03-circuit-construction.md#dynamic-circuits)
 dynamic circuitはmid-circuit measurementとclassical feedforward/control flowなどを含み得る。
 - A: parameter sweepだけではdynamic circuitとは限らない。
 - B: transpiler variabilityの名称ではない。
@@ -195,6 +222,7 @@ dynamic circuitはmid-circuit measurementとclassical feedforward/control flow�
 - D: 正解。
 
 ### Q28 — B
+[正本で深掘り](../../../manuscript/ja/03-circuit-construction.md#sdk-hardware-boundary)
 SDKが表現できるcontrol flowとhardware/serviceが実行できるfeature setは区別する。
 - A: 全QPUで全constructが実行可能とは限らない。
 - B: 正解。
@@ -202,11 +230,13 @@ SDKが表現できるcontrol flowとhardware/serviceが実行できるfeature se
 - D: IBM hardwareにはclassical feedforward supportがあるが制約を確認する。
 
 ### Q29 — B
+[正本で深掘り](../../../manuscript/ja/04-transpile-execution.md#transpile-preset)
 `generate_preset_pass_manager(..., backend=backend)`がstandard staged transpilation pipelineを生成する代表的方法。
 - A/C/D: pass manager生成APIではない。
 - B: 正解。
 
 ### Q30 — D
+[正本で深掘り](../../../manuscript/ja/04-transpile-execution.md#transpile-preset)
 preset optimization levelは0–3。高いlevelは一般により積極的なoptimizationを試みるが、特定のdepth削減を保証しない。
 - A: level範囲が不足。
 - B: optimization outcomeは保証されない。
@@ -214,6 +244,7 @@ preset optimization levelは0–3。高いlevelは一般により積極的なopt
 - D: 正解。
 
 ### Q31 — C
+[正本で深掘り](../../../manuscript/ja/04-transpile-execution.md#isa-layout)
 QPU Runtime workflowではtarget backendのISA/layoutに適合するcircuitを準備する。
 - A: QASM2 conversionは必須要件ではない。
 - B: Samplerではclassical outputsのためmeasurementが必要。
@@ -221,17 +252,20 @@ QPU Runtime workflowではtarget backendのISA/layoutに適合するcircuitを�
 - D: abstract circuitをtarget-independentにそのまま送れるという理解は誤り。
 
 ### Q32 — A
+[正本で深掘り](../../../manuscript/ja/04-transpile-execution.md#execution-modes)
 IBM Quantum Computeのexecution modesはJob, Session, Batch。
 - A: 正解。
 - B/C/D: official execution-mode namesではない。
 
 ### Q33 — B
+[正本で深掘り](../../../manuscript/ja/04-transpile-execution.md#execution-modes)
 Sessionはquantum/classical間でresult-dependent iterationを行うmulti-job workloadに向く。
 - A: independent jobsならBatchが自然。
 - B: 正解。
 - C/D: Runtime scheduling modeを必要としない。
 
 ### Q34 — C
+[正本で深掘り](../../../manuscript/ja/04-transpile-execution.md#execution-modes)
 Batchは互いにconditional dependencyのない複数jobsをまとめるworkload向け。
 - A: iterative dependencyはSession寄り。
 - B: single-job専用modeではない。
@@ -239,23 +273,27 @@ Batchは互いにconditional dependencyのない複数jobsをまとめるworkloa
 - D: circuit内control flowとjob schedulingを混同している。
 
 ### Q35 — A
+[正本で深掘り](../../../manuscript/ja/04-transpile-execution.md#execution-modes)
 Job modeではprimitiveを`mode=backend`で作る代表的workflowがある。
 - A: 正解。
 - B: local reference primitiveにQPU modeを付けるAPIではない。
 - C/D: valid mode objectではない。
 
 ### Q36 — B
+[正本で深掘り](../../../manuscript/ja/04-transpile-execution.md#backend-selection)
 `QiskitRuntimeService().least_busy(...)`は条件に合う比較的空いているbackendを選ぶ代表API。
 - A/C/D: current service backend-selection APIではない。
 - B: 正解。
 
 ### Q37 — D
+[正本で深掘り](../../../manuscript/ja/04-transpile-execution.md#runtime-local)
 IBM Runtime implementationは`qiskit_ibm_runtime.SamplerV2`。
 - A/B: current import pathではない。
 - C: V1-style generic Samplerを指し、IBM Runtime V2 classではない。
 - D: 正解。
 
 ### Q38 — A
+[正本で深掘り](../../../manuscript/ja/04-transpile-execution.md#pub-job)
 Estimator PUBはcircuit + observablesを核に、parameter valuesとprecisionを追加できる。
 - A: 正解。
 - B: Sampler PUBの形。
@@ -264,6 +302,7 @@ Estimator PUBはcircuit + observablesを核に、parameter valuesとprecisionを
 位置引数の順序は変わらない。未parameter化回路でprecisionだけを指定する例は`(qc, observable, None, 0.01)`であり、`None`の位置を省いて値を前へ詰めない。
 
 ### Q39 — A
+[正本で深掘り](../../../manuscript/ja/06-estimator.md#estimator-broadcasting)
 Estimator V2はobservable arraysとparameter arraysにNumPy-style broadcastingを使う。
 - A: 正解。
 - B: exact同長listだけに限定されない。
@@ -273,12 +312,14 @@ Estimator V2はobservable arraysとparameter arraysにNumPy-style broadcasting�
 parameter values配列の最後の軸は回路parameterの軸で、broadcastingのshapeから除かれる。例えばparameterが1個ならvalues shape `(3,1)`のbinding shapeは`(3,)`。observables shape `(2,1)`と組み合わせると結果shapeは`(2,3)`になる。
 
 ### Q40 — B
+[正本で深掘り](../../../manuscript/ja/04-transpile-execution.md#pub-job)
 Runtime V2 `run()`はsubmitted job objectを返し、`job.result()`でPrimitiveResultを得る。
 - A: direct scalar returnではない。
 - B: 正解。
 - C/D: runのreturn typeではない。
 
 ### Q41 — C
+[正本で深掘り](../../../manuscript/ja/04-transpile-execution.md#runtime-local)
 local statevector reference implementationはQPU target/schedulingを必要としないが、Runtime QPU executionではISAとexecution modeを考慮する。
 - A: local implementationはIBM QPU必須ではない。
 - B: Estimatorはobservableを受け取る。
@@ -286,24 +327,28 @@ local statevector reference implementationはQPU target/schedulingを必要と�
 - D: execution environmentは異なる。
 
 ### Q42 — D
+[正本で深掘り](../../../manuscript/ja/05-sampler.md#sampler-purpose)
 Samplerの目的はclassical output dataをsampleすること。
 - A/C: exact spectral analysisではない。
 - B: transpilerではない。
 - D: 正解。
 
 ### Q43 — C
+[正本で深掘り](../../../manuscript/ja/05-sampler.md#sampler-purpose)
 `qiskit.primitives.StatevectorSampler`がlocal statevector-based V2 reference implementation。
 - A/B: Estimator側。
 - C: 正解。
 - D: service access class。
 
 ### Q44 — D
+[正本で深掘り](../../../manuscript/ja/05-sampler.md#sampler-purpose)
 IBM Quantum Compute用は`qiskit_ibm_runtime.SamplerV2`。
 - A/B: current APIではない。
 - C: local statevector reference implementation。
 - D: 正解。
 
 ### Q45 — B
+[正本で深掘り](../../../manuscript/ja/05-sampler.md#sampler-pub)
 Sampler PUBはcircuitとoptional parameter values/shots。
 - A: Estimator PUBに近い。
 - B: 正解。
@@ -312,6 +357,7 @@ Sampler PUBはcircuitとoptional parameter values/shots。
 parameter valuesを省略してPUBのshotsを指定する例は`(qc, None, 128)`。`(qc, 128)`では2番目の要素がshotsになるわけではない。
 
 ### Q46 — D
+[正本で深掘り](../../../manuscript/ja/05-sampler.md#sampler-pub)
 `SamplerV2.run(pubs, shots=128)`のrun-level shotsは、PUB-specific shotsがないPUBについてcurrent runの`default_shots`をoverrideする。
 - A: Estimator-side precision概念。
 - B: Sampler `run()`のinterfaceは`shots`。
@@ -319,12 +365,14 @@ parameter valuesを省略してPUBのshotsを指定する例は`(qc, None, 128)`
 - D: 正解。PUB-specific shotsがあればそちらがさらに優先される。
 
 ### Q47 — B
+[正本で深掘り](../../../manuscript/ja/05-sampler.md#sampler-options)
 current Sampler optionsでは`dynamical_decoupling.enable=True`。
 - A: Estimator resilience設定との混同。
 - B: 正解。
 - C/D: current option pathではない。
 
 ### Q48 — B
+[正本で深掘り](../../../manuscript/ja/05-sampler.md#sampler-options)
 dynamical decouplingはidle periodsへpulse sequencesを挿入し、decoherence等の影響を抑える方向で使う。
 - A: result conversionではない。
 - B: 正解。
@@ -332,35 +380,41 @@ dynamical decouplingはidle periodsへpulse sequencesを挿入し、decoherence�
 - D: hardware connectivityは変わらない。
 
 ### Q49 — C
+[正本で深掘り](../../../manuscript/ja/05-sampler.md#sampler-compatibility)
 2026-09時点のIBM feature compatibilityではdynamic circuitsとdynamical decouplingはincompatibleとして扱われる。
 - A/B: current documentationと一致しない。
 - C: 正解。version-sensitiveなので直前に再確認する。
 - D: DDはSampler optionsで設定できる。
 
 ### Q50 — C
+[正本で深掘り](../../../manuscript/ja/06-estimator.md#estimator-purpose)
 Estimatorはobservable expectation valuesを評価するprimitive。
 - A: Samplerの役割。
 - B/D: Estimatorの役割ではない。
 - C: 正解。
 
 ### Q51 — C
+[正本で深掘り](../../../manuscript/ja/06-estimator.md#estimator-purpose)
 local reference implementationは`qiskit.primitives.StatevectorEstimator`。
 - A/B/D: Estimatorのlocal statevector reference classではない。
 - C: 正解。
 
 ### Q52 — B
+[正本で深掘り](../../../manuscript/ja/06-estimator.md#estimator-purpose)
 IBM Quantum Compute用Runtime classは`qiskit_ibm_runtime.EstimatorV2`。
 - A/C: current import path/APIではない。
 - B: 正解。
 - D: Sampler implementation。
 
 ### Q53 — A
+[正本で深掘り](../../../manuscript/ja/06-estimator.md#estimator-pub)
 Estimator PUBはcircuitとobservable(s)を核にする。
 - A: 正解。
 - B: Sampler/result conceptsとの混同。
 - C/D: primitive scientific inputではない。
 
 ### Q54 — D
+[正本で深掘り](../../../manuscript/ja/06-estimator.md#estimator-purpose)
 `|+>`をZ basisで見れば+1/-1が等重みなので`<Z>=0`。
 - A: `<X>`なら+1。
 - B: `|1>`の`<Z>`に対応。
@@ -368,11 +422,13 @@ Estimator PUBはcircuitとobservable(s)を核にする。
 - D: 正解。
 
 ### Q55 — D
+[正本で深掘り](../../../manuscript/ja/06-estimator.md#estimator-options)
 2026-09時点のRuntime Estimator resilience levelsは0,1,2。
 - A/B/C: current official optionsと一致しない。
 - D: 正解。
 
 ### Q56 — A
+[正本で深掘り](../../../manuscript/ja/06-estimator.md#estimator-options)
 個別optionsによる上書きがない場合、`resilience_level=0`はEstimatorのresilience mitigationを適用しないbaseline。
 - A: 正解。
 - B/C: 上書きのないlevel 0 presetでは有効にしない。
@@ -381,28 +437,33 @@ Estimator PUBはcircuitとobservable(s)を核にする。
 個別optionsはpresetを上書きできる。level 0でも`resilience.zne_mitigation=True`を設定すればZNEを有効にできるため、levelだけで最終設定を断定しない。
 
 ### Q57 — A
+[正本で深掘り](../../../manuscript/ja/06-estimator.md#estimator-result)
 `data.evs`はestimated expectation values。
 - A: 正解。
 - B: sampled bitsはSampler result側。
 - C/D: field名の意味ではない。
 
 ### Q58 — A
+[正本で深掘り](../../../manuscript/ja/07-results-analysis.md#job-lifecycle)
 過去job IDからは`QiskitRuntimeService.job(job_id)`でjob objectを取得できる。
 - A: 正解。
 - B/C/D: current representative retrieval APIではない。
 
 ### Q59 — D
+[正本で深掘り](../../../manuscript/ja/07-results-analysis.md#job-lifecycle)
 `QiskitRuntimeService.jobs(...)`は過去jobsをlist/filterするAPI。
 - A: single job result取得とは異なる。
 - B/C: jobs retrieval APIではない。
 - D: 正解。
 
 ### Q60 — A
+[正本で深掘り](../../../manuscript/ja/07-results-analysis.md#job-lifecycle)
 `job.status()`がRuntime jobの現在状態を取得する代表method。
 - A: 正解。
 - B/C/D: job lifecycle status methodではない。
 
 ### Q61 — C
+[正本で深掘り](../../../manuscript/ja/07-results-analysis.md#bitarray-counts)
 Sampler resultの`BitArray.get_counts()`でoutcome countsを得られる。
 - A: `BitArray.expectation_values(observables)`は実在し、対角observableの期待値を求めるAPIである。ただしcounts辞書を返すAPIではなく、この選択肢の呼び出しには必須の`observables`引数もない。
 - B: sampled dataからexact probabilitiesを返すmethodではない。
@@ -410,18 +471,21 @@ Sampler resultの`BitArray.get_counts()`でoutcome countsを得られる。
 - D: observableを返すものではない。
 
 ### Q62 — B
+[正本で深掘り](../../../manuscript/ja/06-estimator.md#estimator-result)
 Estimator `data.stds`は`evs`に対応するstandard deviation/uncertainty情報を持つ。error-mitigation settingsにより追加fieldsもあり得る。
 - A: bitstringsではない。
 - B: 正解。
 - C/D: result uncertainty fieldではない。
 
 ### Q63 — C
+[正本で深掘り](../../../manuscript/ja/07-results-analysis.md#empirical-analysis)
 経験確率は`240/1000=0.24`。
 - A: P(0)に相当する。
 - B/D: countsから導かれない。
 - C: 正解。
 
 ### Q64 — C
+[正本で深掘り](../../../manuscript/ja/07-results-analysis.md#metadata)
 Primitive result metadataにはshots、target precision、resilience/execution関連情報等が含まれ得る。
 - A: metadataはquantum stateそのものではない。
 - B: 常に空ではない。
@@ -429,11 +493,13 @@ Primitive result metadataにはshots、target precision、resilience/execution�
 - D: metadata readingはjob resubmissionではない。
 
 ### Q65 — B
+[正本で深掘り](../../../manuscript/ja/08-openqasm3.md#qasm-types)
 OpenQASM 3では`qubit[2] q;`と`bit[2] c;`。
 - A/C/D: OpenQASM 3のdeclaration syntaxではない。
 - B: 正解。
 
 ### Q66 — A
+[正本で深掘り](../../../manuscript/ja/08-openqasm3.md#qasm-semantics)
 version declarationと`stdgates.inc`を読み、qへHを作用させ、measurement resultをcへ格納する。
 - A: 正解。ここでは初期状態やH後の特定の状態ベクトルを断定していない。
 - B: cはclassical bitでqubitへ変換しない。
@@ -441,6 +507,7 @@ version declarationと`stdgates.inc`を読み、qへHを作用させ、measureme
 - D: gate definitionをcへ保存するコードではない。
 
 ### Q67 — B
+[正本で深掘り](../../../manuscript/ja/08-openqasm3.md#qasm-qiskit-interop)
 `dumps`はOpenQASM 3 string export、`loads`はprogram string import。current importには`qiskit-qasm3-import` optional packageが必要。
 - A: import/export方向が逆。
 - B: 正解。
@@ -448,6 +515,7 @@ version declarationと`stdgates.inc`を読み、qへHを作用させ、measureme
 - D: circuit serialization/import APIでありSampler result専用ではない。
 
 ### Q68 — A
+[正本で深掘り](../../../manuscript/ja/08-openqasm3.md#qasm-support-boundary)
 language/specification、Qiskit parse/representation、IBM QPU executable supportは別レイヤー。IBM Quantum Compute REST APIでもprimitive workloadsをJob/Session/Batchで扱える。
 - A: 正解。
 - B: specification featureが全てhardware executableとは限らない。
