@@ -1,0 +1,18 @@
+{
+  "name": "qiskit-pocket-reference-html-pdf",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "dependencies": {
+    "katex": "0.18.7",
+    "markdown-it": "15.0.2",
+    "markdown-it-texmath": "1.0.0",
+    "playwright-core": "1.63.0"
+  }
+}

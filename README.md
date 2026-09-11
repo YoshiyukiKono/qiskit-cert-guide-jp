@@ -521,6 +521,12 @@ MIT License
 
 ---
 
+# 携帯用リファレンス
+
+試験直前の確認や印刷向けに、[Qiskitポケットリファレンス](./references/README.md)を収録しています。Markdown原稿、A5 PDF、PDF再生成スクリプト、および固定済みの生成用依存関係を同じディレクトリで管理しています。
+
+---
+
 # 参考資料
 
 * IBM Quantum Documentation
