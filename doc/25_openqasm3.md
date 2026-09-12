@@ -26,7 +26,7 @@ Qiskit は内部的に OpenQASM を利用して回路を表現しています。
 
 # OpenQASM とは何か
 
-OpenQASM は Quantum Assembly Language の略です。
+OpenQASM は **Quantum Assembly Language** の略です。
 
 つまり、
 
@@ -87,11 +87,11 @@ Hadamard適用
 OpenQASM 3 では条件分岐が可能です。
 
 例：
-
+````
 if (c == 1) {
 x q;
 }
-
+````
 これは
 
 測定結果が 1 の場合だけ X を適用
@@ -105,11 +105,11 @@ x q;
 OpenQASM 3 は for 文をサポートします。
 
 例：
-
+````
 for i in [0:3] {
 h q[i];
 }
-
+````
 複数量子ビットに同じ操作を適用できます。
 
 ---
@@ -159,9 +159,9 @@ measure
 Qiskit では QuantumCircuit を OpenQASM に変換できます。
 
 例：
-
+````
 qc.qasm()
-
+````
 また OpenQASM 文字列から回路を生成することも可能です。
 
 ---

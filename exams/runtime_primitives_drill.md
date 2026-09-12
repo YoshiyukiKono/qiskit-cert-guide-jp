@@ -1,5 +1,4 @@
-了解しました。
-以下は **IBM Qiskit Certification 試験で最頻出の Runtime / Primitive 領域だけに特化した演習セット**です。
+**IBM Qiskit Certification 試験で最頻出の Runtime / Primitive 領域だけに特化した演習セット**です。
 
 対象：
 
@@ -13,10 +12,6 @@
 * Transpile との関係
 
 試験の得点に直結する部分だけ集めています 📈
-
-そのまま `runtime_primitives_drill.md` として保存できます。
-
----
 
 # Runtime / Primitive 集中演習セット
 
@@ -347,7 +342,7 @@ D backendのみ使用する
 ---
 
 # 解答
-
+````
 1 B
 2 A
 3 B
@@ -378,7 +373,7 @@ D backendのみ使用する
 28 B
 29 B
 30 A
-
+````
 ---
 
 必要なら次に：

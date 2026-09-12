@@ -269,13 +269,13 @@ phase kickback
 
 次の2つ：
 
-[
+$$
 |0\rangle+|1\rangle
-]
+$$
 
 と
 
-[
+$$
 
 * (|0\rangle+|1\rangle)
   ]
@@ -302,13 +302,13 @@ global phase は観測できない
 
 [
 |0\rangle+|1\rangle
-]
+$$
 
 と
 
-[
+$$
 |0\rangle-|1\rangle
-]
+$$
 
 は：
 
@@ -534,9 +534,9 @@ Step3：
 
 次の形なら：
 
-[
+$$
 (a|0\rangle+b|1\rangle)\otimes(c|0\rangle+d|1\rangle)
-]
+$$
 
 ```text
 separable

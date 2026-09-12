@@ -1,4 +1,4 @@
-では第20章として、**QAOA（Quantum Approximate Optimization Algorithm）**を資格試験対策レベルで体系的に解説します。
+**QAOA（Quantum Approximate Optimization Algorithm）**を資格試験対策レベルで体系的に解説します。
 
 この章は：
 
@@ -24,9 +24,6 @@ IBM Qiskit資格試験でも：
 
 が重要です。
 
----
-
-# 20_qaoa.md
 
 # Part 20：QAOA（Quantum Approximate Optimization Algorithm）を完全に理解する
 
@@ -121,9 +118,9 @@ cost Hamiltonian：
 
 MaxCut：
 
-[
+$$
 H_C=\sum_{(i,j)\in E} \frac{1-Z_iZ_j}{2}
-]
+$$
 
 意味：
 
@@ -145,9 +142,9 @@ mixer：
 
 代表例：
 
-[
+$$
 H_M=\sum_i X_i
-]
+$$
 
 つまり：
 
@@ -287,9 +284,9 @@ p=3
 
 2ノード：
 
-[
+$$
 H_C=\frac{1-Z_0Z_1}{2}
-]
+$$
 
 回路：
 
@@ -479,28 +476,3 @@ optimizer更新
 ✅ γとβを説明できる
 ✅ repsの意味を説明できる
 ✅ VQEとの違いを説明できる
-
----
-
-次章：
-
-**21_runtime_primitives.md**
-
-では：
-
-```text id="c6y4mk"
-Sampler primitive
-Estimator primitive
-Runtime execution
-クラウド量子実行モデル
-```
-
-を扱います。
-
-ここで：
-
-```text id="v8q2tg"
-最新Qiskit API体系
-```
-
-が完成します。

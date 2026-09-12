@@ -1,4 +1,4 @@
-では第19章として、**VQE（Variational Quantum Eigensolver）**を資格試験対策レベルで体系的に解説します。
+**VQE（Variational Quantum Eigensolver）**を資格試験対策レベルで体系的に解説します。
 
 この章はこれまで扱った：
 
@@ -51,7 +51,9 @@ VQE = 固有値を近似的に求めるアルゴリズム
 
 VQEは次を解きます：
 
+$$
 H|\psi\rangle=E|\psi\rangle
+$$
 
 ここで：
 
@@ -192,7 +194,9 @@ qc.ry(theta, 0)
 
 VQEの理論基盤：
 
+$$
 E(\theta)=\langle \psi(\theta)|H|\psi(\theta)\rangle
+$$
 
 重要：
 
@@ -491,28 +495,3 @@ optimizerの役割は？
 ✅ Pauli分解の意味を説明できる
 ✅ Estimator primitiveとの関係を説明できる
 
----
-
-次章：
-
-**20_qaoa.md**
-
-では：
-
-```text id="x7t3qa"
-QAOA
-組合せ最適化
-MaxCut問題
-cost Hamiltonian
-mixer Hamiltonian
-```
-
-を扱います。
-
-ここで：
-
-```text id="k4v9hn"
-量子最適化アルゴリズム
-```
-
-の体系が完成します。

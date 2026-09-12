@@ -248,7 +248,8 @@ Z基底 ↔ X基底
 Hadamardは次の行列：
 
 $$
-H=\frac{1}{\sqrt{2}}\begin{pmatrix}1&1\1&-1\end{pmatrix}
+H=\frac{1}{\sqrt{2}}\begin{pmatrix}1&1\\
+1&-1\end{pmatrix}
 $$
 
 試験では：
@@ -497,68 +498,70 @@ X / Y / Z の意味と関係
 
 あなたの画像の式は：
 
-[
+$$
 H|0\rangle = \frac{|0\rangle + |1\rangle}{\sqrt2}
-]
+$$
 
-[
+$$
 H|1\rangle = \frac{|0\rangle - |1\rangle}{\sqrt2}
-]
+$$
 
 この違いは、Hゲートの中身を行列で見ると急に腑に落ちます。
 
-H=\frac{1}{\sqrt2}\begin{bmatrix}1&1\1&-1\end{bmatrix}
+$$
+H=\frac{1}{\sqrt2}\begin{bmatrix}1&1\\1&-1\end{bmatrix}
+$$
+
 
 量子状態をベクトルで書くと：
 
-[
+$$
 |0\rangle=
 \begin{bmatrix}
-1\
+1\\
 0
 \end{bmatrix}
-]
+$$
 
-[
+$$
 |1\rangle=
 \begin{bmatrix}
-0\
+0\\
 1
 \end{bmatrix}
-]
+$$
 
 ### |0⟩にかける
 
 行列を掛けると：
 
-[
+$$
 \frac1{\sqrt2}
 \begin{bmatrix}
-1&1\
+1&1\\
 1&-1
 \end{bmatrix}
 \begin{bmatrix}
-1\
+1\\
 0
 \end{bmatrix}
-]
+$$
 
 すると：
 
-# [
-
+$$
 \frac1{\sqrt2}
 \begin{bmatrix}
-1\
+1\\
 1
 \end{bmatrix}
-]
+$$
 
 つまり
 
-[
+$$
 \frac{|0\rangle+|1\rangle}{\sqrt2}
-]
+$$
 
 ---
 
@@ -566,40 +569,40 @@ H=\frac{1}{\sqrt2}\begin{bmatrix}1&1\1&-1\end{bmatrix}
 
 今度は：
 
-[
+$$
 \frac1{\sqrt2}
 \begin{bmatrix}
-1&1\
+1&1\\
 1&-1
 \end{bmatrix}
 \begin{bmatrix}
-0\
+0\\
 1
 \end{bmatrix}
-]
+$$
 
 すると：
 
-# [
+$$
 
 \frac1{\sqrt2}
 \begin{bmatrix}
-1\
+1\\
 -1
 \end{bmatrix}
-]
+$$
 
 つまり
 
-[
+$$
 \frac{|0\rangle-|1\rangle}{\sqrt2}
-]
+$$
 
 「−」は行列右下のこの要素から来ています：
 
-[
+$$
 -1
-]
+$$
 
 ---
 
@@ -614,15 +617,15 @@ H=\frac{1}{\sqrt2}\begin{bmatrix}1&1\1&-1\end{bmatrix}
 
 だから2回Hをかけると面白いことが起きます：
 
-[
+$$
 H(H|0\rangle)=|0\rangle
-]
+$$
 
 でも途中は：
 
-[
+$$
 \frac{|0\rangle+|1\rangle}{\sqrt2}
-]
+$$
 
 さらにHをかけると、＋と−が打ち消し合います。
 

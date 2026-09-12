@@ -79,9 +79,9 @@ P(i)=|\langle i|\psi\rangle|^2
 
 測定前：
 
-[
+$$
 (|0\rangle+|1\rangle)/\sqrt{2}
-]
+$$
 
 測定後：
 
@@ -219,9 +219,9 @@ qc.measure([0,1],[0,1])
 
 状態：
 
-[
+$$
 (|00\rangle+|11\rangle)/\sqrt{2}
-]
+$$
 
 測定結果：
 
@@ -244,9 +244,9 @@ qc.measure([0,1],[0,1])
 
 状態：
 
-[
+$$
 (|00\rangle+|11\rangle)/\sqrt{2}
-]
+$$
 
 qubit0だけ測定：
 
@@ -304,9 +304,9 @@ qubit1 = 1
 
 状態：
 
-[
+$$
 (|00\rangle+|01\rangle)/\sqrt{2}
-]
+$$
 
 qubit0測定：
 

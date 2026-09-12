@@ -57,7 +57,9 @@ control=1 のときだけ位相回転
 
 一般形：
 
+$$
 CP(\theta)|11\rangle=e^{i\theta}|11\rangle
+$$
 
 それ以外：
 
@@ -71,7 +73,9 @@ CP(\theta)|11\rangle=e^{i\theta}|11\rangle
 
 CZは：
 
+$$
 CP(\pi)=CZ
+$$
 
 つまり：
 
@@ -101,7 +105,9 @@ RZ(θ)
 
 数式：
 
+$$
 CRZ(\theta)|11\rangle=e^{i\theta}|11\rangle
+$$
 
 ---
 
@@ -154,7 +160,9 @@ qc.crz(theta, 0, 1)
 
 一般形：
 
+$$
 CU|1\rangle|\psi\rangle=|1\rangle U|\psi\rangle
+$$
 
 つまり：
 
@@ -242,18 +250,18 @@ phase estimation の基礎
 
 行列：
 
-[
+$$
 CP(\theta)=
 \begin{pmatrix}
 1&0&0&0
-\
+\\
 0&1&0&0
-\
+\\
 0&0&1&0
-\
+\\
 0&0&0&e^{i\theta}
 \end{pmatrix}
-]
+$$
 
 つまり：
 

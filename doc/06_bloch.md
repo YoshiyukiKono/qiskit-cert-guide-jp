@@ -36,13 +36,15 @@ Bloch球の表面のどこか
 
 量子状態：
 
-[
+$$
 |\psi\rangle=a|0\rangle+b|1\rangle
-]
+$$
 
 は次の形で書き直せます：
 
+$$
 \lvert\psi\rangle=\cos\frac{\theta}{2}\lvert0\rangle+e^{i\phi}\sin\frac{\theta}{2}\lvert1\rangle
+$$
 
 ここで：
 
@@ -84,9 +86,9 @@ Bloch球の基本位置：
 
 例：
 
-[
+$$
 (|0\rangle+|1\rangle)/\sqrt{2}
-]
+$$
 
 これは：
 
@@ -110,15 +112,15 @@ Bloch球の基本位置：
 
 状態：
 
-[
+$$
 (|0\rangle+|1\rangle)/\sqrt{2}
-]
+$$
 
 と
 
-[
+$$
 (|0\rangle-|1\rangle)/\sqrt{2}
-]
+$$
 
 は：
 
@@ -178,9 +180,9 @@ Bloch球は：
 
 Hadamard：
 
-[
+$$
 |0\rangle \rightarrow (|0\rangle+|1\rangle)/\sqrt{2}
-]
+$$
 
 つまり：
 
@@ -278,9 +280,9 @@ Pauliゲート＝半回転
 
 定義：
 
-[
+$$
 R_x(\theta)
-]
+$$
 
 意味：
 
@@ -300,9 +302,9 @@ qc.rx(theta, 0)
 
 定義：
 
-[
+$$
 R_y(\theta)
-]
+$$
 
 意味：
 
@@ -322,9 +324,9 @@ qc.ry(theta, 0)
 
 定義：
 
-[
+$$
 R_z(\theta)
-]
+$$
 
 意味：
 

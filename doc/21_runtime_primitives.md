@@ -1,4 +1,4 @@
-では第21章として、**Qiskit Runtime Primitives（Sampler / Estimator / Runtime execution）**を資格試験対策レベルで体系的に解説します。
+# 21_runtime_primitives.md
 
 ここは **最新のIBM Qiskit資格試験で最重要領域の一つ**です。理由：
 
@@ -13,10 +13,6 @@ Sampler / Estimator を理解しているか
 ```
 
 が評価されます。
-
----
-
-# 21_runtime_primitives.md
 
 # Part 21：Runtime Primitives（Sampler / Estimator）を完全に理解する
 
@@ -162,9 +158,9 @@ Primitiveです。
 
 例：
 
-[
+$$
 \langle Z \rangle
-]
+$$
 
 などを計算します。
 
@@ -456,28 +452,3 @@ Sessionの目的は？
 ✅ Runtimeの役割を説明できる
 ✅ Sessionの役割を説明できる
 ✅ Primitive APIの目的を説明できる
-
----
-
-次章（最終章）：
-
-**22_exam_strategy.md**
-
-では：
-
-```text id="p4z7nm"
-試験頻出テーマ整理
-出題パターン分類
-最短合格ルート
-演習問題セット
-```
-
-を扱います。
-
-ここで：
-
-```text id="x2c6qp"
-資格試験対策シリーズ完成
-```
-
-になります。

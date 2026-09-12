@@ -1,4 +1,5 @@
-では、GitHub にそのまま追加できる **`mock_exam_01.md`（本番レベル40問セット）** を作成します。
+## 本番レベル40問セット
+
 構成は実際の IBM Qiskit Associate 試験に近い形：
 
 * 回路理解
@@ -19,9 +20,6 @@
 
 ---
 
-# mock_exam_01.md
-
-```md
 # Mock Exam 01 — IBM Qiskit Certification Practice
 
 想定時間：60分  
@@ -595,14 +593,4 @@ D. swap操作
 38:A  
 39:B  
 40:B
-```
 
----
-
-必要なら次に：
-
-* mock_exam_02.md（応用レベル）
-* mock_exam_03.md（Runtime / primitives重点）
-* 回路読み取り特化版
-
-も追加できます 📘

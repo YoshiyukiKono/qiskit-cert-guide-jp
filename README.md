@@ -3,6 +3,8 @@
 **IBM Certified Associate Developer – Quantum Computation using Qiskit**
 合格を目的とした実践ハンズオン教材シリーズです。
 
+https://www.ibm.com/jp-ja/think/insights/qiskit-v2x-developer-certification
+
 対象：
 
 * Python経験がある開発者

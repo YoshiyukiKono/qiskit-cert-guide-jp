@@ -1,4 +1,4 @@
-では第18章として、**Groverアルゴリズム（振幅増幅：Amplitude Amplification）**を資格試験対策レベルで体系的に解説します。
+第18章として、**Groverアルゴリズム（振幅増幅：Amplitude Amplification）**を資格試験対策レベルで体系的に解説します。
 
 この章は：
 
@@ -125,9 +125,9 @@ measurement
 
 2量子ビット：
 
-[
+$$
 |s\rangle=\frac{1}{2}(|00\rangle+|01\rangle+|10\rangle+|11\rangle)
-]
+$$
 
 これは：
 
@@ -153,9 +153,9 @@ oracleは：
 
 正解が |10⟩ の場合：
 
-[
+$$
 |10\rangle \rightarrow -|10\rangle
-]
+$$
 
 他は：
 
@@ -207,7 +207,9 @@ inversion about the mean
 
 Grover演算子：
 
+$$
 G=(2|s\rangle\langle s|-I)O
+$$
 
 ここで：
 
@@ -279,7 +281,9 @@ G = DO
 
 重要公式：
 
+$$
 k\approx \frac{\pi}{4}\sqrt{N}
+$$
 
 ここで：
 
@@ -513,27 +517,3 @@ oracle + diffusion
 ✅ 反復回数の意味を説明できる
 ✅ 振幅増幅の仕組みを説明できる
 ✅ Grover iterationを説明できる
-
----
-
-次章：
-
-**19_vqe.md**
-
-では：
-
-```text id="c7y2rm"
-VQE（Variational Quantum Eigensolver）
-ハイブリッド量子アルゴリズム
-NISQ時代の実用量子計算
-```
-
-を扱います。
-
-ここから：
-
-```text id="z1m8ke"
-実務レベル量子アルゴリズム領域
-```
-
-に入ります 🧠⚛️

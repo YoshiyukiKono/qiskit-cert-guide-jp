@@ -74,7 +74,9 @@ QFTは：
 
 数学的には：
 
+$$
 QFT|x\rangle=\frac{1}{\sqrt{N}}\sum_{k=0}^{N-1} e^{2\pi i xk/N}|k\rangle
+$$
 
 意味：
 

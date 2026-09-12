@@ -1,5 +1,4 @@
-では **応用レベル版（mock_exam_02.md）** を作成します。
-こちらは **回路読解・位相・primitives・アルゴリズム構造** を強化した、本番よりやや難しめのセットです。
+**回路読解・位相・primitives・アルゴリズム構造** を強化した、本番よりやや難しめのセットです。
 
 想定用途：
 
@@ -7,13 +6,7 @@
 * mock_exam_02.md → 合格ライン突破
 * mock_exam_03.md → Runtime / primitives特化（次回作成可）
 
-以下、そのまま GitHub に置けます。
 
----
-
-# mock_exam_02.md
-
-```md
 # Mock Exam 02 — IBM Qiskit Certification Practice (Advanced)
 
 想定時間：60分  
@@ -614,12 +607,3 @@ D. noise削除
 38:B  
 39:B  
 40:B
-```
-
----
-
-次に作ると最も効果が高いのは：
-
-📘 **mock_exam_03.md（Sampler / Estimator / Runtime特化版）**
-
-です。ここが最近の試験で一番差がつく領域です。

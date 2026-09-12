@@ -1,4 +1,4 @@
-では第17章として、**Quantum Phase Estimation（QPE：量子位相推定）**を資格試験対策レベルで体系的に解説します。
+第17章として、**Quantum Phase Estimation（QPE：量子位相推定）**を資格試験対策レベルで体系的に解説します。
 
 この章はシリーズ全体の中でも最重要クラスです。理由：
 
@@ -21,8 +21,6 @@ HHL
 が頻出です。
 
 ---
-
-# 17_qpe.md
 
 # Part 17：Quantum Phase Estimation（QPE）を完全に理解する
 
@@ -48,7 +46,9 @@ QPE = 位相を測定するアルゴリズム
 
 QPEは次を解きます：
 
+$$
 U|\psi\rangle=e^{2\pi i\phi}|\psi\rangle
+$$
 
 ここで：
 

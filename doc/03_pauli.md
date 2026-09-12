@@ -44,9 +44,11 @@ Pauli-Xは古典NOTに対応します。
 
 変換：
 
+$$
 X\lvert0\rangle=\lvert1\rangle
 
 X\lvert1\rangle=\lvert0\rangle
+$$
 
 つまり：
 
@@ -96,9 +98,13 @@ Zゲートは状態を変えません。
 
 変換：
 
+$$
 Z\lvert0\rangle=\lvert0\rangle
+$$
 
+$$
 Z\lvert1\rangle=-\lvert1\rangle
+$$
 
 つまり：
 
@@ -178,9 +184,13 @@ X + Z を同時に実行
 
 変換：
 
+$$
 Y\lvert0\rangle=i\lvert1\rangle
+$$
 
+$$
 Y\lvert1\rangle=-i\lvert0\rangle
+$$
 
 特徴：
 
@@ -195,16 +205,17 @@ Y\lvert1\rangle=-i\lvert0\rangle
 Pauli行列：
 
 X：
-
-X=\begin{pmatrix}0&1\1&0\end{pmatrix}
-
+$$
+X=\begin{pmatrix}0&1\\1&0\end{pmatrix}
+$$
 Y：
-
-Y=\begin{pmatrix}0&-i\i&0\end{pmatrix}
-
+$$
+Y=\begin{pmatrix}0&-i\\i&0\end{pmatrix}
+$$
 Z：
-
-Z=\begin{pmatrix}1&0\0&-1\end{pmatrix}
+$$
+Z=\begin{pmatrix}1&0\\0&-1\end{pmatrix}
+$$
 
 試験では：
 
@@ -252,7 +263,9 @@ HXH=Z
 
 同様に：
 
+$$
 HZH=X
+$$
 
 これは資格試験の頻出問題です。
 
@@ -261,23 +274,24 @@ HZH=X
 # 11. X² = I
 
 Pauliゲートは2回適用すると元に戻ります：
-
+$$
 X^2=I
-
+$$
 同様に：
-
+$$
 Y^2=I
-
+$$
+$$
 Z^2=I
-
+$$
 ---
 
 # 12. XとZは可換ではない
 
 順序が重要：
-
+$$
 XZ=-ZX
-
+$$
 つまり：
 
 ```text
@@ -374,8 +388,8 @@ X
 
 | 入力 | X  | Z |    |   |    |
 | -- | -- | - | -- | - | -- |
-|    | 0⟩ |   | 1⟩ |   | 0⟩ |
-|    | 1⟩ |   | 0⟩ | − | 1⟩ |
+|    |0⟩ |   |1⟩ |   |0⟩ |
+|    |1⟩ |   |0⟩ | − |1⟩ |
 
 ---
 

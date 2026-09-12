@@ -53,7 +53,9 @@ phase manipulation
 
 状態：
 
+$$
 |\psi\rangle=a|0\rangle+b|1\rangle
+$$
 
 ここで：
 
@@ -90,9 +92,13 @@ phase
 
 Zゲート：
 
+$$
 Z|0\rangle=|0\rangle
+$$
 
+$$
 Z|1\rangle=-|1\rangle
+$$
 
 つまり：
 
@@ -126,15 +132,15 @@ qc.z(0)
 
 状態：
 
-[
+$$
 (|0⟩+|1⟩)/\sqrt{2}
-]
+$$
 
 にZをかけると：
 
-[
+$$
 (|0⟩-|1⟩)/\sqrt{2}
-]
+$$
 
 になります。
 
@@ -178,7 +184,9 @@ H → Z → H
 
 重要関係：
 
+$$
 HZH=X
+$$
 
 つまり：
 
@@ -196,9 +204,13 @@ HZH=X
 
 Sゲート：
 
+$$
 S|0\rangle=|0\rangle
+$$
 
+$$
 S|1\rangle=i|1\rangle
+$$
 
 つまり：
 
@@ -214,7 +226,9 @@ S|1\rangle=i|1\rangle
 
 Tゲート：
 
+$$
 T|1\rangle=e^{i\pi/4}|1\rangle
+$$
 
 つまり：
 
@@ -328,17 +342,17 @@ phase kickback
 
 状態：
 
-[
+$$
 |+\rangle|1\rangle
-]
+$$
 
 にCZを作用：
 
 結果：
 
-[
+$$
 (|0\rangle-|1\rangle)/\sqrt{2}
-]
+$$
 
 つまり：
 
@@ -377,7 +391,9 @@ targetではなく control に位相が出現
 
 CZ：
 
+$$
 CZ|11\rangle=-|11\rangle
+$$
 
 それ以外：
 
@@ -391,7 +407,9 @@ CZ|11\rangle=-|11\rangle
 
 重要：
 
+$$
 CZ=(I\otimes H),CX,(I\otimes H)
+$$
 
 つまり：
 

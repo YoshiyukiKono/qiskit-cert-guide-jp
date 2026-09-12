@@ -52,7 +52,9 @@ SWAPは：
 
 変換：
 
+$$
 SWAP|ab\rangle=|ba\rangle
+$$
 
 例：
 
@@ -82,7 +84,9 @@ qc.draw("text")
 
 重要関係：
 
+$$
 SWAP=CX_{12}CX_{21}CX_{12}
+$$
 
 つまり：
 
