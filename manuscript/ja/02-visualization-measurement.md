@@ -5,9 +5,9 @@
 <a id="measurement-basis"></a>
 ## 測定と基底
 
-computational（Z）basis測定では`α|0>+β|1>`から0/1を`|α|²/|β|²`で得て、状態は対応するbasis stateへ射影されます。X basisを測りたいときは測定前にHを置き、Y basisなら典型的には`S†`の後にHを置いてZ測定へ変換します。「状態の振幅」と「有限shotsから得たcounts」を区別してください。
+computational（Z）basis測定では$\alpha|0\rangle+\beta|1\rangle$から、0を確率$|\alpha|^2$、1を確率$|\beta|^2$で得て、状態は対応するbasis stateへ射影されます。X basisを測りたいときは測定前に$H$を置き、Y basisなら典型的には$S^\dagger$の後に$H$を置いてZ測定へ変換します。「状態の振幅」と「有限shotsから得たcounts」を区別してください。
 
-Bell state `(|00>+|11>)/√2`の理想Z-basis分布は00と11が各1/2です。`H|->=|1>`なので、その後のZ測定は1が確定します。
+Bell state $(|00\rangle+|11\rangle)/\sqrt{2}$の理想Z-basis分布は`00`と`11`が各$1/2$です。$H|-\rangle=|1\rangle$なので、その後のZ測定は1が確定します。
 
 ```python
 from qiskit import QuantumCircuit
@@ -19,7 +19,7 @@ bell.h(0); bell.cx(0, 1)
 <a id="statevector"></a>
 ## Statevectorで確かめる
 
-測定を含まないunitary circuitなら次で初期`|0...0>`からの状態を得ます。
+測定を含まないunitary circuitなら次で初期$|0\cdots0\rangle$からの状態を得ます。
 
 ```python
 import numpy as np
@@ -36,7 +36,7 @@ assert np.allclose(psi.probabilities(), [0.5, 0.0, 0.0, 0.5])
 
 通常のresult stringはclassical bitの高indexを左、bit 0を右に表示します。`"10"`の右端はc0です。ただしmeasurement mappingが`q0→c1`なら右端がq0とは限りません。複数classical registerでは空白で区切られる場合があり、register構成とmappingを先に確認します。
 
-countsはshotsの度数です。`{'0':760,'1':240}`、1000 shotsなら経験確率`P(1)=0.24`。理論確率ではなく標本推定です。
+countsはshotsの度数です。`{'0':760,'1':240}`、1000 shotsなら経験確率$\hat{p}(1)=0.24$。理論確率ではなく標本推定です。
 
 <a id="circuit-drawing"></a>
 ## 回路を描く

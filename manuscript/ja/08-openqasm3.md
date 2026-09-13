@@ -20,7 +20,7 @@ c = measure q;
 <a id="qasm-semantics"></a>
 ## programを意味で追う
 
-上例はstandard gateを読み込み、Bell stateを用意し、2 qubitsを測って結果をcへ代入します。`measure`はstatevectorをclassical変数へコピーする操作ではありません。`reset q[0];`はq0を`|0>`へ戻すnon-unitary operationです。
+上例はstandard gateを読み込み、Bell stateを用意し、2 qubitsを測って結果をcへ代入します。`measure`はstatevectorをclassical変数へコピーする操作ではありません。`reset q[0];`はq0を$|0\rangle$へ戻すnon-unitary operationです。
 
 OpenQASM 3にはclassical expressionとcontrol flowがあります。次は測定結果が1ならXを適用します。
 

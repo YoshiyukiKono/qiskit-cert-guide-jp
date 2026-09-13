@@ -50,7 +50,19 @@ counts = bit_array.get_counts()
 <a id="empirical-analysis"></a>
 ## 経験確率と不確かさ
 
-outcome `x`の経験確率は`p̂(x)=n_x/N`。1000 shots中240なら0.24です。二項標本の標準誤差の目安は`√(p̂(1-p̂)/N)`で、0.24なら約0.0135。有限shotsのcountsをexact probabilityと呼ばないでください。
+outcome $x$の経験確率は、出現回数$n_x$と総shots数$N$から求めます。
+
+$$
+\hat{p}(x)=\frac{n_x}{N}.
+$$
+
+1000 shots中240なら0.24です。二項標本の標準誤差の目安は次のとおりです。
+
+$$
+\widehat{\mathrm{SE}}=\sqrt{\frac{\hat{p}(1-\hat{p})}{N}}.
+$$
+
+$N=1000$、$\hat{p}=0.24$なら約0.0135。有限shotsのcountsをexact probabilityと呼ばないでください。
 
 Estimatorでは`evs`と同shapeの`stds`または別error estimateが返り得ます。値の意味はprimitive implementationとresilience settingの公式説明を確認します。
 

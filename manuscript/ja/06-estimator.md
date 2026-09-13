@@ -5,7 +5,7 @@
 <a id="estimator-purpose"></a>
 ## 期待値を評価する
 
-Estimatorはcircuitが用意する状態とobservableから期待値`<ψ|O|ψ>`を評価します。bitstring sampleを主出力にするSamplerとは目的が違います。
+Estimatorはcircuitが用意する状態とobservableから期待値$\langle\psi|O|\psi\rangle$を評価します。bitstring sampleを主出力にするSamplerとは目的が違います。
 
 ```python
 from qiskit import QuantumCircuit
@@ -19,7 +19,7 @@ result = StatevectorEstimator().run([(qc, obs)]).result()
 assert abs(float(result[0].data.evs)) < 1e-12
 ```
 
-`|+>`をZで測るeigenvalueは+1/-1が等確率なので`<Z>=0`。`<X>=1`との取り違えに注意します。QPU用classは`qiskit_ibm_runtime.EstimatorV2`です。
+$|+\rangle$を$Z$で測るeigenvalueは$+1$と$-1$が等確率なので$\langle Z\rangle=0$。$\langle X\rangle=1$との取り違えに注意します。QPU用classは`qiskit_ibm_runtime.EstimatorV2`です。
 
 <a id="estimator-pub"></a>
 ## Estimator PUB
