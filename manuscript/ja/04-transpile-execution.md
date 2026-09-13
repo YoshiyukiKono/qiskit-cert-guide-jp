@@ -69,7 +69,7 @@ from qiskit_ibm_runtime import SamplerV2, EstimatorV2
 <a id="pub-job"></a>
 ## PUB、run、job
 
-PUB（Primitive Unified Bloc）は1 circuitを核にしたvectorizedな実行単位です。`primitive.run([pub1, pub2])`は通常submitted job objectを返し、完了後`job.result()`で`PrimitiveResult`を得ます。scalar値が`run()`から直接返るわけではありません。
+**PUB**（**Primitive Unified Bloc**）は1 circuitを核にしたvectorizedな実行単位です。`primitive.run([pub1, pub2])`は通常submitted job objectを返し、完了後`job.result()`で`PrimitiveResult`を得ます。scalar値が`run()`から直接返るわけではありません。
 
 Estimator PUB一般形は`(circuit, observables, parameter_values, precision)`。未parameter化回路でprecisionだけ指定するなら`(qc, observable, None, 0.01)`で、`None`を詰めません。Sampler PUBは次章です。
 

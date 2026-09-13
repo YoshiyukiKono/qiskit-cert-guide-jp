@@ -36,7 +36,9 @@ H = 系のすべての振る舞いを決める演算子
 
 量子状態の時間発展は次の式で決まります：
 
+$$
 i\hbar \frac{d}{dt}|\psi(t)\rangle = H|\psi(t)\rangle
+$$
 
 これはシュレディンガー方程式です。
 
@@ -54,7 +56,9 @@ i\hbar \frac{d}{dt}|\psi(t)\rangle = H|\psi(t)\rangle
 
 一般形：
 
+$$
 U = e^{-iHt}
+$$
 
 つまり：
 
@@ -78,7 +82,9 @@ Pauli-X ハミルトニアンの時間発展
 
 つまり：
 
+$$
 X = e^{-i(π/2)X}
+$$
 
 のように書けます。
 
@@ -437,7 +443,9 @@ H
 
 式で書くと：
 
+$$
 P(x)=|\langle x|\psi\rangle|^2
+$$
 
 意味：
 
@@ -805,7 +813,9 @@ Sampler / Estimator
 
 ## X（ビット反転）
 
-X = \begin{pmatrix}0 & 1 \ 1 & 0\end{pmatrix}
+$$
+X = \begin{pmatrix}0 & 1 \\ 1 & 0\end{pmatrix}
+$$
 
 意味：
 
@@ -815,8 +825,9 @@ X = \begin{pmatrix}0 & 1 \ 1 & 0\end{pmatrix}
 
 ## Z（位相反転）
 
-Z = \begin{pmatrix}1 & 0 \ 0 & -1\end{pmatrix}
-
+$$
+Z = \begin{pmatrix}1 & 0 \\ 0 & -1\end{pmatrix}
+$$
 意味：
 
 |1⟩ にマイナス符号を付ける
@@ -825,7 +836,9 @@ Z = \begin{pmatrix}1 & 0 \ 0 & -1\end{pmatrix}
 
 ## Y（複素回転）
 
-Y = \begin{pmatrix}0 & -i \ i & 0\end{pmatrix}
+$$
+Y = \begin{pmatrix}0 & -i \\ i & 0\end{pmatrix}
+$$
 
 意味：
 
@@ -3187,9 +3200,9 @@ U|\psi\rangle = e^{2\pi i \phi}|\psi\rangle
 
 量子状態の時間発展：
 
-[
+$$
 |\psi(t)\rangle = e^{-iHt}|\psi(0)\rangle
-]
+$$
 
 ここで：
 
@@ -3251,9 +3264,9 @@ Shor = Phase Estimation
 
 これは：
 
-[
+$$
 H|\psi\rangle = E|\psi\rangle
-]
+$$
 
 という固有値問題です。
 
@@ -3538,9 +3551,9 @@ Phase Estimation が中心エンジンと呼ばれる理由：
 
 式で書くと：
 
-[
+$$
 F(k)=\sum_{x=0}^{N-1} f(x)e^{2\pi i kx/N}
-]
+$$
 
 つまり：
 
@@ -3610,15 +3623,15 @@ QFT：
 
 量子状態：
 
-[
+$$
 |\psi\rangle = \sum_x a_x |x\rangle
-]
+$$
 
 QFT後：
 
-[
+$$
 |\psi'\rangle = \sum_k \tilde{a}_k |k\rangle
-]
+$$
 
 ここで：
 
@@ -3712,9 +3725,9 @@ QFTの結果は
 
 QFT後の状態：
 
-[
+$$
 \sum_k \tilde{a}_k |k\rangle
-]
+$$
 
 しかし測定すると：
 
@@ -3991,15 +4004,15 @@ U^{\dagger}U = I
 
 量子状態：
 
-[
+$$
 |\psi\rangle = a|0\rangle + b|1\rangle
-]
+$$
 
 確率：
 
-[
+$$
 |a|^2 + |b|^2 = 1
-]
+$$
 
 でした。
 
@@ -4103,9 +4116,9 @@ Xゲート：
 
 Hadamard：
 
-[
+$$
 |0\rangle \rightarrow \frac{|0\rangle+|1\rangle}{\sqrt{2}}
-]
+$$
 
 逆操作：
 
@@ -4137,9 +4150,9 @@ Hadamard：
 
 量子状態の時間発展：
 
-[
+$$
 |\psi(t)\rangle = e^{-iHt}|\psi(0)\rangle
-]
+$$
 
 ここで：
 
@@ -4169,9 +4182,9 @@ Hadamard：
 
 例：
 
-[
+$$
 \frac{|0\rangle+|1\rangle}{\sqrt{2}}
-]
+$$
 
 測定すると：
 
@@ -4267,9 +4280,9 @@ CNOT
 
 量子回路：
 
-[
+$$
 |\psi_{final}\rangle = U_n U_{n-1} \cdots U_1 |\psi_{initial}\rangle
-]
+$$
 
 すべて：
 
@@ -4860,9 +4873,9 @@ RY(theta)
 
 ここまでの説明では、量子状態を
 
-[
+$$
 |\psi\rangle
-]
+$$
 
 という **状態ベクトル（ket）** で表してきました。
 
@@ -4886,9 +4899,9 @@ RY(theta)
 
 理想量子状態：
 
-[
+$$
 |\psi\rangle = a|0\rangle + b|1\rangle
-]
+$$
 
 これは
 
@@ -4927,9 +4940,9 @@ RY(theta)
 
 これは：
 
-[
+$$
 \frac{|0\rangle + |1\rangle}{\sqrt{2}}
-]
+$$
 
 とは違います。
 
@@ -4955,7 +4968,9 @@ RY(theta)
 
 密度行列は次のように定義されます：
 
+$$
 \rho = \sum_i p_i |\psi_i\rangle \langle \psi_i|
+$$
 
 意味：
 
@@ -4979,7 +4994,9 @@ RY(theta)
 
 純粋状態：
 
+$$
 \rho = |\psi\rangle \langle \psi|
+$$
 
 つまり：
 
@@ -5039,9 +5056,9 @@ RY(theta)
 
 状態：
 
-[
+$$
 \frac{|00\rangle + |11\rangle}{\sqrt{2}}
-]
+$$
 
 このとき：
 
@@ -5064,15 +5081,15 @@ RY(theta)
 
 状態ベクトルの場合：
 
-[
+$$
 P(x)=|\langle x|\psi\rangle|^2
-]
+$$
 
 密度行列の場合：
 
-[
+$$
 P(x)=\mathrm{Tr}(\rho |x\rangle\langle x|)
-]
+$$
 
 つまり：
 
@@ -5088,17 +5105,17 @@ P(x)=\mathrm{Tr}(\rho |x\rangle\langle x|)
 
 Estimator は：
 
-[
+$$
 \langle H \rangle
-]
+$$
 
 を計算します。
 
 密度行列で書くと：
 
-[
+$$
 \mathrm{Tr}(\rho H)
-]
+$$
 
 になります。
 
@@ -5114,15 +5131,15 @@ Estimatorは密度行列の言語で動いている
 
 理想状態：
 
-[
+$$
 |\psi\rangle
-]
+$$
 
 ノイズあり状態：
 
-[
+$$
 \rho
-]
+$$
 
 つまり：
 
@@ -5142,9 +5159,9 @@ Estimatorは密度行列の言語で動いている
 
 状態変換：
 
-[
+$$
 \rho \rightarrow E(\rho)
-]
+$$
 
 ここで：
 
@@ -5310,9 +5327,9 @@ IBM系試験では：
 
 2量子ビット系を考えます：
 
-[
+$$
 |\psi\rangle = \frac{|00\rangle + |11\rangle}{\sqrt{2}}
-]
+$$
 
 これは Bell 状態です。
 
@@ -5360,9 +5377,9 @@ IBM系試験では：
 
 記号で書くと：
 
-[
+$$
 \rho_A = \mathrm{Tr}*B(\rho*{AB})
-]
+$$
 
 意味：
 
@@ -5375,19 +5392,19 @@ A だけ取り出す
 
 Bell状態：
 
-[
+$$
 |\psi\rangle = \frac{|00\rangle + |11\rangle}{\sqrt{2}}
-]
+$$
 
 密度行列：
 
-[
+$$
 \rho = |\psi\rangle\langle\psi|
-]
+$$
 
 展開すると：
 
-[
+$$
 \rho =
 \frac{1}{2}
 (
@@ -5399,7 +5416,7 @@ Bell状態：
 +
 |11\rangle\langle11|
 )
-]
+$$
 
 ここまでは普通の密度行列です。
 
@@ -5409,20 +5426,20 @@ Bell状態：
 
 B を消す：
 
-[
+$$
 \rho_A = \mathrm{Tr}_B(\rho)
-]
+$$
 
 すると結果は：
 
-[
+$$
 \rho_A =
 \frac{1}{2}
 |0\rangle\langle0|
 +
 \frac{1}{2}
 |1\rangle\langle1|
-]
+$$
 
 つまり：
 
@@ -5442,9 +5459,9 @@ B を消す：
 
 つまり：
 
-[
+$$
 |00\rangle\langle11|
-]
+$$
 
 などの項が消えたのです。
 
@@ -5486,9 +5503,9 @@ B を観測しないから
 
 もし状態が：
 
-[
+$$
 |\psi\rangle = |0\rangle|1\rangle
-]
+$$
 
 なら：
 
@@ -5532,9 +5549,9 @@ B を観測しないから
 
 Bell状態：
 
-[
+$$
 \frac{|00\rangle + |11\rangle}{\sqrt{2}}
-]
+$$
 
 情報は：
 
@@ -5661,9 +5678,9 @@ partial_trace(rho, [1])
 
 Estimator は：
 
-[
+$$
 \langle H \rangle
-]
+$$
 
 を計算しますが、
 
@@ -5756,9 +5773,9 @@ Estimator は：
 
 つまり：
 
-[
+$$
 |\psi'\rangle = U|\psi\rangle
-]
+$$
 
 ここで：
 
@@ -5784,10 +5801,10 @@ U†U = I
 
 例：
 
-[
+$$
 |\psi\rangle =
 \frac{|0\rangle + |1\rangle}{\sqrt{2}}
-]
+$$
 
 測定すると：
 
@@ -5834,7 +5851,9 @@ U†U = I
 
 測定は「射影演算」として表されます：
 
+$$
 |\psi'\rangle = \frac{P_i |\psi\rangle}{\sqrt{\langle \psi | P_i | \psi \rangle}}
+$$
 
 ここで：
 
@@ -5959,9 +5978,9 @@ a と b の情報がある
 
 状態：
 
-[
+$$
 (|0\rangle + |1\rangle)/\sqrt{2}
-]
+$$
 
 測定装置：
 
@@ -5969,11 +5988,11 @@ a と b の情報がある
 
 相互作用後：
 
-[
+$$
 |0\rangle|M_0\rangle
 +
 |1\rangle|M_1\rangle
-]
+$$
 
 これは：
 
@@ -6051,9 +6070,9 @@ Primitive = 測定API
 
 Estimator は：
 
-[
+$$
 \langle H \rangle
-]
+$$
 
 を返します。
 
@@ -6594,9 +6613,9 @@ QAOA：
 
 量子状態：
 
-[
+$$
 |\psi\rangle = a|0\rangle + b|1\rangle
-]
+$$
 
 ここで：
 
@@ -6631,7 +6650,9 @@ a, b は複素数
 
 量子状態の位相は：
 
+$$
 e^{i\theta}
+$$
 
 という形で表されます。
 
@@ -6680,9 +6701,9 @@ Groverの核心：
 
 します：
 
-[
+$$
 |x\rangle \rightarrow -|x\rangle
-]
+$$
 
 これは：
 
@@ -6779,13 +6800,13 @@ RX(θ)
 
 QAOAの回路：
 
-[
+$$
 e^{-i\gamma H_C}
-]
+$$
 
-[
+$$
 e^{-i\beta H_M}
-]
+$$
 
 つまり：
 
@@ -6933,9 +6954,9 @@ HHL
 
 Estimator：
 
-[
+$$
 \langle H \rangle
-]
+$$
 
 を測定します。
 
@@ -7009,15 +7030,15 @@ Primitiveは位相の観測器
 
 量子状態：
 
-[
+$$
 |\psi\rangle = a|0\rangle + b|1\rangle
-]
+$$
 
 ここで重要なのは：
 
-[
+$$
 |a|^2 + |b|^2 = 1
-]
+$$
 
 つまり：
 
@@ -7033,13 +7054,13 @@ Primitiveは位相の観測器
 
 例えば：
 
-[
+$$
 A =
 \begin{pmatrix}
-2 & 0 \
+2 & 0 \\
 0 & 2
 \end{pmatrix}
-]
+$$
 
 これを状態にかけると：
 
@@ -7061,7 +7082,9 @@ A =
 
 その条件が：
 
+$$
 U^{\dagger}U = I
+$$
 
 これが：
 
@@ -7131,20 +7154,20 @@ AND(0,0)=0
 
 Hadamard行列：
 
-[
+$$
 H =
 \frac{1}{\sqrt{2}}
 \begin{pmatrix}
-1 & 1 \
+1 & 1 \\
 1 & -1
 \end{pmatrix}
-]
+$$
 
 特徴：
 
-[
+$$
 H^2 = I
-]
+$$
 
 つまり：
 
@@ -7156,9 +7179,9 @@ H^2 = I
 
 位相回転：
 
-[
+$$
 R_Z(\theta)
-]
+$$
 
 は：
 
@@ -7284,9 +7307,9 @@ Bloch球の表面
 
 つまり：
 
-[
+$$
 U = U_n U_{n-1} \cdots U_1
-]
+$$
 
 これ全体も：
 
@@ -7330,9 +7353,9 @@ Primitiveの入力は常にユニタリ回路
 
 密度行列の時間発展：
 
-[
+$$
 \rho' = U\rho U^\dagger
-]
+$$
 
 つまり：
 

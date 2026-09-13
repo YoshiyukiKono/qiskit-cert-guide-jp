@@ -54,7 +54,7 @@
 
 式で書くと：
 
-[
+$$
 |\psi\rangle
 \rightarrow
 U|\psi\rangle
@@ -62,7 +62,7 @@ U|\psi\rangle
 \text{interference}
 \rightarrow
 \text{measurement}
-]
+$$
 
 つまり：
 
@@ -149,6 +149,7 @@ Grover / QFT / Shor が一本に見えます 🧭
 物理としての最終形はこうです：
 
 > 宇宙はユニタリで進化する
+> 
 > 観測者だけが部分トレースする
 
 つまり：
@@ -225,9 +226,9 @@ Grover / QFT / Shor が一本に見えます 🧭
 
 例えば：
 
-[
+$$
 (|00\rangle + |11\rangle)/\sqrt{2}
-]
+$$
 
 この状態は：
 
@@ -303,9 +304,9 @@ Groverでは：
 
 します：
 
-[
+$$
 |x\rangle \rightarrow -|x\rangle
-]
+$$
 
 ここで起きているのは：
 
@@ -353,9 +354,9 @@ QFT
 
 QAOAでは：
 
-[
+$$
 e^{-i\gamma H_C}
-]
+$$
 
 という操作を繰り返します。
 
@@ -583,7 +584,7 @@ BQP
 
 テーマは：
 
-> なぜ「古典シミュレーションが難しくなる境界」が存在するのか？
+# なぜ「古典シミュレーションが難しくなる境界」が存在するのか？
 
 これは量子コンピュータの核心の最終層です。
 つまり：
@@ -940,8 +941,7 @@ Shorは：
 
 テーマは：
 
-> 現実の **NISQ（Noisy Intermediate-Scale Quantum）** 量子コンピュータで
-> 本当に量子優位性が出る可能性が高い領域はどこか？
+# 現実の **NISQ（Noisy Intermediate-Scale Quantum）** 量子コンピュータで本当に量子優位性が出る可能性が高い領域はどこか？
 
 ここが「理論の決着」から「実務の決着」への移行点です。
 
@@ -1001,9 +1001,9 @@ Shorのようなアルゴリズムはまだ難しい ❌
 
 数式で書くと：
 
-[
+$$
 \langle H \rangle
-]
+$$
 
 つまり：
 
@@ -1042,9 +1042,9 @@ Estimator primitive
 
 分子の基底状態エネルギー：
 
-[
+$$
 H|\psi\rangle = E|\psi\rangle
-]
+$$
 
 を求める問題です。
 
@@ -1198,6 +1198,7 @@ Googleの量子優位性実験もここでした。
 IBM Runtime primitives：
 
 Sampler
+
 Estimator
 
 は偶然のAPIではありません。
