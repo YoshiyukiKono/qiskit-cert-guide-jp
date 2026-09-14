@@ -72,6 +72,6 @@ IBM Quantum Compute REST APIでもEstimator/Sampler primitive workloadをJob / S
 
 答え: 1. circuit→string、string→circuit。2. いいえ。SDKとbackend/service supportを別確認します。
 
-公式参照: [OpenQASM 3仕様](https://openqasm.com/versions/3.0/)、[Qiskitとの相互運用](https://quantum.cloud.ibm.com/docs/en/guides/interoperate-qiskit-qasm3)、[QASM feature table](https://quantum.cloud.ibm.com/docs/en/guides/qasm-feature-table)、[REST execution modes](https://quantum.cloud.ibm.com/docs/en/guides/execution-modes-rest-api)
+公式参照: [OpenQASM 3.0仕様](https://openqasm.com/versions/3.0/index.html)、[Qiskitとの相互運用](https://quantum.cloud.ibm.com/docs/en/guides/interoperate-qiskit-qasm3)、[QASM feature table](https://quantum.cloud.ibm.com/docs/en/guides/qasm-feature-table)、[REST execution modes](https://quantum.cloud.ibm.com/docs/en/guides/execution-modes-rest-api)
 
 [← jobと結果分析](07-results-analysis.md) | [次: coverage →](coverage.md)

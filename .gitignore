@@ -1,2 +1,4 @@
 */.ipynb_checkpoints
 references/html-pdf/node_modules/
+__pycache__/
+*.py[cod]

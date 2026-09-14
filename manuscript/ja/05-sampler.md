@@ -40,6 +40,8 @@ job = sampler.run([isa_circuit], shots=128)
 <a id="sampler-options"></a>
 ## Runtime optionsとdynamical decoupling
 
+次の設定方法は、`qiskit-ibm-runtime 0.49.0`のAPIを基準とします。`backend`は実行先として取得済みのものを使います。
+
 ```python
 from qiskit_ibm_runtime import SamplerV2
 
@@ -53,7 +55,9 @@ DDはidle periodへpulse sequenceを挿入し、decoherence等の影響を抑え
 <a id="sampler-compatibility"></a>
 ## feature compatibilityは都度確認する
 
-2026-09-12に確認したIBM Sampler optionsガイドのcompatibility表では、dynamic circuitsとdynamical decouplingは同一jobでincompatibleとされています。一方、別項目の「fractional gatesはruntime 0.42.0以降dynamic circuitsとcompatible」をDDの説明と読み違えないでください。これはversion-sensitiveで、backend capabilityと最新表を実行直前に確認します。
+IBM Sampler optionsガイドの[機能の組合せ条件](https://quantum.cloud.ibm.com/docs/en/guides/sampler-options#feature-compatibility)では、dynamic circuitsとdynamical decouplingは同一jobで併用できないとされています。これはRuntimeサービス側の実行条件であり、SDKでDDのoptionを指定できることだけでは、任意の回路で利用できるとは判断できません。実行時には、サービスの条件と実行先backendの対応状況を確認します。
+
+同じ表の「`qiskit-ibm-runtime 0.42.0`以降ではfractional gatesとdynamic circuitsを併用できる」という記述は、その二つの機能についてのバージョン条件です。DDとの併用条件を変更する説明ではありません。本書の基準版0.49.0はこのバージョン条件を満たしますが、実行先が必要な機能に対応することも別に確認します。
 
 ## 典型的な誤答
 

@@ -18,9 +18,16 @@
 <a id="version-policy"></a>
 ## 固定知識とversion-sensitive事項
 
-Born rule、unitary、tensor product、global phase、期待値などは固定知識です。一方、import path、options階層、利用可能なresilience level、hardware feature compatibility、serviceのexecution mode、OpenQASM importerの依存関係はversion-sensitiveです。
+本書のSDKの説明とコードは **Qiskit 2.5.2 / qiskit-ibm-runtime 0.49.0** を基準とします。ただし、説明する内容によって、適用範囲を決めるものが異なります。
 
-本書の基準は **Qiskit 2.5.2 / qiskit-ibm-runtime 0.49.0、確認日2026-09-12 JST** です。受験・実装直前には公式API referenceで再確認してください。公式ガイドのコードが別のruntime minor versionを掲げている場合も、概念と特定versionの表面APIを切り分けます。
+- **数学・量子計算の原理**: Born rule、unitary、tensor product、global phase、期待値などは、パッケージのバージョンに依存しない知識です。
+- **言語仕様**: OpenQASMの構文や意味は、言語の仕様版を基準にします。本書ではOpenQASM 3.0仕様を参照します。
+- **SDKのAPI**: import path、optionsの階層、引数に指定できる値、importerの依存関係などは、パッケージのバージョンを基準にします。
+- **サービス・実機の機能**: Runtimeの既定値、resilience levelに割り当てられる具体的な手法、機能の併用条件などは、サービスの仕様やbackendにも依存します。同じパッケージ版を使うことだけでは、実機の動作条件まで固定できません。
+
+公式資料も読み分けます。**バージョン別のAPIリファレンス**は、その版のAPIを説明します。一方、公式ガイドの**Package versions**は、掲載コードの作成に使った依存条件です。ガイド全体やRuntimeサービスの仕様が、そのパッケージ版に固定されていることを意味しません。
+
+別のパッケージ版を使うときは、その版のAPIリファレンスで差分を確認します。実機へ送るときは、サービスの機能の組合せ条件と、実行先backendの対応状況も確認します。参照ガイドのコード基準と本書の検証環境が異なる場合や、参照先が更新される資料である場合は、その違いを[参照・検証記録](../validation/version-scope-revision-2026-09-14.md)に示します。
 
 <a id="three-layers"></a>
 ## 三つのレイヤーを混ぜない

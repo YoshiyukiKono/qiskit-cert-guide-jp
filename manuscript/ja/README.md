@@ -2,7 +2,9 @@
 
 このディレクトリは、IBM Certified Quantum Computation using Qiskit v2.X Developer – Associate（C1000-179）の公開Objectivesを学ぶための、本リポジトリにおける正本です。Python経験者が量子計算を初めて学ぶ前提で、数式、Qiskitコード、実行結果の読み方を一つの流れにしました。
 
-> **検証境界（2026-09-12 JST）**: version-sensitiveな説明は **Qiskit 2.5.2 / qiskit-ibm-runtime 0.49.0** を基準に、IBM Quantum / Qiskit公式文書とOpenQASM 3仕様で確認しています。ローカル環境にこの組合せがある、または実QPUで全例を実行した、という意味ではありません。試験Objectivesは公開範囲の説明であり、この教材の補足をIBM公式要件として主張しません。実試験問題の再現でも合格保証でもありません。
+> **対象バージョンと適用範囲**: SDKの説明とコードは **Qiskit 2.5.2 / qiskit-ibm-runtime 0.49.0**、OpenQASMの説明は **OpenQASM 3.0仕様**を基準とします。Runtimeの既定値や機能の組合せ、実機での対応状況は、サービスの仕様と実行先backendにも依存します。詳しくは[バージョンによる適用範囲](00-guide.md#version-policy)を参照してください。
+
+参照資料の版・掲載コードの依存条件と、実行確認した例の範囲は[参照・検証記録](../validation/version-scope-revision-2026-09-14.md)にまとめています。全例を実QPUで実行したという意味ではありません。試験Objectivesは公開範囲の説明であり、この教材の補足をIBM公式要件として主張しません。実試験問題の再現でも合格保証でもありません。
 
 <a id="reading-order"></a>
 ## 推奨読書順
@@ -41,6 +43,6 @@
 - [Execution modes](https://quantum.cloud.ibm.com/docs/en/guides/execution-modes)
 - [Sampler options](https://quantum.cloud.ibm.com/docs/en/guides/sampler-options)
 - [Estimator options](https://quantum.cloud.ibm.com/docs/en/guides/estimator-options)
-- [OpenQASM 3 specification](https://openqasm.com/versions/3.0/)
+- [OpenQASM 3.0 specification](https://openqasm.com/versions/3.0/index.html)
 
 [次: 学び方・境界 →](00-guide.md)
