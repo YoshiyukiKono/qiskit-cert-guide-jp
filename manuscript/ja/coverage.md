@@ -38,7 +38,7 @@
 
 | Questions | 主題 | 節 |
 |---|---|---|
-| Q1 | Hによる共役 | [行列と演算順序](01-quantum-operations.md#matrix-order) |
+| Q1 | Hによる共役 | [ゲートの合成と基底変換](01-quantum-operations.md#matrix-order) |
 | Q2–Q5 | 回転、厳密等式、phase、S† | [phase](01-quantum-operations.md#phase)、[基本gate](01-quantum-operations.md#basic-gates) |
 | Q6–Q11 | CX、Pauli、observable | [複数量子bit](01-quantum-operations.md#multi-entanglement)、[Pauli label](01-quantum-operations.md#bit-pauli-order)、[期待値](01-quantum-operations.md#expectation) |
 | Q12–Q19 | 回路・測定・状態の可視化 | [回路描画](02-visualization-measurement.md#circuit-drawing)〜[state plot](02-visualization-measurement.md#state-plots) |
