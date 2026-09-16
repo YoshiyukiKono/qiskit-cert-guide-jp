@@ -483,6 +483,8 @@ $$
 
 例えばXを二回行う列は、理想的には$XX=I$で状態を元に戻します。これを適切な間隔で挟むことで、待機中に蓄積する一部の誤差を抑えます。期待値を測定後に外挿するZNEとは、働きかける段階が異なります。待機時間がほとんどない回路では効果が小さく、追加パルス自身の誤差で結果が悪化する場合もあります。
 
+Xの間隔によって位相のずれを打ち消す途中計算と、Runtime Samplerへの指定は[第5章のDD](05-sampler.md#sampler-dd)で扱います。ここでは、DDと期待値を求める他の設定が、何に働きかけるかを比べます。
+
 | 方法 | 主に何をするか | 追加で必要になるもの |
 |---|---|---|
 | shotsを増やす | 有限回の測定に伴う平均の揺らぎを減らす | 測定回数 |
@@ -572,6 +574,8 @@ PUB 2 target: 0.03
 ```
 
 `metadata`は、結果に添えられた実行条件などの情報です。ここで表示しているのは目標precisionで、達成した誤差ではありません。また、`StatevectorEstimator`の正のprecisionは計算値に人工的なランダムな揺らぎを加える指定であり、実機のshotsやノイズを再現する設定ではありません。状態ベクトルの値を揺らぎなしで確認する前の例では0.0を使いましたが、RuntimeのQPU実行で要求するprecisionは正の値です。
+
+なお、qiskit-ibm-runtime 0.49.0では、異なるprecisionを持つPUBを同じjobに含める指定は非推奨です。直前の例はローカルの`StatevectorEstimator`による優先順位の確認であり、Runtimeでは精度の指定ごとにjobを分けます。この変更は0.48.0の[公式リリースノート](https://quantum.cloud.ibm.com/docs/en/api/qiskit-ibm-runtime/release-notes)に記載されています。
 
 Runtimeには、さらに`default_precision`、`default_shots`、twirlingに割り当てる測定回数があります。優先関係は、各PUBについて次の順に読みます。
 
@@ -664,9 +668,13 @@ ZNEを有効にした結果では、最終的な期待値に加え、ノイズ�
 
 `metadata`には、実装に応じて目標precision、shots、誤差軽減の条件などが入ります。ローカル例に存在したキーが実機でもすべて同じ場所にあると仮定せず、結果全体の`result.metadata`と、各PUBの`result[i].metadata`をそれぞれ確認します。目標precisionの欄だけでは、実際の不確かさや偏りは分かりません。
 
+二つの値の差と不確かさを一緒に読む方法は[第7章の比較例](07-results-analysis.md#compare-results)へ進みます。独立性などの前提を確認したうえで、Estimatorの結果へ応用します。比較の根拠として残す入力・測定記録・実行条件は、[第7章のmetadata](07-results-analysis.md#metadata)で整理します。
+
 **判断の要点**: PUB番号を選び、`evs`のshapeと添字を入力に対応させてから、値と不確かさを読みます。どの条件で得られた値かはmetadataで確認します。
 
 公式参照: [Estimatorの出力](https://quantum.cloud.ibm.com/docs/en/guides/estimator-input-output)、[StatevectorEstimator](https://quantum.cloud.ibm.com/docs/en/api/qiskit/qiskit.primitives.StatevectorEstimator)
+
+期待値を繰り返し評価して状態を選ぶ応用は、[補章AのVQE](09-algorithm-worked-examples.md#algorithm-vqe)で扱います。ハミルトニアン、候補回路、Estimator、古典側の最適化が、それぞれ何を担当するかを小さなモデルで確かめます。
 
 ## 章末チェック
 

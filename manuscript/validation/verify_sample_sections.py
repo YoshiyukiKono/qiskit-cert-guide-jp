@@ -473,9 +473,10 @@ def anchors(text: str) -> set[str]:
     return result
 
 
-def check_links() -> None:
+def check_links(extra_files: tuple[Path, ...] = ()) -> None:
     files = sorted((ROOT / "manuscript").rglob("*.md"))
     files.append(ROOT / "practice-bank/answers/mock-exams/mock-01-answers.md")
+    files.extend(extra_files)
     checked = 0
     for path in files:
         source = outside_fences(path.read_text(encoding="utf-8"))

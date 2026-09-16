@@ -1,11 +1,11 @@
 /* figures/ 以下の画像に共通する設定 */
 img[src*="figures/"] {
-  width: 80%;
+  width: 60%;
   height: auto;
 }
 
-/* 個別指定の例。第2章の基底測定の回路図を、本文表示領域の幅の80%で表示する。 */
+/* 個別指定の例。第2章の基底測定の回路図を、本文表示領域の幅の60%で表示する。 */
 img[src*="figures/02/02-basis-readout.png"] {
-  width: 80%;
+  width: 60%;
   height: auto;
 }

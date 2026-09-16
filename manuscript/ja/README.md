@@ -18,9 +18,13 @@
 7. [Estimator V2](06-estimator.md)
 8. [jobと結果分析](07-results-analysis.md)
 9. [OpenQASM 3](08-openqasm3.md)
-10. [Objectives・Mock 01 coverage](coverage.md)
+10. [補章A: 基本アルゴリズムでつなぐ回路設計と実行](09-algorithm-worked-examples.md)
 
-各章末のチェックを解き、次にMock 01を解いてください。誤答時は解答解説にある「正本で深掘り」リンクから該当節へ戻ります。
+各章の確認問題を、理由も含めて説明できるか確かめながら進みます。補章Aでは、位相キックバックとDeutsch、2量子ビットGrover、1量子ビットVQEを使い、学んだ操作を問題解決の手順へつなぎます。既習なら必要な節から読めます。Deutsch・Groverは第1〜3・5章、VQEは第1・3・6章を主な前提とします。
+
+補章の題材は教材側の選択であり、個別アルゴリズムの出題頻度や新しい公式領域を示しません。QFT・位相推定は今後の追加候補、Shor全体やQAOAの詳説は発展学習として位置付けます。
+
+演習は、本文を学んだ後の理解の確認や学び直しに使えます。Objectivesと教材・演習との対応を調べる場合は、[対応表](coverage.md)を参照してください。
 
 <a id="notation"></a>
 ## 記法

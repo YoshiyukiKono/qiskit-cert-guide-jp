@@ -1,6 +1,6 @@
 # Objectives・Mock 01 coverage
 
-[← OpenQASM 3](08-openqasm3.md) | [入口](README.md)
+[← 補章A](09-algorithm-worked-examples.md) | [入口](README.md)
 
 この表は、公開試験レコードの8領域・21 Objectives（公開順に付けた参照用ID）を本書へ対応させたものです。日本語の要約と補足範囲は教材側の解釈です。
 
@@ -31,6 +31,19 @@
 | 8.3 | QASM versionsとQiskitを相互利用 | [interop](08-openqasm3.md#qasm-qiskit-interop)、[version差](08-openqasm3.md#qasm-version-differences) | Q67 |
 | 8.4 | Runtime REST APIを利用 | [support / REST境界](08-openqasm3.md#qasm-support-boundary) | Q68 |
 
+<a id="algorithm-supplement-coverage"></a>
+## 補章Aによる学習上の補足
+
+次は、既存Objectivesの理解を深めるための総合例との対応であり、公式Objectivesやweightの追加ではありません。題材にしたアルゴリズム名の出題頻度を示す表でもありません。
+
+| 総合例 | 関連する既存Objective | 学習上の補足 |
+|---|---|---|
+| [Deutschと位相キックバック](09-algorithm-worked-examples.md#algorithm-deutsch) | 1.2、3.4、5.2 | 制御ゲート・固有状態・相対位相・干渉から、関数の性質を測定で判定する |
+| [2量子ビットGrover](09-algorithm-worked-examples.md#algorithm-grover) | 1.2、3.4、5.2 | オラクルと拡散の合成、振幅と確率、ビット順、回路内反復とshotsを区別する |
+| [1量子ビットVQE](09-algorithm-worked-examples.md#algorithm-vqe) | 1.1、3.2、4.2、6.2 | ハミルトニアン、候補回路、PUBの角度配列、期待値と古典側の最適化をつなぐ |
+
+VQE例はローカルのEstimatorを使い、4.2に含まれる実機実行まで検証した例ではありません。実行先への変換、Runtime options、誤差への対処は引き続き本編を参照します。
+
 <a id="mock-coverage"></a>
 ## Q1〜Q68の受け皿
 
@@ -53,4 +66,4 @@
 
 全ObjectiveとMock概念への参照先があることは、全API・全hardware featureの網羅や実技習熟を意味しません。特にRuntime options、backend capability、OpenQASM supportは変化するため、受験・実行直前に公式資料を確認してください。
 
-[← OpenQASM 3](08-openqasm3.md) | [入口](README.md)
+[← 補章A](09-algorithm-worked-examples.md) | [入口](README.md)
