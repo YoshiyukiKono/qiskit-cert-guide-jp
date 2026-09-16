@@ -7,3 +7,6 @@ matplotlib==3.11.2
 pylatexenc==2.11
 seaborn==0.13.2
 Pillow==12.3.0
+qiskit-qasm3-import==0.6.0
+openqasm3[parser]==1.0.1
+antlr4-python3-runtime==4.13.2

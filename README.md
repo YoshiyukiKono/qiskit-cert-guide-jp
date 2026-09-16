@@ -1,555 +1,67 @@
-# Qiskit Certification Guide for Developers
+# Qiskit v2.X 開発者認定 日本語学習ガイド
 
-**IBM Certified Associate Developer – Quantum Computation using Qiskit**
-合格を目的とした実践ハンズオン教材シリーズです。
+IBM Certified Quantum Computation using Qiskit v2.X Developer – Associate（C1000-179）の試験対策を目的とする教材です。Python経験があり、量子計算を初めて学ぶ読者が、数式・回路・コード・実行結果を順序立てて理解することを目指します。
 
-https://www.ibm.com/jp-ja/think/insights/qiskit-v2x-developer-certification
+**学習の入口は [manuscript/ja の日本語正本](manuscript/ja/README.md)です。** 章末の確認問題には理由付きの解答があり、本文だけでも学び進められます。基本的な操作を説明できるようになったら、補章の総合例と演習で、条件を変えて考えます。
 
-対象：
+## 本編と総合例
 
-* Python経験がある開発者
-* 量子コンピューティング初学者
-* Qiskit資格を短期間で取得したい人
-* 量子回路を「読める・書ける」ようになりたい人
+| 章 | 内容 |
+|---|---|
+| [第0章](manuscript/ja/00-guide.md) | 学び方、公開Objectives、バージョンと適用範囲 |
+| [第1章](manuscript/ja/01-quantum-operations.md) | 量子状態、ゲートの合成、位相、もつれ、期待値 |
+| [第2章](manuscript/ja/02-visualization-measurement.md) | 測定基底、状態と確率、回路・測定結果・状態の可視化 |
+| [第3章](manuscript/ja/03-circuit-construction.md) | 回路の設計と合成、パラメータ、動的回路 |
+| [第4章](manuscript/ja/04-transpile-execution.md) | transpile、ISA、layout、実行モード、PUBとjob |
+| [第5章](manuscript/ja/05-sampler.md) | Sampler、shots、測定記録、DDと実行条件 |
+| [第6章](manuscript/ja/06-estimator.md) | Estimator、broadcasting、精度、誤差軽減 |
+| [第7章](manuscript/ja/07-results-analysis.md) | jobの取得、結果の集計、不確かさ、記録の保存 |
+| [第8章](manuscript/ja/08-openqasm3.md) | OpenQASMの型と意味、Qiskitとの入出力、対応範囲 |
+| [補章A](manuscript/ja/09-algorithm-worked-examples.md) | 位相キックバックとDeutsch、2量子ビットGrover、1量子ビットVQE |
 
-このリポジトリは：
+補章Aは、問題の定義から途中計算、回路、結果の解釈までを通して学ぶ総合例です。第1〜8章の知識をつなぐために追加した教材であり、新しい公式試験領域や、個別アルゴリズムの出題頻度を示すものではありません。
 
-* 試験範囲を完全カバー
-* 実装中心
-* 模擬試験付き
-* GitHubポートフォリオとして利用可能
+QFT・位相推定は今後の追加候補です。Shor全体やQAOAの詳説は発展学習に位置付け、現行正本で詳説済みとは扱いません。
 
-な構成になっています。
+## 演習と参照資料
 
----
+- [Practice Bank](practice-bank/README.md): 公開Objectivesに対応させたオリジナルの分野別演習と模擬試験。理解の確認や、つまずいた内容の学び直しに使えます。
+- [Objectivesと教材の対応表](manuscript/ja/coverage.md): 本編の参照先と、補章による学習上の補足を確認できます。
+- [Qiskitポケットリファレンス](references/README.md): 印刷・携帯向けのMarkdown、PDF、再生成手順とNotebook。
 
-# 学習ロードマップ
+試験範囲との対応は[IBMの公開試験レコード](https://www.ibm.com/training/credentials/getExam/C1000-179)を基準にします。対応表に参照先があることは、すべての細目の習熟や合格を保証するものではありません。
 
-推奨学習時間：
+## コードを試す環境
 
-約20時間（2〜3週間）
+正本のSDKの基準はQiskit 2.5.2 / qiskit-ibm-runtime 0.49.0です。例の再現にはPython 3.12と[検証用の依存一覧](manuscript/validation/requirements.txt)を使います。以下の`python`がPython 3.12を指す環境で、リポジトリのルートから新しい仮想環境へ導入します。
 
-| Phase | 内容                         |
-| ----- | -------------------------- |
-| 基礎    | qubit / H / Pauli          |
-| 中級    | entanglement / measurement |
-| 応用    | transpile / simulator      |
-| 発展    | algorithms                 |
-| 仕上げ   | mock exam                  |
-
----
-
-# 目次
-
-## Part 0 環境構築
-
-* [00_setup](./00_setup.md)
-
-内容：
-
-* Python venv
-* Qiskit install
-* AerSimulator
-* Statevector
-* 回路描画
-
----
-
-## Part 1 量子ビット
-
-* [01_qubit](./01_qubit.md)
-
-内容：
-
-* |0⟩
-* |1⟩
-* 重ね合わせ
-* 確率振幅
-* 正規化条件
-
----
-
-## Part 2 Hadamardゲート
-
-* [02_hadamard](./02_hadamard.md)
-
-内容：
-
-* H|0⟩
-* H|1⟩
-* H × H = I
-* 干渉の基礎
-
----
-
-## Part 3 Pauliゲート
-
-* [03_pauli](./03_pauli.md)
-
-内容：
-
-* X
-* Y
-* Z
-* ゲート変換関係
-
----
-
-## Part 4 位相ゲート
-
-* [04_phase](./04_phase.md)
-
-内容：
-
-* S
-* S†
-* T
-* T†
-* 位相と確率の違い
-
----
-
-## Part 5 測定
-
-* [05_measurement](./05_measurement.md)
-
-内容：
-
-* 測定とは何か
-* collapse
-* shot
-* histogram解釈
-
----
-
-## Part 6 Bloch球
-
-* [06_bloch](./06_bloch.md)
-
-内容：
-
-* θ
-* φ
-* 回転操作
-* Rx
-* Ry
-* Rz
-
----
-
-## Part 7 多量子ビット
-
-* [07_multiqubit](./07_multiqubit.md)
-
-内容：
-
-* tensor product
-* qubit ordering
-* register構造
-
----
-
-## Part 8 CNOTともつれ
-
-* [08_cnot](./08_cnot.md)
-
-内容：
-
-* CXゲート
-* 制御ビット
-* ターゲットビット
-* Bell状態
-
----
-
-## Part 9 回路合成
-
-* [09_circuit](./09_circuit.md)
-
-内容：
-
-* SWAP
-* Toffoli
-* barrier
-* compose
-
----
-
-## Part 10 transpile
-
-* [10_transpile](./10_transpile.md)
-
-内容：
-
-* backend
-* basis gates
-* optimization level
-* mapping
-
----
-
-## Part 11 AerSimulator
-
-* [11_simulator](./11_simulator.md)
-
-内容：
-
-* statevector simulator
-* qasm simulator
-* shot数の影響
-
----
-
-## Part 12 Statevector解析
-
-* [12_statevector](./12_statevector.md)
-
-内容：
-
-* amplitude抽出
-* probability計算
-* 位相確認
-
----
-
-## Part 13 基本アルゴリズム
-
-* [13_algorithms](./13_algorithms.md)
-
-内容：
-
-* Deutsch–Jozsa
-* Grover（最小例）
-* 位相キックバック
-
----
-
-## Part 14 模擬試験
-
-* [14_mock_exam](./14_mock_exam.md)
-
-内容：
-
-* 模擬問題30問
-* 回路出力予測問題
-* 測定結果解析問題
-* transpile理解問題
-
----
-
-# この教材で到達できるレベル
-
-修了後：
-
-以下ができるようになります
-
-✅ 回路の出力を予測できる
-✅ Bell状態を説明できる
-✅ 位相ゲートの意味を理解できる
-✅ transpileの役割を説明できる
-✅ simulatorを使い分けできる
-✅ 基本アルゴリズムを実装できる
-
----
-
-了解しました。
-以下に **Markdown構造が崩れない完全フラット版 README.md** をそのまま掲載します。
-このまま `README.md` に貼り付けて使用できます。
-
----
-
-# Qiskit Certification Training — 開発者のための量子プログラミング実践教材
-
-このリポジトリは：
-
-**IBM Certified Associate Developer – Quantum Computation using Qiskit**
-
-合格レベルに到達するための体系的トレーニング教材です。
-
-対象読者：
-
-* 量子コンピューティング初学者
-* Pythonエンジニア
-* Qiskit資格受験者
-* Sampler / Estimator / Runtime を理解したい開発者
-
-特徴：
-
-* 理論解説（chapters）
-* 実行型演習（exercises）
-* 模擬試験（mock exams）
-* 回路読解ドリル（circuit drills）
-
-すべて含まれています。
-
----
-
-# 学習ロードマップ
-
-推奨順序：
-
-```
-chapters/
-↓
-exercises/
-↓
-mock_exam_01.md
-↓
-mock_exam_02.md
-↓
-mock_exam_03.md
-↓
-circuit_reading_drills.md
+```text
+python -m venv .venv-manuscript
 ```
 
-到達目標：
+Windows PowerShellでの導入と、補章Aの検証は次のとおりです。
 
-```
-回路が読める
-状態が予測できる
-Samplerが使える
-Estimatorが使える
-Runtimeが理解できる
+```powershell
+.\.venv-manuscript\Scripts\python.exe -m pip install -r manuscript/validation/requirements.txt
+.\.venv-manuscript\Scripts\python.exe -X utf8 -B manuscript/validation/verify_algorithm_examples.py
 ```
 
----
+macOS・Linuxでは、上記のPython実行ファイルを`.venv-manuscript/bin/python`へ置き換えます。ローカル例の実行にIBM Quantumの認証は不要です。Runtimeの実機例については、各章で関数を呼び出す条件と実行先の前提を確認してください。
 
-# ディレクトリ構成
+補章Aの掲載コード・数式・図の確認範囲は[検証記録](manuscript/validation/algorithm-supplement-2026-09-15.md)にまとめています。編集の基準と残る作業は[編集方針](manuscript/editorial-policy.md)・[改稿計画](manuscript/revision-plan.md)で管理します。
 
-```
-qiskit-certification-training/
+## 旧稿・既存資料の位置付け
 
-├── chapters/
-│   ├── 01_qubit.md
-│   ├── ...
-│   └── 22_exam_strategy.md
-│
-├── exercises/
-│   ├── ex01_hadamard.py
-│   ├── ex02_pauli.py
-│   ├── ...
-│   └── ex18_mock_exam_practice.py
-│
-├── mock_exam_01.md
-├── mock_exam_02.md
-├── mock_exam_03.md
-│
-├── circuit_reading_drills.md
-│
-├── README_exercises.md
-├── requirements.txt
-└── run_all.sh
-```
+`doc/`、`exercises/`、`exams/`は、正本を整える前の教材・演習として残しています。正本とはAPIの基準や説明の検証状況が異なるため、現在の学習案内と確認済みの例は`manuscript/ja/`を基準にしてください。旧稿の「頻出」「合格基準」などの記述を、現行試験の公式な出題情報としては扱いません。
 
----
+旧稿にある[QFT](doc/16_qft_intro.md)・[位相推定](doc/17_qpe.md)・[QAOA](doc/20_qaoa.md)も、現行正本の詳説範囲へ移行済みという意味ではありません。`chats/`には学習中の議論を残しています。
 
-# セットアップ
+## 一次情報
 
-## 仮想環境
+- [IBMの試験紹介](https://www.ibm.com/jp-ja/think/insights/qiskit-v2x-developer-certification)
+- [IBM Quantum Learning](https://quantum.cloud.ibm.com/learning/en/courses)
+- [Qiskitの公式ドキュメント](https://quantum.cloud.ibm.com/docs/en)
 
-Mac / Linux
+## ライセンス
 
-```
-python3 -m venv qiskit_env
-source qiskit_env/bin/activate
-```
-
-Windows
-
-```
-python -m venv qiskit_env
-qiskit_env\Scripts\activate
-```
-
----
-
-# 依存関係インストール
-
-```
-pip install -r requirements.txt
-```
-
----
-
-# 演習の実行
-
-```
-cd exercises
-python ex01_hadamard.py
-```
-
-または：
-
-```
-bash run_all.sh
-```
-
----
-
-# カバー範囲
-
-この教材は試験範囲を網羅しています。
-
-## 基本ゲート
-
-* X
-* Z
-* H
-* S
-* T
-
----
-
-## multi-qubit
-
-* CX
-* CZ
-* CP
-* SWAP
-* Bell states
-
----
-
-## 位相理解
-
-* phase kickback
-* interference
-* basis change
-
----
-
-## アルゴリズム
-
-* QFT
-* Grover
-* VQE
-* QAOA
-
----
-
-## Primitives（最新版）
-
-* Sampler
-* Estimator
-* Parameterized circuits
-* Observable
-* Runtime Session
-
----
-
-## コンパイル・実機理解
-
-* transpile
-* basis_gates
-* optimization_level
-* noise simulation
-
----
-
-# 模擬試験
-
-3段階構成：
-
-| File            | 難易度       |
-| --------------- | --------- |
-| mock_exam_01.md | 基礎        |
-| mock_exam_02.md | 応用        |
-| mock_exam_03.md | Runtime特化 |
-
----
-
-# 回路読解ドリル
-
-```
-circuit_reading_drills.md
-```
-
-目的：
-
-回路を見て出力を即答できるようになること。
-
-試験得点に最も直結します。
-
----
-
-# この教材で身につくスキル
-
-完走すると：
-
-```
-量子状態の追跡
-回路簡約
-entanglement理解
-phase理解
-Sampler操作
-Estimator操作
-Runtime理解
-```
-
-が可能になります。
-
----
-
-# 想定合格ライン
-
-以下が理解できれば合格圏です：
-
-* HZH = X
-* HXH = Z
-* Bell状態の測定結果
-* Samplerの役割
-* Estimatorの役割
-* Observableの意味
-* Parameterized circuits
-* Runtime Session
-
----
-
-# 推奨学習時間
-
-目安：
-
-| レベル       | 時間      |
-| --------- | ------- |
-| 初学者       | 10–15時間 |
-| Python経験者 | 6–8時間   |
-| 量子経験者     | 3–5時間   |
-
----
-
-# ライセンス
-
-MIT License
-
----
-
-# 携帯用リファレンス
-
-試験直前の確認や印刷向けに、[Qiskitポケットリファレンス](./references/README.md)を収録しています。Markdown原稿、A5 PDF、PDF再生成スクリプト、および固定済みの生成用依存関係を同じディレクトリで管理しています。
-
----
-
-# 参考資料
-
-* IBM Quantum Documentation
-* Qiskit SDK Documentation
-* Quantum Computation and Quantum Information（Nielsen & Chuang）
-
----
-
-# 次のステップ（合格後）
-
-推奨：
-
-```
-Estimator primitive 深掘り
-Variational algorithms
-Quantum simulation
-Error mitigation
-Tensor network simulation
-GPU-based simulation（cuQuantum）
-```
-
-量子アプリケーション開発への橋渡しになります。
-
-
+[MIT License](LICENSE)

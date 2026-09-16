@@ -2,3 +2,4 @@
 references/html-pdf/node_modules/
 __pycache__/
 *.py[cod]
+.venv-manuscript/
