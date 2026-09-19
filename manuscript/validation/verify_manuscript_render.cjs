@@ -20,7 +20,7 @@ const engine = {
 };
 const md = new MarkdownIt({html: true}).use(texmath, {engine, delimiters: 'dollars'});
 
-const chapters = ['01-quantum-operations.md', '02-visualization-measurement.md', '03-circuit-construction.md', '04-transpile-execution.md', '05-sampler.md', '06-estimator.md', '07-results-analysis.md', '08-openqasm3.md', '09-algorithm-worked-examples.md'];
+const chapters = ['01-quantum-operations.md', '02-visualization-measurement.md', '03-circuit-construction.md', '04-transpile-execution.md', '05-sampler.md', '06-estimator.md', '07-results-analysis.md', '08-openqasm3.md', '09-algorithm-worked-examples.md', '10-grover-advanced.md', '11-grover-unknown-solutions.md'];
 const files = [
     ...chapters.map(name => ['manuscript/ja/' + name, path.join(root, 'manuscript/ja', name)]),
     ...['README.md', 'manuscript/ja/README.md', 'manuscript/ja/00-guide.md', 'manuscript/ja/coverage.md']

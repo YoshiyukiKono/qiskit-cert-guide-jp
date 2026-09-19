@@ -1,4 +1,4 @@
-"""Verify the algorithm supplement's printed examples, math and three figures.
+"""Verify the algorithm supplement's printed examples, math and five figures.
 
 python -X utf8 -B manuscript/validation/verify_algorithm_examples.py
 python -X utf8 -B manuscript/validation/verify_algorithm_examples.py --write-figures
@@ -27,12 +27,14 @@ from qiskit import QuantumCircuit
 from qiskit.primitives import StatevectorSampler
 from qiskit.quantum_info import Operator, Statevector
 from verify_sample_sections import ROOT, anchors, check_links, close, require
+from draw_grover_geometry import draw_geometry
 
 SOURCE = ROOT / "manuscript/ja/09-algorithm-worked-examples.md"
 ASSETS = SOURCE.parent / "figures/09"
 NAMES = ["kickback", "deutsch", "grover_stages", "grover_variants",
          "vqe_grid", "vqe_optimize", "vqe_readout"]
-FIGURES = {"09-deutsch.png", "09-grover-probabilities.png", "09-vqe-energy.png"}
+FIGURES = {"09-deutsch.png", "09-grover-probabilities.png", "09-vqe-energy.png",
+           "09-grover-reflections.png", "09-grover-rotations.png"}
 
 
 def run_examples(directory: Path) -> dict[str, dict]:
@@ -60,6 +62,7 @@ def run_examples(directory: Path) -> dict[str, dict]:
             namespaces[name] = namespace
             plt.close("all")
             print(f"PASS printed output: {name}")
+    draw_geometry(directory)
     images = {Path(p).name for p in re.findall(r"!\[[^\]]*\]\(([^)]+)\)", source)}
     require(images == FIGURES == {p.name for p in directory.glob("*.png")}, "Figure output/link mismatch")
     for name in FIGURES:
@@ -144,6 +147,18 @@ def check_grover(ns: dict[str, dict]) -> None:
         counts = StatevectorSampler(seed=7).run([measured], shots=16).result()[0].data.meas.get_counts()
         require(counts == {target: 16}, "Marked state/readout order")
     close(Statevector(variants["grover"]("11", 2)).data, [-.5, -.5, -.5, .5])
+    # Project the four amplitudes onto the two axes shown in the new figures.
+    basis = np.column_stack(([1/np.sqrt(3)]*3 + [0], [0, 0, 0, 1]))
+    close(basis.T @ basis, np.eye(2))
+    close(basis.T @ np.diag([1, 1, 1, -1]) @ basis, np.diag([1, -1]))
+    close(basis.T @ d @ basis, [[.5, np.sqrt(3)/2], [np.sqrt(3)/2, -.5]])
+    for repetitions in range(4):
+        state = Statevector(variants["grover"]("11", repetitions)).data
+        angle = (2*repetitions+1)*np.pi/6
+        coordinates = np.array([np.cos(angle), np.sin(angle)])
+        close(basis.T @ state, coordinates)
+        close(basis @ coordinates, state)
+    print("PASS signed geometry coordinates, two reflections and four-amplitude reconstruction")
     print("PASS every marked basis state, complex reflection, D versus -D, 0–6 iterations and readout")
 
 
@@ -213,9 +228,9 @@ def main() -> None:
             ASSETS.mkdir(parents=True, exist_ok=True)
             for name in FIGURES:
                 shutil.copy2(directory / name, ASSETS / name)
-            print("WROTE 3 supplement figures")
+            print(f"WROTE {len(FIGURES)} supplement figures")
     check_links((ROOT / "README.md",))
-    print("PASS 7 independent examples, changed-condition questions and 3 figures; no QPU submission")
+    print("PASS 7 independent examples, changed-condition questions and 5 figures; no QPU submission")
 
 
 if __name__ == "__main__":
